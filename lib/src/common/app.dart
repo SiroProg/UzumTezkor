@@ -9,6 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: 'DaysOne',
         useMaterial3: true,
       ),
       title: "Uzum Tezkor",

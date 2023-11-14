@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'location_determination.dart';
+
 class DetailScreen extends StatefulWidget {
   const DetailScreen({super.key});
 
@@ -19,6 +21,12 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   @override
+  void deactivate() {
+    super.deactivate();
+    pageController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -34,7 +42,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: SmoothPageIndicator(
                     controller: pageController,
                     count: 3,
-                    effect: WormEffect(
+                    effect: const WormEffect(
                       dotHeight: 10,
                       dotWidth: 10,
                       type: WormType.thin,
@@ -48,7 +56,12 @@ class _DetailScreenState extends State<DetailScreen> {
                     width: double.infinity,
                     height: 60,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LocationDetermination(),
+                        ),
+                      ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateColor.resolveWith(
                           (states) => Colors.deepPurple,
