@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'determine_location.dart';
+
 class LocationDetermination extends StatelessWidget {
   const LocationDetermination({super.key});
 
@@ -22,16 +24,16 @@ class LocationDetermination extends StatelessWidget {
               "Куда доставить?",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 24,
+                fontSize: 22,
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Text(
                 "Разрешите доступ к местоположению или укажите адрес вручнуюб чтобы мы подобрали лучшие рестораны поблизости",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 12,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -42,7 +44,12 @@ class LocationDetermination extends StatelessWidget {
             Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetermineLocation(),
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple),
                   child: const Padding(
@@ -51,7 +58,7 @@ class LocationDetermination extends StatelessWidget {
                       "Определить автоматически",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ),
@@ -65,7 +72,7 @@ class LocationDetermination extends StatelessWidget {
                     "Указать вручную",
                     style: TextStyle(
                       color: Colors.deepPurple,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                 ),
