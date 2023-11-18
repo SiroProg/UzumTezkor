@@ -5,21 +5,23 @@ import '../model/restourant_model.dart';
 
 class FakeData {
   List<PersonModel> personData = [
-    PersonModel(
+    const PersonModel(
       id: 1,
       name: "Sirozhiddin",
       phoneNumber: "950143108",
       ordersHistory: [],
       basket: [],
       promotionalCodes: [],
+      locationList: []
     ),
-    PersonModel(
+    const PersonModel(
       id: 2,
       name: "Jahongir",
       phoneNumber: "330143108",
       ordersHistory: [],
       basket: [],
       promotionalCodes: [],
+      locationList: []
     ),
   ];
 

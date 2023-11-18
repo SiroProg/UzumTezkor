@@ -35,7 +35,7 @@ class ChoiceLanguage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailScreen(),
+                    builder: (context) => const DetailScreen(),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
@@ -64,7 +64,7 @@ class ChoiceLanguage extends StatelessWidget {
                 onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailScreen(),
+                    builder: (context) => const DetailScreen(),
                   ),
                 ),
                 style: ElevatedButton.styleFrom(

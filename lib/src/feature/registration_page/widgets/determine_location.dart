@@ -1,31 +1,39 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:geocoding/geocoding.dart' as geo;
 
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:location/location.dart';
+import 'package:uzum_tezkor/src/common/provider/person_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 import '../../../common/model/location/place_location.dart';
 
-class DetermineLocation extends StatefulWidget {
+class DetermineLocation extends ConsumerStatefulWidget {
   const DetermineLocation({Key? key}) : super(key: key);
 
   @override
-  State<DetermineLocation> createState() => _DetermineLocationState();
+  ConsumerState<DetermineLocation> createState() => _DetermineLocationState();
 }
 
-class _DetermineLocationState extends State<DetermineLocation> {
-  String _currentAddress = "";
+class _DetermineLocationState extends ConsumerState<DetermineLocation> {
   double longitude = 0;
   double latitude = 0;
   PlaceLocation? _placeLocation;
-  bool _isGettingLocation = true;
+  Timer? _timer;
 
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   LocationData? currentLocation;
+
+  void onCameraMove(CameraPosition cameraPosition) {
+    _timer?.cancel();
+    _timer = Timer(const Duration(seconds: 1), () {
+      _savePlace(
+          cameraPosition.target.latitude, cameraPosition.target.longitude);
+    });
+  }
 
   Future<void> _getCurrentLocation() async {
     var location = Location();
@@ -57,31 +65,27 @@ class _DetermineLocationState extends State<DetermineLocation> {
     final response = await get(url);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final resData = jsonDecode(response.body);
-      final formattedAddress = resData["results"][0]['formatted_address'];
-      setState(() {
-        _placeLocation = PlaceLocation(
-          longitude: longitude,
-          latitude: latitude,
-          address: formattedAddress,
-        );
-        _isGettingLocation = false;
-      });
-      // widget.onChooseLocation(_locationModel!);
-    } else {
-      setState(() {
-        _isGettingLocation = false;
-      });
+      final formattedAddress =
+          resData["results"][0]['formatted_address'] as String;
+      _placeLocation = PlaceLocation(
+        longitude: longitude,
+        latitude: latitude,
+        address: formattedAddress.split(",").firstOrNull ?? "",
+      );
+      ref.read(personProvider.notifier).setLocation(_placeLocation!);
     }
   }
 
   @override
   void initState() {
     _getCurrentLocation();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    _placeLocation = ref.watch(personProvider).locationList.firstOrNull;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -119,11 +123,12 @@ class _DetermineLocationState extends State<DetermineLocation> {
             ),
             SizedBox(
               width: double.infinity,
-              height: 480,
+              height: 500,
               child: Stack(
                 children: [
                   GoogleMap(
                     zoomControlsEnabled: false,
+                    onCameraMove: onCameraMove,
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
                     },
@@ -162,29 +167,44 @@ class _DetermineLocationState extends State<DetermineLocation> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(_placeLocation?.address.split(',').firstOrNull ?? ""),
-            SizedBox(
+            Text(_placeLocation?.address ?? ""),
+            const SizedBox(
               height: 20,
             ),
             OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const HomePage(),
+                  ),
+                );
+              },
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 18),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
               child: Text(
                 "Подтвердите локацию",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                ),
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.background,
+                    ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "Уточнить адрес",
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
               ),
             ),
           ],

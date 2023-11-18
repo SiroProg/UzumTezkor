@@ -47,7 +47,7 @@ class LocationDetermination extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DetermineLocation(),
+                      builder: (context) => const DetermineLocation(),
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
