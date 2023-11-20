@@ -6,7 +6,7 @@ import '../model/promotion_model.dart';
 import '../model/restourant_model.dart';
 
 class FakeData {
-  final List<ProductModel> _burges = [
+  static List<ProductModel> burges = [
     ProductModel(
       id: 1,
       price: 12000,
@@ -58,7 +58,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _chikens = [
+  static List<ProductModel> chikens = [
     ProductModel(
       id: 1,
       price: 32045,
@@ -117,7 +117,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _coffee = [
+  static List<ProductModel> coffee = [
     ProductModel(
       id: 1,
       price: 2000,
@@ -175,7 +175,7 @@ class FakeData {
       image: "asset/images/coffee8.jpeg",
     ),
   ];
-  final List<ProductModel> _desert = [
+  static List<ProductModel> desert = [
     ProductModel(
       id: 1,
       price: 2000,
@@ -233,7 +233,7 @@ class FakeData {
       image: "asset/images/desert8.jpeg",
     ),
   ];
-  final List<ProductModel> _drinks = [
+  static List<ProductModel> drinks = [
     ProductModel(
       id: 1,
       price: 400,
@@ -292,7 +292,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _hotFoods = [
+  static List<ProductModel> hotFoods = [
     ProductModel(
       id: 1,
       price: 120000,
@@ -350,7 +350,7 @@ class FakeData {
       image: "asset/images/hot8.jpeg",
     ),
   ];
-  final List<ProductModel> _lavash = [
+  static List<ProductModel> lavash = [
     ProductModel(
       id: 1,
       price: 21000,
@@ -409,7 +409,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _mangal = [
+  static List<ProductModel> mangal = [
     ProductModel(
       id: 1,
       price: 54000,
@@ -446,7 +446,7 @@ class FakeData {
       image: "asset/images/mangal5.jpeg",
     ),
   ];
-  final List<ProductModel> _meal = [
+  static List<ProductModel> meal = [
     ProductModel(
       id: 1,
       price: 12000,
@@ -476,7 +476,7 @@ class FakeData {
       image: "asset/images/meal4.jpeg",
     ),
   ];
-  final List<ProductModel> _pizza = [
+  static List<ProductModel> pizza = [
     ProductModel(
       id: 1,
       price: 54300,
@@ -513,7 +513,7 @@ class FakeData {
       image: "asset/images/pizza5.jpeg",
     ),
   ];
-  final List<ProductModel> _potato = [
+  static List<ProductModel> potato = [
     ProductModel(
       id: 1,
       price: 12000,
@@ -550,7 +550,7 @@ class FakeData {
       image: "asset/images/potato5.png",
     ),
   ];
-  final List<ProductModel> _salad = [
+  static List<ProductModel> salad = [
     ProductModel(
       id: 1,
       price: 23000,
@@ -609,7 +609,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _snacs = [
+  static List<ProductModel> snacs = [
     ProductModel(
       id: 1,
       price: 12456,
@@ -653,7 +653,7 @@ class FakeData {
       image: "asset/images/snacs6.jpeg",
     ),
   ];
-  final List<ProductModel> _sous = [
+  static List<ProductModel> sous = [
     ProductModel(
       id: 1,
       price: 123456,
@@ -704,7 +704,7 @@ class FakeData {
       image: "asset/images/snacs7.jpeg",
     ),
   ];
-  final List<ProductModel> _sushi = [
+  static List<ProductModel> sushi = [
     ProductModel(
       id: 1,
       price: 2345,
@@ -770,7 +770,7 @@ class FakeData {
     ),
   ];
 
-  final List<ProductModel> _tea = [
+  static List<ProductModel> tea = [
     ProductModel(
       id: 1,
       price: 1000,
@@ -805,24 +805,64 @@ class FakeData {
     RestaurantModel(
       id: 1,
       name: "Oqtepa Lavash",
-      poster: "asset/images/sushi2.png",
+      poster: "asset/images/poster1.jpg",
       products: {
-        Category.burger: [
-          ProductModel(
-            id: 1,
-            price: 123456,
-            title: "Lavash",
-            compound: "chees, souse",
-            image: "asset/images/lavash1.png",
-          ),
-          ProductModel(
-            id: 2,
-            price: 123456,
-            title: "Burger",
-            compound: "chees, souse",
-            image: "asset/images/burger2.jpeg",
-          ),
-        ],
+        Category.burger: burges,
+        Category.chicken: chikens,
+        Category.pizza: pizza,
+        Category.coffee: [...coffee, ...tea],
+      },
+      open: DateTime.now(),
+      close: DateTime.now(),
+    ),
+    RestaurantModel(
+      id: 1,
+      name: "MaxWay",
+      poster: "asset/images/poster2.jpg",
+      products: {
+        Category.kebab: mangal,
+        Category.asia: [...hotFoods, ...meal],
+        Category.pita: lavash,
+        Category.coffee: [...tea, ...drinks],
+      },
+      open: DateTime.now(),
+      close: DateTime.now(),
+    ),
+    RestaurantModel(
+      id: 1,
+      name: "Feed Up",
+      poster: "asset/images/poster3.jpg",
+      products: {
+        Category.burger: burges,
+        Category.kebab: mangal,
+        Category.pita: lavash,
+        Category.coffee: [...tea, ...drinks, ...drinks],
+      },
+      open: DateTime.now(),
+      close: DateTime.now(),
+    ),
+    RestaurantModel(
+      id: 1,
+      name: "Les Ailes",
+      poster: "asset/images/poster5.jpg",
+      products: {
+        Category.burger: burges,
+        Category.pizza: pizza,
+        Category.nationalFood: [...hotFoods, ...potato],
+        Category.coffee: [...tea, ...drinks, ...drinks],
+      },
+      open: DateTime.now(),
+      close: DateTime.now(),
+    ),
+    RestaurantModel(
+      id: 1,
+      name: "Feed Up",
+      poster: "asset/images/poster4.jpg",
+      products: {
+        Category.dessert: desert,
+        Category.pizza: pizza,
+        Category.nationalFood: [...hotFoods, ...potato],
+        Category.coffee: [...tea, ...drinks, ...drinks],
       },
       open: DateTime.now(),
       close: DateTime.now(),
