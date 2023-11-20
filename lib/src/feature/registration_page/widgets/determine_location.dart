@@ -1,15 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart';
-import 'package:location/location.dart';
-import 'package:uzum_tezkor/src/common/provider/person_state_notifier.dart';
-import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 
-import '../../../common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 class DetermineLocation extends ConsumerStatefulWidget {
   const DetermineLocation({Key? key}) : super(key: key);
@@ -19,73 +15,29 @@ class DetermineLocation extends ConsumerStatefulWidget {
 }
 
 class _DetermineLocationState extends ConsumerState<DetermineLocation> {
-  double longitude = 0;
-  double latitude = 0;
-  PlaceLocation? _placeLocation;
   Timer? _timer;
 
   final Completer<GoogleMapController> _controller = Completer();
-  LocationData? currentLocation;
+  ValueNotifier<PlaceLocation?> location = ValueNotifier(null);
 
   void onCameraMove(CameraPosition cameraPosition) {
     _timer?.cancel();
-    _timer = Timer(const Duration(seconds: 1), () {
-      _savePlace(
-          cameraPosition.target.latitude, cameraPosition.target.longitude);
+    _timer = Timer(const Duration(seconds: 1), () async {
+      location.value = await ref.read(clientProvider.notifier).addressName(
+            cameraPosition.target.latitude,
+            cameraPosition.target.longitude,
+          );
     });
-  }
-
-  Future<void> _getCurrentLocation() async {
-    var location = Location();
-    try {
-      LocationData userLocation = await location.getLocation();
-      final GoogleMapController controller = await _controller.future;
-      controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: LatLng(userLocation.latitude!, userLocation.longitude!),
-            zoom: 20,
-          ),
-        ),
-      );
-      latitude = userLocation.latitude!;
-      longitude = userLocation.longitude!;
-      _savePlace(latitude, longitude);
-      setState(() {
-        currentLocation = userLocation;
-      });
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-
-  void _savePlace(double latitude, double longitude) async {
-    final url = Uri.parse(
-        "https://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&key=AIzaSyAMUS_eH_E0_qPzIuweJL_NWuRKoI8lj0w");
-    final response = await get(url);
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final resData = jsonDecode(response.body);
-      final formattedAddress =
-          resData["results"][0]['formatted_address'] as String;
-      _placeLocation = PlaceLocation(
-        longitude: longitude,
-        latitude: latitude,
-        address: formattedAddress.split(",").firstOrNull ?? "",
-      );
-      ref.read(personProvider.notifier).setLocation(_placeLocation!);
-    }
   }
 
   @override
   void initState() {
-    _getCurrentLocation();
-
+    ref.read(clientProvider.notifier).getCurrentLocation(_controller);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _placeLocation = ref.watch(personProvider).locationList.firstOrNull;
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -152,7 +104,9 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                       backgroundColor: Colors.white,
                       shape: const CircleBorder(),
                       onPressed: () {
-                        _getCurrentLocation();
+                        ref
+                            .read(clientProvider.notifier)
+                            .getCurrentLocation(_controller);
                       },
                       child: Transform.rotate(
                         angle: 44.5,
@@ -170,17 +124,26 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
             const SizedBox(
               height: 20,
             ),
-            Text(_placeLocation?.address ?? ""),
+            ValueListenableBuilder(
+                valueListenable: location,
+                builder: (ctx, value, child) {
+                  return Text(value?.address.split(",").firstOrNull ?? "");
+                }),
             const SizedBox(
               height: 20,
             ),
             OutlinedButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (ctx) => const HomePage(),
-                  ),
-                );
+                if (location.value != null) {
+                  ref
+                      .read(clientProvider.notifier)
+                      .setLocation(location.value!);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => const HomePage(),
+                    ),
+                  );
+                }
               },
               style: OutlinedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
