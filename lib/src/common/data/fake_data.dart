@@ -1,4 +1,5 @@
 import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
 import '../model/person_model.dart';
 import '../model/product_model.dart';
@@ -869,31 +870,9 @@ class FakeData {
     ),
   ];
   List<PromotionalCodeModel> promotionData = [];
-  List<PersonModel> personData = [
-    PersonModel(
-      id: 1,
-      name: "Sirozhiddin",
-      phoneNumber: "950143108",
-      ordersHistory: [
-        OrderModel(
-          id: 1,
-          paymentAmount: 1223445,
-          promocode: null,
-          deliveryPoint: "Beruni 3A",
-          restorant: "Oqtepa Lavash",
-          date: DateTime.now(),
-          isDelivered: false,
-          ordersList: [],
-        ),
-      ],
-      basket: [],
-      promotionalCodes: [],
-      locationList: [],
-    ),
-    const PersonModel(
-      id: 2,
-      name: "Jahongir",
-      phoneNumber: "330143108",
+
+  List<ClientModel> clientData = [
+    ClientModel(
       ordersHistory: [],
       basket: [],
       promotionalCodes: [],
