@@ -1,4 +1,5 @@
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'order_model.dart';
 import 'product_model.dart';

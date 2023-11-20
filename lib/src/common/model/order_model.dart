@@ -5,9 +5,9 @@ import 'restourant_model.dart';
 class OrderModel {
   int id;
   int paymentAmount;
-  RestaurantModel restorant;
+  String restorant;
   String deliveryPoint;
-  PromotionalCodeModel promocode;
+  PromotionalCodeModel? promocode;
   DateTime date;
   bool isDelivered;
   List<ProductModel> ordersList;
