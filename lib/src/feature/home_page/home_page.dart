@@ -11,6 +11,7 @@ import 'widgets/custom_poster.dart';
 import 'widgets/custom_search.dart';
 import 'widgets/restaurants.dart';
 
+
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
