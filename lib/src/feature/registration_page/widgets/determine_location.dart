@@ -140,7 +140,7 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                       .setLocation(location.value!);
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (ctx) => const HomePage(),
+                      builder: (ctx) =>  HomePage(),
                     ),
                   );
                 }

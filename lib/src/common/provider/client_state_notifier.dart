@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
@@ -9,14 +10,50 @@ import 'package:uzum_tezkor/src/common/data/fake_data.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
+import '../model/restourant_model.dart';
+
 class ClientStateNotifier extends StateNotifier<ClientModel> {
+  FakeData fakeData = FakeData();
+  List<Category> categories = Category.values;
+  ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
+
   ClientStateNotifier() : super(FakeData().clientData.first);
+  ValueNotifier<int> counterOfFilters = ValueNotifier(0);
+  ValueNotifier filterList = ValueNotifier([]);
   double? latitude;
   double? longitude;
+  ValueNotifier<List<bool>> selectionCategoryes =
+      ValueNotifier(List.generate(Category.values.length, (index) => false));
+
+  void changeSelection(Category category) => selectionCategoryes
+          .value[Category.values.toList().indexOf(category)] =
+      !selectionCategoryes.value[Category.values.toList().indexOf(category)];
+
+  void refreshFilterList(Category category) {
+    if (filterList.value.contains(category)) {
+      filterList.value.remove(category);
+
+      counterOfFilters.value = counterOfFilters.value - 1;
+    } else {
+      filterList.value.add(category);
+      counterOfFilters.value = counterOfFilters.value + 1;
+    }
+  }
+
+  void filterByCategories() {
+    if (filterList.value.isEmpty) {
+      restaurants.value = fakeData.restaurantData;
+      return;
+    }
+
+    restaurants.value = fakeData.restaurantData.where((element) {
+      return filterList.value.every(
+          (category) => element.products.keys.toList().contains(category));
+    }).toList();
+  }
 
   void setLocation(PlaceLocation location) async {
     state = state.copyWith(locationList: [location, ...state.locationList]);
-    print(state);
   }
 
   Future<void> getCurrentLocation(

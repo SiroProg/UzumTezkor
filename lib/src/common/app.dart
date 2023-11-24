@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../feature/home_page/home_page.dart';
 import '../feature/registration_page/widgets/choice_language.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
         ),
       ),
       title: "Uzum Tezkor",
-      home: const ChoiceLanguage(),
+      home:  HomePage(),
     );
   }
 }

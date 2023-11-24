@@ -817,7 +817,7 @@ class FakeData {
       close: DateTime.now(),
     ),
     RestaurantModel(
-      id: 1,
+      id: 2,
       name: "MaxWay",
       poster: "asset/images/poster2.jpg",
       products: {
@@ -830,7 +830,7 @@ class FakeData {
       close: DateTime.now(),
     ),
     RestaurantModel(
-      id: 1,
+      id: 3,
       name: "Feed Up",
       poster: "asset/images/poster3.jpg",
       products: {
@@ -843,7 +843,7 @@ class FakeData {
       close: DateTime.now(),
     ),
     RestaurantModel(
-      id: 1,
+      id: 4,
       name: "Les Ailes",
       poster: "asset/images/poster5.jpg",
       products: {
@@ -856,14 +856,27 @@ class FakeData {
       close: DateTime.now(),
     ),
     RestaurantModel(
-      id: 1,
-      name: "Feed Up",
+      id: 5,
+      name: "Mahmud Kebab",
       poster: "asset/images/poster4.jpg",
       products: {
-        Category.dessert: desert,
+        Category.kebab: mangal,
         Category.pizza: pizza,
         Category.nationalFood: [...hotFoods, ...potato],
         Category.coffee: [...tea, ...drinks, ...drinks],
+      },
+      open: DateTime.now(),
+      close: DateTime.now(),
+    ),
+    RestaurantModel(
+      id: 6,
+      name: "KFC",
+      poster: "asset/images/poster2.jpg",
+      products: {
+        Category.chicken: chikens,
+        Category.asia: [...hotFoods, ...meal],
+        Category.pita: lavash,
+        Category.coffee: [...tea, ...drinks],
       },
       open: DateTime.now(),
       close: DateTime.now(),
