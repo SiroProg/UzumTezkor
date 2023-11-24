@@ -1,27 +1,28 @@
 import 'product_model.dart';
 import 'promotion_model.dart';
-import 'restourant_model.dart';
 
 class OrderModel {
-  int id;
-  int paymentAmount;
-  String restorant;
-  String deliveryPoint;
-  PromotionalCodeModel? promocode;
-  DateTime date;
-  bool isDelivered;
-  List<ProductModel> ordersList;
+  final int id;
+  final String restaurant;
+  final String deliveryPoint;
+  final PromotionalCodeModel? promocode;
+  final DateTime date;
+  final bool isDelivered;
+  final ProductModel product;
+  final int amount;
+
 
   OrderModel({
     required this.id,
-    required this.paymentAmount,
-    required this.promocode,
+    required this.restaurant,
     required this.deliveryPoint,
-    required this.restorant,
+    required this.promocode,
     required this.date,
     required this.isDelivered,
-    required this.ordersList,
+    required this.product,
+    required this.amount,
   });
+
 
   @override
   bool operator ==(Object other) =>
@@ -29,23 +30,36 @@ class OrderModel {
       other is OrderModel &&
           runtimeType == other.runtimeType &&
           id == other.id &&
-          paymentAmount == other.paymentAmount &&
+          restaurant == other.restaurant &&
+          deliveryPoint == other.deliveryPoint &&
           promocode == other.promocode &&
           date == other.date &&
           isDelivered == other.isDelivered &&
-          ordersList == other.ordersList;
+          product == other.product &&
+          amount == other.amount;
 
   @override
   int get hashCode =>
       id.hashCode ^
-      paymentAmount.hashCode ^
+      restaurant.hashCode ^
+      deliveryPoint.hashCode ^
       promocode.hashCode ^
       date.hashCode ^
       isDelivered.hashCode ^
-      ordersList.hashCode;
+      product.hashCode ^
+      amount.hashCode;
 
   @override
   String toString() {
-    return 'OrderModel{id: $id, paymentAmount: $paymentAmount, promocod: $promocode, date: $date, isDelivered: $isDelivered, ordersList: $ordersList}';
+    return 'OrderModel{'
+        'id: $id, '
+        'restaurant: $restaurant, '
+        'deliveryPoint: $deliveryPoint, '
+        'promocode: $promocode, '
+        'date: $date, '
+        'isDelivered: $isDelivered, '
+        'product: $product, '
+        'amount: $amount'
+        '}';
   }
 }
