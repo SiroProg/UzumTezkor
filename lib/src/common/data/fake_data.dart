@@ -1,7 +1,5 @@
-import 'package:uzum_tezkor/src/common/model/order_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
-import '../model/person_model.dart';
 import '../model/product_model.dart';
 import '../model/promotion_model.dart';
 import '../model/restourant_model.dart';
