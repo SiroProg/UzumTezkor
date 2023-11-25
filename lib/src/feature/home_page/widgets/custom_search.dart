@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../search_page/search_page.dart';
+
 class CustomSearch extends StatelessWidget {
   const CustomSearch({super.key});
 
@@ -10,7 +12,12 @@ class CustomSearch extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchPage(),
+            ),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white70,
             shape: const RoundedRectangleBorder(

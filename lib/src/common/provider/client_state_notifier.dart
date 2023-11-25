@@ -10,18 +10,38 @@ import 'package:uzum_tezkor/src/common/data/fake_data.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
+import '../model/product_model.dart';
 import '../model/restourant_model.dart';
 
 class ClientStateNotifier extends StateNotifier<ClientModel> {
   FakeData fakeData = FakeData();
   List<Category> categories = Category.values;
   ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
+  ValueNotifier<int> pageNumber = ValueNotifier(0);
+  ValueNotifier<List<RestaurantModel>> searchResults = ValueNotifier([]);
 
   ClientStateNotifier() : super(FakeData().clientData.first);
   ValueNotifier<int> counterOfFilters = ValueNotifier(0);
   ValueNotifier filterList = ValueNotifier([]);
   double? latitude;
   double? longitude;
+  ValueNotifier<String> searchText = ValueNotifier("");
+  void searchRestaurants(String text) {
+    searchText.value = text;
+    searchResults.value = [];
+    List<RestaurantModel> result = [];
+    if (text.isNotEmpty) {
+      for (var element in fakeData.restaurantData) {
+        for (final category in element.products.keys) {
+          if (category.title.toLowerCase().contains(text)) {
+            result.add(element);
+            break;
+          }
+        }
+      }
+    }
+    searchResults.value = result;
+  }
 
   ValueNotifier<Map<Category, bool>> selectionCategoryes = ValueNotifier({
     Category.chicken: true,

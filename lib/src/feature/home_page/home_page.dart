@@ -2,14 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
-import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:badges/badges.dart' as badges;
-import 'widgets/custom_app_bar.dart';
+import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
+import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
 import 'widgets/custom_filter.dart';
-import 'widgets/custom_poster.dart';
-import 'widgets/custom_search.dart';
-import 'widgets/restaurants.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -43,199 +40,211 @@ class _HomePagState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     PlaceLocation? location =
         ref.watch(clientProvider).locationList.firstOrNull;
+    final PageController pageController = PageController();
 
     return SafeArea(
       child: Scaffold(
-        body: Stack(
+        bottomNavigationBar: CustomNavigationBar(
+          onPageChange: (value) {
+            ref.read(clientProvider.notifier).pageNumber.value = value;
+
+            pageController.jumpToPage(
+              value,
+            );
+          },
+        ),
+        body: PageView(
+          controller: pageController,
+          physics: NeverScrollableScrollPhysics(),
+          onPageChanged: (value) {
+            ref.read(clientProvider.notifier).pageNumber.value = value;
+          },
           children: [
-            SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Column(
-                  children: [
-                    CustomAppBar(
-                      location: location?.address.split(",").first ?? "",
-                    ),
-                    CustomPoster(),
-                    CustomSearch(),
-                    CustomFilter(),
-                    Restaurants(),
-                  ],
+            Stack(
+              children: [
+                HomeWidgets(
+                  pageController: _scrollController,
+                  location: location,
                 ),
-              ),
-            ),
-            ValueListenableBuilder(
-              valueListenable: isVisible,
-              builder: (BuildContext context, value, Widget? child) =>
-                  !isVisible.value
-                      ? SizedBox()
-                      : PreferredSize(
-                          preferredSize: Size(double.infinity, 0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 150,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: 10,
+                ValueListenableBuilder(
+                  valueListenable: isVisible,
+                  builder: (BuildContext context, value, Widget? child) =>
+                      !isVisible.value
+                          ? SizedBox()
+                          : PreferredSize(
+                              preferredSize: Size(double.infinity, 0),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 150,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                      bottomLeft: Radius.circular(20),
+                                    ),
                                   ),
-                                  AppBar(
-                                    backgroundColor: Colors.white,
-                                    actions: [
-                                      ValueListenableBuilder(
-                                        valueListenable: ref
-                                            .watch(clientProvider.notifier)
-                                            .counterOfFilters,
-                                        builder: (BuildContext context, value,
-                                                Widget? child) =>
-                                            badges.Badge(
-                                          badgeContent: Text(
-                                            value == 0 ? "" : value.toString(),
-                                          ),
-                                          badgeStyle: badges.BadgeStyle(
-                                            badgeColor: Colors.white,
-                                          ),
-                                          child: Icon(CupertinoIcons
-                                              .slider_horizontal_3),
-                                        ),
-                                      ),
+                                  child: Column(
+                                    children: [
                                       SizedBox(
-                                        width: 30,
+                                        height: 10,
                                       ),
-                                    ],
-                                    centerTitle: true,
-                                    title: Column(
-                                      children: [
-                                        Text(
-                                          "Рестораны",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                      AppBar(
+                                        backgroundColor: Colors.white,
+                                        actions: [
+                                          ValueListenableBuilder(
+                                            valueListenable: ref
+                                                .watch(clientProvider.notifier)
+                                                .counterOfFilters,
+                                            builder: (BuildContext context,
+                                                    value, Widget? child) =>
+                                                badges.Badge(
+                                              badgeContent: Text(
+                                                value == 0
+                                                    ? ""
+                                                    : value.toString(),
+                                              ),
+                                              badgeStyle: badges.BadgeStyle(
+                                                badgeColor: Colors.white,
+                                              ),
+                                              child: Icon(CupertinoIcons
+                                                  .slider_horizontal_3),
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          "улица Беруний 3А",
-                                          style: TextStyle(
-                                            color: Colors.black38,
-                                            fontSize: 12,
+                                          SizedBox(
+                                            width: 30,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      height: 2,
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          color: Colors.black26,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              spreadRadius: 1,
-                                              blurRadius: 10,
+                                        ],
+                                        centerTitle: true,
+                                        title: Column(
+                                          children: [
+                                            Text(
+                                              "Рестораны",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Text(
+                                              "улица Беруний 3А",
+                                              style: TextStyle(
+                                                color: Colors.black38,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Expanded(child: SizedBox()),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        ...List.generate(
-                                          ref
-                                              .watch(clientProvider.notifier)
-                                              .categories
-                                              .length,
-                                          (index) => SliverFilterItem(
-                                            title: ref
-                                                .watch(clientProvider.notifier)
-                                                .categories[index],
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                          vertical: 10,
+                                        ),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 2,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              color: Colors.black26,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 10,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {},
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 10, right: 10),
-                                            child: SizedBox(
-                                              child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(50),
-                                                  ),
-                                                  color:
-                                                      Colors.lightBlue.shade100,
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 5),
-                                                  child: Text(
-                                                    "Еще",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 15,
+                                      ),
+                                      Expanded(child: SizedBox()),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            ...List.generate(
+                                              ref
+                                                  .watch(
+                                                      clientProvider.notifier)
+                                                  .categories
+                                                  .length,
+                                              (index) => SliverFilterItem(
+                                                title: ref
+                                                    .watch(
+                                                        clientProvider.notifier)
+                                                    .categories[index],
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 10, right: 10),
+                                                child: SizedBox(
+                                                  child: DecoratedBox(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(50),
+                                                      ),
+                                                      color: Colors
+                                                          .lightBlue.shade100,
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 10,
+                                                          vertical: 5),
+                                                      child: Text(
+                                                        "Еще",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(child: SizedBox()),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      height: 2,
-                                      child: DecoratedBox(
-                                        decoration: BoxDecoration(
-                                          color: Colors.black26,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              spreadRadius: 1,
-                                              blurRadius: 10,
-                                            ),
                                           ],
                                         ),
                                       ),
-                                    ),
+                                      Expanded(child: SizedBox()),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                          vertical: 10,
+                                        ),
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 2,
+                                          child: DecoratedBox(
+                                            decoration: BoxDecoration(
+                                              color: Colors.black26,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        ),
+                ),
+              ],
             ),
+            ColoredBox(color: Colors.red),
+            ColoredBox(color: Colors.blue),
+            ColoredBox(color: Colors.yellowAccent),
           ],
         ),
       ),
