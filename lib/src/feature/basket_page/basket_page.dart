@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/basket_items.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/bottom_total.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/empty_basket.dart';
 
 class BasketPage extends ConsumerWidget {
@@ -18,6 +19,7 @@ class BasketPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+
         title: Text(
           "Корзина",
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -41,7 +43,7 @@ class BasketPage extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(child: content),
-
+          const BottomTotal(),
         ],
       ),
     );
