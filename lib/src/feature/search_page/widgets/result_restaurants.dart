@@ -33,7 +33,7 @@ class _ResultRestaurantsState extends ConsumerState<ResultRestaurants> {
                   ),
                 ),
               )
-            : Text(
+            : const Text(
                 "Ничего не найдено",
                 style: TextStyle(color: Colors.black54, fontSize: 16),
               );

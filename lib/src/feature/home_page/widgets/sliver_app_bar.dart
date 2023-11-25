@@ -10,6 +10,6 @@ class CustomSliverAppBar extends StatefulWidget {
 class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
+    return const Placeholder();
   }
 }

@@ -15,7 +15,7 @@ class CustomSearch extends StatelessWidget {
           onPressed: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => SearchPage(),
+              builder: (context) => const SearchPage(),
             ),
           ),
           style: ElevatedButton.styleFrom(

@@ -167,11 +167,11 @@ class _SliverFilterItemState extends ConsumerState<SliverFilterItem> {
               setState(() {});
             },
             child: Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(50),
                     ),
                     color: !ref

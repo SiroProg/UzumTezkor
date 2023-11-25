@@ -29,15 +29,15 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.search,
                           color: Colors.black54,
@@ -51,7 +51,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                                 .read(clientProvider.notifier)
                                 .searchRestaurants(value);
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Поиск",
                             hintStyle:
                                 TextStyle(fontSize: 14, color: Colors.black54),
@@ -65,7 +65,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
+                child: const Text(
                   "Отменить",
                   style: TextStyle(color: Colors.deepPurple, fontSize: 13),
                 ),

@@ -90,10 +90,10 @@ class CustomAppBar extends ConsumerWidget {
               badgeContent: Text(
                 value == 0 ? "" : value.toString(),
               ),
-              badgeStyle: badges.BadgeStyle(
+              badgeStyle: const badges.BadgeStyle(
                 badgeColor: Colors.white,
               ),
-              child: Icon(CupertinoIcons.slider_horizontal_3),
+              child: const Icon(CupertinoIcons.slider_horizontal_3),
             ),
           ),
         ],
