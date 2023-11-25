@@ -22,12 +22,25 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   ValueNotifier filterList = ValueNotifier([]);
   double? latitude;
   double? longitude;
-  ValueNotifier<List<bool>> selectionCategoryes =
-      ValueNotifier(List.generate(Category.values.length, (index) => false));
 
-  void changeSelection(Category category) => selectionCategoryes
-          .value[Category.values.toList().indexOf(category)] =
-      !selectionCategoryes.value[Category.values.toList().indexOf(category)];
+  ValueNotifier<Map<Category, bool>> selectionCategoryes = ValueNotifier({
+    Category.chicken: true,
+    Category.kebab: true,
+    Category.burger: true,
+    Category.dessert: true,
+    Category.coffee: true,
+    Category.nationalFood: true,
+    Category.pizza: true,
+    Category.pilaf: true,
+    Category.pita: true,
+    Category.asia: true,
+  });
+
+  void changeSelection(Category category) {
+    refreshFilterList(category);
+    filterByCategories();
+    selectionCategoryes.value[category] = !selectionCategoryes.value[category]!;
+  }
 
   void refreshFilterList(Category category) {
     if (filterList.value.contains(category)) {

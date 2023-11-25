@@ -70,30 +70,14 @@ class FilterItem extends ConsumerStatefulWidget {
 }
 
 class _FilterItemState extends ConsumerState<FilterItem> {
-  ValueNotifier<bool> isSelected = ValueNotifier(false);
-
-  @override
-  void initState() {
-    super.initState();
-    changeSelection();
-  }
-
-  void changeSelection() => isSelected.value = ref
-      .read(clientProvider.notifier)
-      .selectionCategoryes
-      .value[Category.values.indexOf(widget.title)];
-
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return GestureDetector(
           onTap: () {
-            ref.read(clientProvider.notifier)
-              ..refreshFilterList(widget.title)
-              ..filterByCategories();
             ref.read(clientProvider.notifier).changeSelection(widget.title);
-            changeSelection();
+            setState(() {});
           },
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
@@ -116,38 +100,105 @@ class _FilterItemState extends ConsumerState<FilterItem> {
                 const SizedBox(
                   height: 6,
                 ),
-                ValueListenableBuilder(
-                  valueListenable: isSelected,
-                  builder: (BuildContext context, bool value, Widget? child) =>
-                      !isSelected.value
-                          ? Text(
+                ref
+                        .read(clientProvider.notifier)
+                        .selectionCategoryes
+                        .value[widget.title]!
+                    ? Text(
+                        widget.title.title,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                        ),
+                      )
+                    : SizedBox(
+                        child: DecoratedBox(
+                          decoration: const BoxDecoration(
+                            color: Colors.deepPurple,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 5),
+                            child: Text(
                               widget.title.title,
                               style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                              ),
-                            )
-                          : SizedBox(
-                              child: DecoratedBox(
-                                decoration: const BoxDecoration(
-                                  color: Colors.deepPurple,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 2, horizontal: 5),
-                                  child: Text(
-                                    widget.title.title,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                  ),
-                                ),
-                              ),
+                                  color: Colors.white, fontSize: 12),
                             ),
-                ),
+                          ),
+                        ),
+                      ),
               ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class SliverFilterItem extends ConsumerStatefulWidget {
+  final Category title;
+
+  const SliverFilterItem({
+    required this.title,
+    super.key,
+  });
+
+  @override
+  ConsumerState<SliverFilterItem> createState() => _SliverFilterItemState();
+}
+
+class _SliverFilterItemState extends ConsumerState<SliverFilterItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        return ValueListenableBuilder(
+          valueListenable:
+              ref.read(clientProvider.notifier).selectionCategoryes,
+          builder: (BuildContext context, value, Widget? child) =>
+              GestureDetector(
+            onTap: () {
+
+              ref.read(clientProvider.notifier).changeSelection(widget.title);
+              setState(() {});
+            },
+            child: Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: SizedBox(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50),
+                    ),
+                    color: !ref
+                            .watch(clientProvider.notifier)
+                            .selectionCategoryes
+                            .value[widget.title]!
+                        ? Colors.deepPurple
+                        : Colors.black12,
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Text(
+                      widget.title.title,
+                      style: TextStyle(
+                        color: !ref
+                                .watch(clientProvider.notifier)
+                                .selectionCategoryes
+                                .value[widget.title]!
+                            ? Colors.white
+                            : Colors.black,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         );

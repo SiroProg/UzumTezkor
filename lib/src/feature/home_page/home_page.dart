@@ -11,7 +11,6 @@ import 'widgets/custom_poster.dart';
 import 'widgets/custom_search.dart';
 import 'widgets/restaurants.dart';
 
-
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -30,12 +29,13 @@ class _HomePagState extends ConsumerState<HomePage> {
   }
 
   void onChange() {
-    if (_scrollController.position.pixels.toInt() >= 150) {
+    if (_scrollController.position.pixels.toInt() >= 280) {
       isVisible.value = true;
     } else if (isVisible.value &&
         _scrollController.position.pixels !=
             _scrollController.position.minScrollExtent) {
       isVisible.value = false;
+      setState(() {});
     }
   }
 
@@ -237,73 +237,6 @@ class _HomePagState extends ConsumerState<HomePage> {
                         ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SliverFilterItem extends ConsumerStatefulWidget {
-  final Category title;
-
-  const SliverFilterItem({
-    required this.title,
-    super.key,
-  });
-
-  @override
-  ConsumerState<SliverFilterItem> createState() => _SliverFilterItemState();
-}
-
-class _SliverFilterItemState extends ConsumerState<SliverFilterItem> {
-  ValueNotifier<bool> isSelected = ValueNotifier(false);
-
-  void changeSelection() => isSelected.value = ref
-      .read(clientProvider.notifier)
-      .selectionCategoryes
-      .value[Category.values.indexOf(widget.title)];
-
-  @override
-  void initState() {
-    super.initState();
-    changeSelection();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        ref.read(clientProvider.notifier)
-          ..refreshFilterList(widget.title)
-          ..filterByCategories();
-        ref.read(clientProvider.notifier).changeSelection(widget.title);
-        changeSelection();
-      },
-      child: ValueListenableBuilder(
-        valueListenable: isSelected,
-        builder: (BuildContext context, bool value, Widget? child) => Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: SizedBox(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50),
-                ),
-                color: isSelected.value ? Colors.deepPurple : Colors.black12,
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                child: Text(
-                  widget.title.title,
-                  style: TextStyle(
-                    color: isSelected.value ? Colors.white : Colors.black,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ),
       ),
     );
