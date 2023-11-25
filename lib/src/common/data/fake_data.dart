@@ -56,7 +56,6 @@ class FakeData {
       image: "asset/images/burger7.png",
     ),
   ];
-
   static List<ProductModel> chikens = [
     ProductModel(
       id: 1,
@@ -885,7 +884,20 @@ class FakeData {
   List<ClientModel> clientData = [
     ClientModel(
       ordersHistory: [],
-      basket: [],
+      basket: [
+        BasketModel(
+          productModel: salad.first,
+          amount: 2,
+        ),
+        BasketModel(
+          productModel: tea.first,
+          amount: 2,
+        ),
+        BasketModel(
+          productModel: meal.last,
+          amount: 4,
+        ),
+      ],
       promotionalCodes: [],
       locationList: [],
     ),

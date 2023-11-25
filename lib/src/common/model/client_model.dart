@@ -1,5 +1,5 @@
+import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/person_model.dart';
-import 'package:uzum_tezkor/src/common/model/product_model.dart';
 import 'package:uzum_tezkor/src/common/model/promotion_model.dart';
 
 import 'location/place_location.dart';
@@ -8,7 +8,7 @@ import 'order_model.dart';
 class ClientModel {
   PersonModel? personModel;
   final List<OrderModel> ordersHistory;
-  final List<ProductModel> basket;
+  final List<BasketModel> basket;
   final List<PromotionalCodeModel> promotionalCodes;
   final List<PlaceLocation> locationList;
 
@@ -23,7 +23,7 @@ class ClientModel {
   ClientModel copyWith({
     PersonModel? personModel,
     List<OrderModel>? ordersHistory,
-    List<ProductModel>? basket,
+    List<BasketModel>? basket,
     List<PromotionalCodeModel>? promotionalCodes,
     List<PlaceLocation>? locationList,
   }) {

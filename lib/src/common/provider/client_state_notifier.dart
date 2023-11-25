@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:location/location.dart';
 import 'package:uzum_tezkor/src/common/data/fake_data.dart';
+import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
@@ -71,6 +72,44 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
       filterList.value.add(category);
       counterOfFilters.value = counterOfFilters.value + 1;
     }
+  }
+
+  void clearBasket() {
+    state = state.copyWith(basket: []);
+  }
+
+  void incrementBasketProduct(BasketModel model) {
+    state = state.copyWith(
+      basket: state.basket.map<BasketModel>((item) {
+        if (item.id == model.id) {
+          return item.copyWith(amount: item.amount + 1);
+        } else {
+          return item;
+        }
+      }).toList(),
+    );
+  }
+
+  void decrementBasketProduct(BasketModel model) {
+    state = state.copyWith(
+      basket: state.basket.map<BasketModel>((item) {
+        if (item.id == model.id) {
+          return item.copyWith(amount: item.amount - 1);
+        } else {
+          return item;
+        }
+      }).toList(),
+    );
+    clearZeroAmountBasket();
+  }
+
+  void clearZeroAmountBasket() {
+    state = state.copyWith(
+        basket: state.basket.where((element) => element.amount != 0).toList());
+  }
+  void removeBasketElement(BasketModel model) {
+    state = state.copyWith(
+        basket: state.basket.where((element) => element.id != model.id).toList());
   }
 
   void filterByCategories() {
