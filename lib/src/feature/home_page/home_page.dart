@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
 import 'widgets/custom_filter.dart';
@@ -242,7 +243,7 @@ class _HomePagState extends ConsumerState<HomePage> {
                 ),
               ],
             ),
-            const ColoredBox(color: Colors.red),
+            const BasketPage(),
             const ColoredBox(color: Colors.blue),
             const ColoredBox(color: Colors.yellowAccent),
           ],

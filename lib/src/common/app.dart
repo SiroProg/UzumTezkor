@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
+import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 
 class App extends StatelessWidget {
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
         ),
       ),
       title: "Uzum Tezkor",
-      home:  const BasketPage(),
+      home:  const HomePage(),
     );
   }
 }
