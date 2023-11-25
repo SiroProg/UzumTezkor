@@ -1,3 +1,4 @@
+import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
 import '../model/product_model.dart';
@@ -56,7 +57,6 @@ class FakeData {
       image: "asset/images/burger7.png",
     ),
   ];
-
   static List<ProductModel> chikens = [
     ProductModel(
       id: 1,
@@ -115,7 +115,6 @@ class FakeData {
       image: "asset/images/chiken8.png",
     ),
   ];
-
   static List<ProductModel> coffee = [
     ProductModel(
       id: 1,
@@ -290,7 +289,6 @@ class FakeData {
       image: "asset/images/drink2.png",
     ),
   ];
-
   static List<ProductModel> hotFoods = [
     ProductModel(
       id: 1,
@@ -407,7 +405,6 @@ class FakeData {
       image: "asset/images/lester2.jpeg",
     ),
   ];
-
   static List<ProductModel> mangal = [
     ProductModel(
       id: 1,
@@ -607,7 +604,6 @@ class FakeData {
       image: "asset/images/salad8.jpeg",
     ),
   ];
-
   static List<ProductModel> snacs = [
     ProductModel(
       id: 1,
@@ -768,7 +764,6 @@ class FakeData {
       image: "asset/images/sushi9.jpeg",
     ),
   ];
-
   static List<ProductModel> tea = [
     ProductModel(
       id: 1,
@@ -885,7 +880,20 @@ class FakeData {
   List<ClientModel> clientData = [
     ClientModel(
       ordersHistory: [],
-      basket: [],
+      basket: [
+        BasketModel(
+          productModel: salad.first,
+          amount: 2,
+        ),
+        BasketModel(
+          productModel: tea.first,
+          amount: 2,
+        ),
+        BasketModel(
+          productModel: meal.last,
+          amount: 4,
+        ),
+      ],
       promotionalCodes: [],
       locationList: [],
     ),
