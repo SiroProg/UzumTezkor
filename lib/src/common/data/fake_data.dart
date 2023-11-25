@@ -1,3 +1,4 @@
+import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 
 import '../model/product_model.dart';
