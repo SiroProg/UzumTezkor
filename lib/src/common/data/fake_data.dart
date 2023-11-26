@@ -1,5 +1,6 @@
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 
 import '../model/product_model.dart';
 import '../model/promotion_model.dart';
@@ -900,7 +901,13 @@ class FakeData {
         ),
       ],
       promotionalCodes: [],
-      locationList: [],
+      locationList: [
+        PlaceLocation(
+          longitude: 41,
+          latitude: 41,
+          address: "Beruniy 8 a",
+        )
+      ],
     ),
   ];
 }

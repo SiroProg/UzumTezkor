@@ -19,6 +19,7 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
   ValueNotifier<int> pageNumber = ValueNotifier(0);
   ValueNotifier<List<RestaurantModel>> searchResults = ValueNotifier([]);
+
   ClientStateNotifier() : super(FakeData().clientData.first);
   ValueNotifier<int> counterOfFilters = ValueNotifier(0);
   ValueNotifier filterList = ValueNotifier([]);
@@ -143,7 +144,15 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   }
 
   void setLocation(PlaceLocation location) async {
-    state = state.copyWith(locationList: [location, ...state.locationList]);
+    state = state.copyWith(
+      locationList: state.locationList.map<PlaceLocation>((item) {
+        if (location.address != item.address) {
+          return location;
+        } else {
+          return item.copyWith(isSelected: false);
+        }
+      }).toList(),
+    );
   }
 
   Future<void> getCurrentLocation(

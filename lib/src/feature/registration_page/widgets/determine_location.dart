@@ -8,7 +8,9 @@ import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 class DetermineLocation extends ConsumerStatefulWidget {
-  const DetermineLocation({Key? key}) : super(key: key);
+  const DetermineLocation({this.isAddAddress = false, Key? key})
+      : super(key: key);
+  final bool isAddAddress;
 
   @override
   ConsumerState<DetermineLocation> createState() => _DetermineLocationState();
@@ -138,11 +140,15 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                   ref
                       .read(clientProvider.notifier)
                       .setLocation(location.value!);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) =>  const HomePage(),
-                    ),
-                  );
+                  if (widget.isAddAddress) {
+                    Navigator.of(context).pop();
+                  } else {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const HomePage(),
+                      ),
+                    );
+                  }
                 }
               },
               style: OutlinedButton.styleFrom(

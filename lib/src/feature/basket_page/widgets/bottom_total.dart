@@ -5,6 +5,7 @@ import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/bottom_total_item.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/payment.dart';
 
 class BottomTotal extends ConsumerWidget {
   const BottomTotal({super.key});
@@ -12,12 +13,13 @@ class BottomTotal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<BasketModel> items = ref.watch(clientProvider).basket;
-
+    ValueNotifier<bool> isActive = ValueNotifier(false);
     double getTotalPrice() {
       double total = 0.0;
       for (BasketModel i in items) {
         total += i.totalPrice;
       }
+      if (total > 30000) isActive.value = true;
       return total;
     }
 
@@ -48,45 +50,60 @@ class BottomTotal extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.deepPurple),
-              child: ListTile(
-                leading: Container(
-                  width: 30,
-                  height: 30,
+            onTap: getTotalPrice() >= 30000
+                ? () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const Payment(),
+                      ),
+                    )
+                : null,
+            child: ValueListenableBuilder(
+              valueListenable: isActive,
+              builder: (ctx, value, child) {
+                return Container(
+                  height: 60,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(20),
+                    color: value
+                        ? Colors.deepPurple
+                        : Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.2),
                   ),
-                  child: Center(
-                    child: Text(
-                      "${items.length}",
+                  child: ListTile(
+                    leading: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "${items.length}",
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.deepPurple,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      "К оплате",
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.w400,
-                            color: Colors.deepPurple,
+                            color: Theme.of(context).colorScheme.background,
+                          ),
+                    ),
+                    trailing: Text(
+                      "${getTotalPrice()} сум",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).colorScheme.background,
                           ),
                     ),
                   ),
-                ),
-                title: Text(
-                  "К оплате",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                ),
-                trailing: Text(
-                  "${getTotalPrice()} сум",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                ),
-              ),
+                );
+              },
             ),
           )
         ],
