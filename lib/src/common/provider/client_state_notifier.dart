@@ -25,7 +25,9 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   ValueNotifier filterList = ValueNotifier([]);
   double? latitude;
   double? longitude;
+
   ValueNotifier<String> searchText = ValueNotifier("");
+
   void searchRestaurants(String text) {
     searchText.value = text;
     searchResults.value = [];
@@ -106,9 +108,27 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     state = state.copyWith(
         basket: state.basket.where((element) => element.amount != 0).toList());
   }
+
   void removeBasketElement(BasketModel model) {
     state = state.copyWith(
-        basket: state.basket.where((element) => element.id != model.id).toList());
+        basket:
+            state.basket.where((element) => element.id != model.id).toList());
+  }
+
+  void updateBasketElement(BasketModel model, int amount) {
+    if (amount == 0 || model.amount == amount) {
+      removeBasketElement(model);
+    } else {
+      state = state.copyWith(
+        basket: state.basket.map<BasketModel>((item) {
+          if (item.id == model.id) {
+            return item.copyWith(amount: amount);
+          } else {
+            return item;
+          }
+        }).toList(),
+      );
+    }
   }
 
   void filterByCategories() {

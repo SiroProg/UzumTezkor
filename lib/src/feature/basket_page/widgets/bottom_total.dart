@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
 
 class BottomTotal extends ConsumerWidget {
   const BottomTotal({super.key});
@@ -18,6 +20,17 @@ class BottomTotal extends ConsumerWidget {
       return total;
     }
 
+    void deliveryModal() {
+      showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return const DeliveryModal();
+        },
+      );
+    }
+
+
+
     return Container(
       height: 110,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
@@ -31,6 +44,7 @@ class BottomTotal extends ConsumerWidget {
       child: Column(
         children: [
           GestureDetector(
+            onTap: deliveryModal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

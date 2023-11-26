@@ -19,7 +19,6 @@ class BasketPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-
         title: Text(
           "Корзина",
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -43,7 +42,7 @@ class BasketPage extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(child: content),
-          const BottomTotal(),
+          if (items.isNotEmpty) const BottomTotal(),
         ],
       ),
     );
