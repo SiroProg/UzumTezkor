@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/bottom_total_item.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
 
@@ -29,10 +30,8 @@ class BottomTotal extends ConsumerWidget {
       );
     }
 
-
-
     return Container(
-      height: 110,
+      height: 120,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         border: Border(
@@ -45,26 +44,7 @@ class BottomTotal extends ConsumerWidget {
         children: [
           GestureDetector(
             onTap: deliveryModal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(
-                  Icons.run_circle_outlined,
-                  color: Colors.deepPurple,
-                ),
-                Text(
-                  "Бесплатная доставка",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.deepPurple,
-                      ),
-                ),
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.deepPurple,
-                )
-              ],
-            ),
+            child: BottomTotalItem(totalPrice: getTotalPrice()),
           ),
           const SizedBox(height: 10),
           GestureDetector(
