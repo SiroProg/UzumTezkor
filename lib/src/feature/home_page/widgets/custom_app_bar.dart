@@ -96,12 +96,13 @@ class CustomAppBar extends ConsumerWidget {
                 badgeColor: Colors.white,
               ),
               child: IconButton(
-                icon: Icon(CupertinoIcons.slider_horizontal_3),
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  builder: (context) => AllFilters(),
-                ),
-              ),
+                  icon: Icon(CupertinoIcons.slider_horizontal_3),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => AllFilters(),
+                    );
+                  }),
             ),
           ),
         ],

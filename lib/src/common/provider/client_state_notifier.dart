@@ -45,23 +45,23 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     searchResults.value = result;
   }
 
-  ValueNotifier<Map<Category, bool>> selectionCategoryes = ValueNotifier({
-    Category.chicken: true,
-    Category.kebab: true,
-    Category.burger: true,
-    Category.dessert: true,
-    Category.coffee: true,
-    Category.nationalFood: true,
-    Category.pizza: true,
-    Category.pilaf: true,
-    Category.pita: true,
-    Category.asia: true,
-  });
+  Map<Category, ValueNotifier<bool>> selectionCategoryes = {
+    Category.chicken: ValueNotifier(true),
+    Category.kebab: ValueNotifier(true),
+    Category.burger: ValueNotifier(true),
+    Category.dessert: ValueNotifier(true),
+    Category.coffee: ValueNotifier(true),
+    Category.nationalFood: ValueNotifier(true),
+    Category.pizza: ValueNotifier(true),
+    Category.pilaf: ValueNotifier(true),
+    Category.pita: ValueNotifier(true),
+    Category.asia: ValueNotifier(true),
+  };
 
   void changeSelection(Category category) {
     refreshFilterList(category);
     filterByCategories();
-    selectionCategoryes.value[category] = !selectionCategoryes.value[category]!;
+    selectionCategoryes[category]!.value = !selectionCategoryes[category]!.value;
   }
 
   void refreshFilterList(Category category) {
