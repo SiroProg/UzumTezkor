@@ -7,6 +7,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
+import '../profile_page/profile_page.dart';
 import 'widgets/custom_filter.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -105,7 +106,8 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                     ? ""
                                                     : value.toString(),
                                               ),
-                                              badgeStyle: const badges.BadgeStyle(
+                                              badgeStyle:
+                                                  const badges.BadgeStyle(
                                                 badgeColor: Colors.white,
                                               ),
                                               child: const Icon(CupertinoIcons
@@ -186,17 +188,18 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                   child: DecoratedBox(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
-                                                          const BorderRadius.all(
+                                                          const BorderRadius
+                                                              .all(
                                                         Radius.circular(50),
                                                       ),
                                                       color: Colors
                                                           .lightBlue.shade100,
                                                     ),
                                                     child: const Padding(
-                                                      padding: EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10,
-                                                          vertical: 5),
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 10,
+                                                              vertical: 5),
                                                       child: Text(
                                                         "Еще",
                                                         style: TextStyle(
@@ -245,7 +248,7 @@ class _HomePagState extends ConsumerState<HomePage> {
             ),
             const BasketPage(),
             const ColoredBox(color: Colors.blue),
-            const ColoredBox(color: Colors.yellowAccent),
+            Profile(),
           ],
         ),
       ),
