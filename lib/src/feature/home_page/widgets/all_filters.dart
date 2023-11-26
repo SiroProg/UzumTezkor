@@ -30,7 +30,7 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: SizedBox(
               width: double.infinity,
-              height: 360,
+              height: 320,
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 150,
@@ -41,7 +41,9 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
                 itemCount: Category.values.length,
                 itemBuilder: (_, index) => GestureDetector(
                   onTap: () {
-                    ref.read(clientProvider.notifier).changeSelection(Category.values.toList()[index]);
+                    ref
+                        .read(clientProvider.notifier)
+                        .changeSelection(Category.values.toList()[index]);
                     setState(() {});
                   },
                   child: Column(
@@ -53,7 +55,9 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage("asset/images/mangal1.jpeg"),
+                              image: AssetImage(index > 7
+                                  ? "asset/images/desert${index - 3}.jpeg"
+                                  : "asset/images/desert${index + 1}.jpeg"),
                             ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(100),
@@ -64,16 +68,73 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
                       SizedBox(
                         height: 5,
                       ),
-
-                      Text(
-                        Category.values.toList()[index].title,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
+                      ValueListenableBuilder(
+                        valueListenable: ref
+                            .watch(clientProvider.notifier)
+                            .selectionCategoryes[Category.values[index]]!,
+                        builder: (BuildContext context, value, Widget? child) =>
+                            ref
+                                    .read(clientProvider.notifier)
+                                    .selectionCategoryes[
+                                        Category.values.toList()[index]]!
+                                    .value
+                                ? Text(
+                                    Category.values.toList()[index].title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                    ),
+                                  )
+                                : DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: Text(
+                                        Category.values.toList()[index].title,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  "Показать",
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
                 ),
               ),

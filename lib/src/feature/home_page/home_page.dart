@@ -5,9 +5,15 @@ import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
+import 'package:uzum_tezkor/src/feature/home_page/widgets/all_filters.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
-import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
+import '../../common/model/restourant_model.dart';
+import 'widgets/custom_app_bar.dart';
 import 'widgets/custom_filter.dart';
+import 'widgets/custom_poster.dart';
+import 'widgets/custom_search.dart';
+import 'widgets/restaurants.dart';
+import 'widgets/sliver_app_bar.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,7 +39,6 @@ class _HomePagState extends ConsumerState<HomePage> {
         _scrollController.position.pixels !=
             _scrollController.position.minScrollExtent) {
       isVisible.value = false;
-      setState(() {});
     }
   }
 
@@ -64,9 +69,68 @@ class _HomePagState extends ConsumerState<HomePage> {
             SizedBox(
               child: Stack(
                 children: [
-                  HomeWidgets(
-                    pageController: _scrollController,
-                    location: location,
+                  SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      controller: _scrollController,
+                      child: Column(
+                        children: [
+                          CustomAppBar(
+                            location: location?.address.split(",").first ?? "",
+                          ),
+                          const CustomPoster(),
+                          const CustomSearch(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: 110,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    ...List.generate(
+                                      8,
+                                      (index) => FilterItem(
+                                        image:
+                                            'asset/images/hot${index + 1}.jpeg',
+                                        title: Category.values[index],
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: const Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor: Colors.black12,
+                                              radius: 38,
+                                              child: Icon(Icons.arrow_forward,
+                                                  size: 30),
+                                            ),
+                                            SizedBox(height: 6),
+                                            Text(
+                                              "Еще",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 14),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          const Restaurants(),
+                        ],
+                      ),
+                    ),
                   ),
                   ValueListenableBuilder(
                     valueListenable: isVisible,
@@ -96,7 +160,8 @@ class _HomePagState extends ConsumerState<HomePage> {
                                           actions: [
                                             ValueListenableBuilder(
                                               valueListenable: ref
-                                                  .watch(clientProvider.notifier)
+                                                  .watch(
+                                                      clientProvider.notifier)
                                                   .counterOfFilters,
                                               builder: (BuildContext context,
                                                       value, Widget? child) =>
@@ -106,11 +171,21 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                       ? ""
                                                       : value.toString(),
                                                 ),
-                                                badgeStyle: const badges.BadgeStyle(
+                                                badgeStyle:
+                                                    const badges.BadgeStyle(
                                                   badgeColor: Colors.white,
                                                 ),
-                                                child: const Icon(CupertinoIcons
-                                                    .slider_horizontal_3),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    showModalBottomSheet(
+                                                        context: context,
+                                                        builder: (context) =>
+                                                            AllFilters());
+                                                  },
+                                                  child: const Icon(
+                                                      CupertinoIcons
+                                                          .slider_horizontal_3),
+                                                ),
                                               ),
                                             ),
                                             const SizedBox(
@@ -139,7 +214,7 @@ class _HomePagState extends ConsumerState<HomePage> {
                                           ),
                                         ),
                                         const Padding(
-                                          padding:  EdgeInsets.symmetric(
+                                          padding: EdgeInsets.symmetric(
                                             horizontal: 20,
                                             vertical: 10,
                                           ),
@@ -173,31 +248,33 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                     .length,
                                                 (index) => SliverFilterItem(
                                                   title: ref
-                                                      .watch(
-                                                          clientProvider.notifier)
+                                                      .read(clientProvider
+                                                          .notifier)
                                                       .categories[index],
                                                 ),
                                               ),
                                               GestureDetector(
                                                 onTap: () {},
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10, right: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10, right: 10),
                                                   child: SizedBox(
                                                     child: DecoratedBox(
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                            const BorderRadius.all(
+                                                            const BorderRadius
+                                                                .all(
                                                           Radius.circular(50),
                                                         ),
                                                         color: Colors
                                                             .lightBlue.shade100,
                                                       ),
                                                       child: const Padding(
-                                                        padding:  EdgeInsets
+                                                        padding: EdgeInsets
                                                             .symmetric(
-                                                            horizontal: 10,
-                                                            vertical: 5),
+                                                                horizontal: 10,
+                                                                vertical: 5),
                                                         child: Text(
                                                           "Еще",
                                                           style: TextStyle(
@@ -215,7 +292,7 @@ class _HomePagState extends ConsumerState<HomePage> {
                                         ),
                                         const Expanded(child: SizedBox()),
                                         const Padding(
-                                          padding:  EdgeInsets.symmetric(
+                                          padding: EdgeInsets.symmetric(
                                             horizontal: 20,
                                             vertical: 10,
                                           ),
