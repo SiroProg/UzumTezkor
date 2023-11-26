@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 
+import '../../detail_page/detail_page.dart';
+
 class Restaurants extends ConsumerStatefulWidget {
   const Restaurants({super.key});
 
@@ -35,8 +37,18 @@ class _RestaurantsState extends ConsumerState<Restaurants> {
               return Column(
                 children: List.generate(
                   ref.read(clientProvider.notifier).restaurants.value.length,
-                  (index) => RestaurantItem(
-                    restaurant: value[index],
+                  (index) => GestureDetector(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                          restaurant: value[index],
+                        ),
+                      ),
+                    ),
+                    child: RestaurantItem(
+                      restaurant: value[index],
+                    ),
                   ),
                 ),
               );
