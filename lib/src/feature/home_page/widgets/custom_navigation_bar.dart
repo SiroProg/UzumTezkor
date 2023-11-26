@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:badges/badges.dart' as badges;
+
+import '../../basket_page/basket_page.dart';
 
 class CustomNavigationBar extends ConsumerStatefulWidget {
   const CustomNavigationBar({
@@ -30,14 +33,42 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
           landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          items: const [
+          items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant_menu_outlined),
               label: 'Рестораны',
               activeIcon: Icon(Icons.restaurant_menu),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_basket_outlined),
+              icon: GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BasketPage(),
+                  ),
+                ),
+                child: badges.Badge(
+                  badgeContent: Text(
+                    ref.read(clientProvider).basket.length == 0
+                        ? ""
+                        : ref.read(clientProvider).basket.length.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  badgeStyle: const badges.BadgeStyle(
+                    badgeColor: Colors.deepPurple,
+                  ),
+                  child: GestureDetector(
+                    child: Icon(Icons.shopping_basket_outlined),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BasketPage(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // Icon(Icons.shopping_basket_outlined),
               label: 'Корзина',
               activeIcon: Icon(Icons.shopping_basket),
             ),

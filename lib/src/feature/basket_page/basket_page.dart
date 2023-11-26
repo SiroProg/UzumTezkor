@@ -18,6 +18,7 @@ class BasketPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+
         centerTitle: true,
         title: Text(
           "Корзина",

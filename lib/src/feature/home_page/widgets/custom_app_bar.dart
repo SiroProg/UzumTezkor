@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/home_page/widgets/all_filters.dart';
 
 class CustomAppBar extends ConsumerWidget {
   final String location;
@@ -84,7 +85,8 @@ class CustomAppBar extends ConsumerWidget {
             ),
           ),
           ValueListenableBuilder(
-            valueListenable: ref.watch(clientProvider.notifier).counterOfFilters,
+            valueListenable:
+                ref.watch(clientProvider.notifier).counterOfFilters,
             builder: (BuildContext context, value, Widget? child) =>
                 badges.Badge(
               badgeContent: Text(
@@ -93,7 +95,13 @@ class CustomAppBar extends ConsumerWidget {
               badgeStyle: const badges.BadgeStyle(
                 badgeColor: Colors.white,
               ),
-              child: const Icon(CupertinoIcons.slider_horizontal_3),
+              child: IconButton(
+                icon: Icon(CupertinoIcons.slider_horizontal_3),
+                onPressed: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => AllFilters(),
+                ),
+              ),
             ),
           ),
         ],

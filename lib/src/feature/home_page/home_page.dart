@@ -61,189 +61,191 @@ class _HomePagState extends ConsumerState<HomePage> {
             ref.read(clientProvider.notifier).pageNumber.value = value;
           },
           children: [
-            Stack(
-              children: [
-                HomeWidgets(
-                  pageController: _scrollController,
-                  location: location,
-                ),
-                ValueListenableBuilder(
-                  valueListenable: isVisible,
-                  builder: (BuildContext context, value, Widget? child) =>
-                      !isVisible.value
-                          ? const SizedBox()
-                          : PreferredSize(
-                              preferredSize: const Size(double.infinity, 0),
-                              child: SizedBox(
-                                width: double.infinity,
-                                height: 150,
-                                child: DecoratedBox(
-                                  decoration: const BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(20),
-                                      bottomLeft: Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
+            SizedBox(
+              child: Stack(
+                children: [
+                  HomeWidgets(
+                    pageController: _scrollController,
+                    location: location,
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: isVisible,
+                    builder: (BuildContext context, value, Widget? child) =>
+                        !isVisible.value
+                            ? const SizedBox()
+                            : PreferredSize(
+                                preferredSize: const Size(double.infinity, 0),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  height: 150,
+                                  child: DecoratedBox(
+                                    decoration: const BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20),
                                       ),
-                                      AppBar(
-                                        backgroundColor: Colors.white,
-                                        actions: [
-                                          ValueListenableBuilder(
-                                            valueListenable: ref
-                                                .watch(clientProvider.notifier)
-                                                .counterOfFilters,
-                                            builder: (BuildContext context,
-                                                    value, Widget? child) =>
-                                                badges.Badge(
-                                              badgeContent: Text(
-                                                value == 0
-                                                    ? ""
-                                                    : value.toString(),
-                                              ),
-                                              badgeStyle: const badges.BadgeStyle(
-                                                badgeColor: Colors.white,
-                                              ),
-                                              child: const Icon(CupertinoIcons
-                                                  .slider_horizontal_3),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 30,
-                                          ),
-                                        ],
-                                        centerTitle: true,
-                                        title: const Column(
-                                          children: [
-                                            Text(
-                                              "Рестораны",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        AppBar(
+                                          backgroundColor: Colors.white,
+                                          actions: [
+                                            ValueListenableBuilder(
+                                              valueListenable: ref
+                                                  .watch(clientProvider.notifier)
+                                                  .counterOfFilters,
+                                              builder: (BuildContext context,
+                                                      value, Widget? child) =>
+                                                  badges.Badge(
+                                                badgeContent: Text(
+                                                  value == 0
+                                                      ? ""
+                                                      : value.toString(),
+                                                ),
+                                                badgeStyle: const badges.BadgeStyle(
+                                                  badgeColor: Colors.white,
+                                                ),
+                                                child: const Icon(CupertinoIcons
+                                                    .slider_horizontal_3),
                                               ),
                                             ),
-                                            Text(
-                                              "улица Беруний 3А",
-                                              style: TextStyle(
-                                                color: Colors.black38,
-                                                fontSize: 12,
-                                              ),
+                                            const SizedBox(
+                                              width: 30,
                                             ),
                                           ],
-                                        ),
-                                      ),
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 10,
-                                        ),
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          height: 2,
-                                          child: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              color: Colors.black26,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  spreadRadius: 1,
-                                                  blurRadius: 10,
+                                          centerTitle: true,
+                                          title: const Column(
+                                            children: [
+                                              Text(
+                                                "Рестораны",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
-                                              ],
+                                              ),
+                                              Text(
+                                                "улица Беруний 3А",
+                                                style: TextStyle(
+                                                  color: Colors.black38,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Padding(
+                                          padding:  EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 10,
+                                          ),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: 2,
+                                            child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                color: Colors.black26,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 10,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      const Expanded(child: SizedBox()),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: [
-                                            ...List.generate(
-                                              ref
-                                                  .watch(
-                                                      clientProvider.notifier)
-                                                  .categories
-                                                  .length,
-                                              (index) => SliverFilterItem(
-                                                title: ref
+                                        const Expanded(child: SizedBox()),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              ...List.generate(
+                                                ref
                                                     .watch(
                                                         clientProvider.notifier)
-                                                    .categories[index],
+                                                    .categories
+                                                    .length,
+                                                (index) => SliverFilterItem(
+                                                  title: ref
+                                                      .watch(
+                                                          clientProvider.notifier)
+                                                      .categories[index],
+                                                ),
                                               ),
-                                            ),
-                                            GestureDetector(
-                                              onTap: () {},
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10, right: 10),
-                                                child: SizedBox(
-                                                  child: DecoratedBox(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          const BorderRadius.all(
-                                                        Radius.circular(50),
+                                              GestureDetector(
+                                                onTap: () {},
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 10, right: 10),
+                                                  child: SizedBox(
+                                                    child: DecoratedBox(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            const BorderRadius.all(
+                                                          Radius.circular(50),
+                                                        ),
+                                                        color: Colors
+                                                            .lightBlue.shade100,
                                                       ),
-                                                      color: Colors
-                                                          .lightBlue.shade100,
-                                                    ),
-                                                    child: const Padding(
-                                                      padding: EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10,
-                                                          vertical: 5),
-                                                      child: Text(
-                                                        "Еще",
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 15,
+                                                      child: const Padding(
+                                                        padding:  EdgeInsets
+                                                            .symmetric(
+                                                            horizontal: 10,
+                                                            vertical: 5),
+                                                        child: Text(
+                                                          "Еще",
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 15,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      const Expanded(child: SizedBox()),
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 10,
-                                        ),
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          height: 2,
-                                          child: DecoratedBox(
-                                            decoration: BoxDecoration(
-                                              color: Colors.black26,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  spreadRadius: 1,
-                                                  blurRadius: 10,
-                                                ),
-                                              ],
+                                        const Expanded(child: SizedBox()),
+                                        const Padding(
+                                          padding:  EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 10,
+                                          ),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: 2,
+                                            child: DecoratedBox(
+                                              decoration: BoxDecoration(
+                                                color: Colors.black26,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    spreadRadius: 1,
+                                                    blurRadius: 10,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-            const BasketPage(),
+            BasketPage(),
             const ColoredBox(color: Colors.blue),
             const ColoredBox(color: Colors.yellowAccent),
           ],

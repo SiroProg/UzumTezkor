@@ -19,7 +19,6 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
   ValueNotifier<int> pageNumber = ValueNotifier(0);
   ValueNotifier<List<RestaurantModel>> searchResults = ValueNotifier([]);
-
   ClientStateNotifier() : super(FakeData().clientData.first);
   ValueNotifier<int> counterOfFilters = ValueNotifier(0);
   ValueNotifier filterList = ValueNotifier([]);

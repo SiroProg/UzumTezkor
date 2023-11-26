@@ -15,6 +15,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
     super.initState();
     ref.read(clientProvider.notifier).searchResults.value = [];
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,6 +47,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                       SizedBox(
                         width: 200,
                         child: TextField(
+                          autofocus: true,
                           onChanged: (value) {
                             ref
                                 .read(clientProvider.notifier)
