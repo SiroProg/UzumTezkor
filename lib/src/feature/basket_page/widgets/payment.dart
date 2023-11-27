@@ -28,10 +28,6 @@ class Payment extends ConsumerWidget {
             ),
           ),
           const AddressTile(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: leftPadding),
-            child: const Divider(),
-          ),
           const SizedBox(height: 10),
           Form(
             key: _formKey,
@@ -98,15 +94,7 @@ class Payment extends ConsumerWidget {
             ),
           ),
           const PaymentType(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: leftPadding),
-            child: const Divider(),
-          ),
           const PromoCode(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: leftPadding),
-            child: const Divider(),
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: leftPadding / 2),
             child: Container(

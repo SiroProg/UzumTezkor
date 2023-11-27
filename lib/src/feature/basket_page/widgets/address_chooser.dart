@@ -17,10 +17,10 @@ class AddressChooser extends ConsumerWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 10,
+            top: 20,
             left: 0,
             right: 0,
-            bottom: 30,
+            bottom: 0,
             child: Column(
               children: [
                 Expanded(
@@ -47,8 +47,8 @@ class AddressChooser extends ConsumerWidget {
             ),
           ),
           Positioned(
-            right: 10,
-            top: 10,
+            right: 0,
+            top: 5,
             child: IconButton(
               style: IconButton.styleFrom(
                 backgroundColor: Colors.deepPurple.withOpacity(0.2),
