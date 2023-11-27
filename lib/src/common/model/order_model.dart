@@ -4,14 +4,14 @@ import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'promotion_model.dart';
 
-enum PaymentType {
+enum PaymentTypeEnum {
   card("Картой", "UzCard, Humo, MasterCard, Visa"),
   cash("Наличами", "Наличний денги");
 
   final String type;
   final String description;
 
-  const PaymentType(this.type, this.description);
+  const PaymentTypeEnum(this.type, this.description);
 }
 
 class OrderModel {
@@ -24,7 +24,7 @@ class OrderModel {
   final bool isDelivered;
   final CardDetail? cardDetail;
   final List<BasketModel> products;
-  final PaymentType paymentType;
+  final PaymentTypeEnum paymentType;
 
   OrderModel({
     required this.restaurant,
@@ -36,7 +36,7 @@ class OrderModel {
     this.promocode,
     this.cardDetail,
   })  : id = uuid.v4(),
-        paymentType = PaymentType.card;
+        paymentType = PaymentTypeEnum.card;
 
   OrderModel copyWith(
     String? id,
@@ -48,7 +48,7 @@ class OrderModel {
     bool? isDelivered,
     CardDetail? cardDetail,
     List<BasketModel>? products,
-    PaymentType? paymentType,
+      PaymentTypeEnum? paymentType,
   ) {
     return OrderModel(
       restaurant: restaurant ?? this.restaurant,
