@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/bottom_total_item.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
@@ -14,6 +18,12 @@ class BottomTotal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<BasketModel> items = ref.watch(clientProvider).basket;
     ValueNotifier<bool> isActive = ValueNotifier(false);
+    PlaceLocation location = ref
+        .read(clientProvider)
+        .locationList
+        .where((element) => element.isSelected)
+        .first;
+    RestaurantModel restaurantModel = items.first.restaurantModel;
     double getTotalPrice() {
       double total = 0.0;
       for (BasketModel i in items) {
@@ -51,11 +61,22 @@ class BottomTotal extends ConsumerWidget {
           const SizedBox(height: 10),
           GestureDetector(
             onTap: getTotalPrice() >= 30000
-                ? () => Navigator.of(context).push(
+                ? () {
+                    ref.read(orderNotifier.notifier).setOrder(
+                          OrderModel(
+                            restaurant: restaurantModel,
+                            placeLocation: location,
+                            date: DateTime.now(),
+                            deliveredTime: DateTime.now(),
+                            products: items,
+                          ),
+                        );
+                    Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (ctx) => const Payment(),
                       ),
-                    )
+                    );
+                  }
                 : null,
             child: ValueListenableBuilder(
               valueListenable: isActive,
@@ -66,7 +87,10 @@ class BottomTotal extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(20),
                     color: value
                         ? Colors.deepPurple
-                        : Theme.of(context).colorScheme.onSecondaryContainer.withOpacity(0.2),
+                        : Theme.of(context)
+                            .colorScheme
+                            .onSecondaryContainer
+                            .withOpacity(0.2),
                   ),
                   child: ListTile(
                     leading: Container(

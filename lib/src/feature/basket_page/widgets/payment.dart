@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_identifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/payment_type.dart';
@@ -10,6 +12,7 @@ class Payment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    OrderModel orderModel = ref.watch(orderNotifier)!;
     double leftPadding = 20;
     return Scaffold(
       appBar: AppBar(
