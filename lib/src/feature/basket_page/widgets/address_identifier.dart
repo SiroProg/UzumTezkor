@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
-import 'package:uzum_tezkor/src/common/model/order_model.dart';
 import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
 
@@ -22,11 +21,6 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
   final floorEditingController = TextEditingController();
   final flatEditingController = TextEditingController();
   final commentEditingController = TextEditingController();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   @override
   void dispose() {
