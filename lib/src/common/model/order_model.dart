@@ -38,7 +38,7 @@ class OrderModel {
   })  : id = uuid.v4(),
         paymentType = PaymentTypeEnum.card;
 
-  OrderModel copyWith(
+  OrderModel copyWith({
     String? id,
     RestaurantModel? restaurant,
     PlaceLocation? placeLocation,
@@ -48,8 +48,8 @@ class OrderModel {
     bool? isDelivered,
     CardDetail? cardDetail,
     List<BasketModel>? products,
-      PaymentTypeEnum? paymentType,
-  ) {
+    PaymentTypeEnum? paymentType,
+  }) {
     return OrderModel(
       restaurant: restaurant ?? this.restaurant,
       placeLocation: placeLocation ?? this.placeLocation,
@@ -61,7 +61,6 @@ class OrderModel {
       cardDetail: cardDetail ?? this.cardDetail,
     );
   }
-
 
   @override
   bool operator ==(Object other) =>
@@ -97,7 +96,6 @@ class OrderModel {
     return 'OrderModel'
         '{'
         'id: $id, '
-        'restaurant: $restaurant, '
         'placeLocation: $placeLocation, '
         'promocode: $promocode, '
         'date: $date, '

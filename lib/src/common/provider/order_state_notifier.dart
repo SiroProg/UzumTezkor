@@ -12,6 +12,16 @@ class OrderStateNotifier extends StateNotifier<OrderModel?> {
     String? flat,
     String? comment,
   }) {
+
+    if (state != null) {
+      state = state!.copyWith(
+          placeLocation: state!.placeLocation.copyWith(
+        podezd: podezd,
+        flat: flat,
+        floor: floor,
+        comment: comment,
+      ));
+    }
   }
 }
 

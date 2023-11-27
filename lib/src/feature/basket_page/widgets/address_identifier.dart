@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/order_model.dart';
 import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
@@ -23,13 +24,8 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
   final commentEditingController = TextEditingController();
 
   @override
-  void initState() {
-    OrderModel orderModel = ref.watch(orderNotifier)!;
-    podezdEditingController.text = orderModel.placeLocation.podezd;
-    floorEditingController.text = orderModel.placeLocation.floor;
-    flatEditingController.text = orderModel.placeLocation.flat;
-    commentEditingController.text = orderModel.placeLocation.comment;
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
@@ -43,6 +39,13 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
 
   @override
   Widget build(BuildContext context) {
+    PlaceLocation location = ref.watch(orderNotifier)!.placeLocation;
+
+    podezdEditingController.text = location.podezd;
+    floorEditingController.text = location.floor;
+    flatEditingController.text = location.flat;
+    commentEditingController.text = location.comment;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -71,7 +74,11 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                               borderRadius: BorderRadius.circular(15)),
                           labelText: "Подьезд",
                         ),
-                        onChanged: (value) {}),
+                        onChanged: (value) {
+                          ref
+                              .read(orderNotifier.notifier)
+                              .setPlaceLocation(podezd: value);
+                        }),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
@@ -83,31 +90,45 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                         labelText: "Этаж",
                       ),
                       keyboardType: TextInputType.number,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        ref
+                            .read(orderNotifier.notifier)
+                            .setPlaceLocation(floor: value);
+                      },
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: TextField(
-                        controller: flatEditingController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          labelText: "Кв./Офис",
-                        ),
-                        onChanged: (value) {}),
+                      controller: flatEditingController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        labelText: "Кв./Офис",
+                      ),
+                      onChanged: (value) {
+                        ref
+                            .read(orderNotifier.notifier)
+                            .setPlaceLocation(flat: value);
+                      },
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 10),
               TextField(
-                  controller: commentEditingController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    labelText: "Комментарий для курьера",
-                  ),
-                  onChanged: (value) {}),
+                controller: commentEditingController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  labelText: "Комментарий для курьера",
+                ),
+                onChanged: (value) {
+                  ref
+                      .read(orderNotifier.notifier)
+                      .setPlaceLocation(comment: value);
+                },
+              ),
               const SizedBox(height: 8),
               const Divider(),
             ],
