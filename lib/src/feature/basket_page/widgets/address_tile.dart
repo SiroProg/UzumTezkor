@@ -4,7 +4,7 @@ import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_chooser.dart';
-import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile_item.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/info_tile_item.dart';
 
 class AddressTile extends ConsumerWidget {
   const AddressTile({super.key});
@@ -12,7 +12,9 @@ class AddressTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ClientModel clientModel = ref.watch(clientProvider);
-    PlaceLocation? location = clientModel.locationList.firstOrNull;
+    PlaceLocation? location = clientModel.locationList
+        .where((element) => element.isSelected)
+        .firstOrNull;
     String locationName =
         location == null ? "" : location.address.split(",").first;
 
@@ -27,8 +29,9 @@ class AddressTile extends ConsumerWidget {
 
     return GestureDetector(
       onTap: showAddressModal,
-      child: AddressTileItem(
-        locationName: locationName,
+      child: InfoTileItem(
+        subTitle: locationName,
+        isExistLeftIcon: true,
       ),
     );
   }
