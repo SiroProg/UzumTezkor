@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddressTileItem extends ConsumerWidget {
-  const AddressTileItem({
-    required this.locationName,
+class InfoTileItem extends ConsumerWidget {
+  const InfoTileItem({
+    required this.subTitle,
+    this.icon = Icons.home,
+    this.title = "Uy",
     this.isSelected = false,
+    this.isExistLeftIcon = false,
     super.key,
   });
 
-  final String locationName;
+  final String subTitle;
+  final String title;
   final bool isSelected;
+  final bool isExistLeftIcon;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,30 +31,37 @@ class AddressTileItem extends ConsumerWidget {
             width: 40,
             decoration: BoxDecoration(
                 shape: BoxShape.circle, color: color.withOpacity(0.2)),
-            child: const Icon(
-              Icons.home,
+            child: Icon(
+              icon,
               size: 30,
               color: Colors.deepPurple,
             ),
           ),
           title: Text(
-            "Uy",
+            title,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
                   color: color,
                 ),
           ),
           subtitle: Text(
-            locationName,
+            subTitle,
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
                   color: color,
                 ),
           ),
           trailing: Icon(
-            isSelected ? Icons.done : Icons.chevron_right,
+            isSelected
+                ? Icons.done
+                : isExistLeftIcon
+                    ? Icons.chevron_right
+                    : null,
             color: color,
           ),
         ),
-        const Divider(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Divider(),
+        ),
       ],
     );
   }

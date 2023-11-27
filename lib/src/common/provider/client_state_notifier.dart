@@ -61,7 +61,8 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   void changeSelection(Category category) {
     refreshFilterList(category);
     filterByCategories();
-    selectionCategoryes[category]!.value = !selectionCategoryes[category]!.value;
+    selectionCategoryes[category]!.value =
+        !selectionCategoryes[category]!.value;
   }
 
   void refreshFilterList(Category category) {
@@ -145,9 +146,16 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
 
   void setLocation(PlaceLocation location) async {
     state = state.copyWith(
+      locationList: [...state.locationList, location],
+    );
+    setAsMainAddress(location);
+  }
+
+  void setAsMainAddress(PlaceLocation location) {
+    state = state.copyWith(
       locationList: state.locationList.map<PlaceLocation>((item) {
-        if (location.address != item.address) {
-          return location;
+        if (item.id == location.id) {
+          return item.copyWith(isSelected: true);
         } else {
           return item.copyWith(isSelected: false);
         }
