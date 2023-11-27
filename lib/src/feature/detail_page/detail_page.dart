@@ -64,6 +64,7 @@ class _DetailPageState extends ConsumerState<DetailPage>
                     (productIndex) => ProductItem(
                       product: widget.restaurant.products.values.toList()[index]
                           [productIndex],
+                      restaurantModel: widget.restaurant,
                     ),
                   ),
                 ),
@@ -145,9 +146,11 @@ class _DetailPageState extends ConsumerState<DetailPage>
 
 class ProductItem extends ConsumerStatefulWidget {
   final ProductModel product;
+  final RestaurantModel restaurantModel;
 
   const ProductItem({
     super.key,
+    required this.restaurantModel,
     required this.product,
   });
 
@@ -160,7 +163,11 @@ class _ProductItemState extends ConsumerState<ProductItem> {
 
   void onButtonPressed() {
     ref.read(clientProvider).basket.add(
-          BasketModel(productModel: widget.product, amount: amount.value),
+          BasketModel(
+            productModel: widget.product,
+            amount: amount.value,
+            restaurantModel: widget.restaurantModel,
+          ),
         );
     Navigator.of(context).pop();
   }
