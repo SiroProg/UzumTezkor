@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_identifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/payment_type.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/promo_code.dart';
@@ -10,7 +11,6 @@ class Payment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     double leftPadding = 20;
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -18,72 +18,7 @@ class Payment extends ConsumerWidget {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: leftPadding),
-            child: Text(
-              "Адрес доставки",
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  ),
-            ),
-          ),
-          const AddressTile(),
-          const SizedBox(height: 10),
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: leftPadding),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: "Подьезд",
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: "Этаж",
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            labelText: "Кв./Офис",
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      labelText: "Комментарий для курьера",
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Divider(),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
+          const AddressIdentifier(),
           Padding(
             padding: EdgeInsets.only(left: leftPadding),
             child: Text(
