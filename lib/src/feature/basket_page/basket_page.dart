@@ -18,7 +18,6 @@ class BasketPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-
         centerTitle: true,
         title: Text(
           "Корзина",
@@ -42,6 +41,13 @@ class BasketPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
+          if (items.isNotEmpty)
+            Text(
+              items.first.restaurantModel.name,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+            ),
           Expanded(child: content),
           if (items.isNotEmpty) const BottomTotal(),
         ],

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
+import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_item.dart';
 
-class DeliveryModal extends StatelessWidget {
+class DeliveryModal extends ConsumerWidget {
   const DeliveryModal({super.key});
 
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    RestaurantModel restaurant = ref.watch(clientProvider).basket.first.restaurantModel;
     return SizedBox(
       height: 300,
       child: Stack(
@@ -40,13 +45,13 @@ class DeliveryModal extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 20,
             top: 90,
             right: 10,
             child: DeliveryItem(
               leadingText: "До 99 000 сум",
-              trailingText: "4 900 сум",
+              trailingText: "${restaurant.deliveryPriceToFree} сум",
             ),
           ),
           const Positioned(
