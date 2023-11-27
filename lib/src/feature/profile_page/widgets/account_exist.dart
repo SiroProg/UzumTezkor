@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
+import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit.dart';
 
 import 'custom_list_tile.dart';
 
@@ -21,8 +22,16 @@ class AccountExist extends StatelessWidget {
               title: Text("${$profileName}", style: TextStyle(fontSize: 30)),
               subtitle: Text("${$profileNumber}",
                   style: TextStyle(fontSize: 15, color: Colors.grey)),
-              trailing:
-                  IconButton(icon: Icon(Icons.navigate_next), onPressed: () {}),
+              trailing: IconButton(
+                  icon: Icon(Icons.navigate_next),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NameEdit(),
+                      ),
+                    );
+                  }),
             ),
             SizedBox(height: 50),
             CustomListTile(icon: Icons.fact_check, name: "Buyurtmalar tarixi"),

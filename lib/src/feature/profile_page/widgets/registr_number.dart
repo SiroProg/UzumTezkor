@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import 'sms_code.dart';
 
@@ -17,6 +18,7 @@ class _RegisterNumberState extends State<RegisterNumber> {
     RegExp regex = RegExp(r'\d{9,}');
     if (regex.hasMatch(number)) {
       isValid = true;
+      $profileNumber = number;
     } else {
       isValid = false;
     }
