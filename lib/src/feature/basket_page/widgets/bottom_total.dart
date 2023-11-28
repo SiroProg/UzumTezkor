@@ -5,6 +5,8 @@ import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class BottomTotal extends ConsumerWidget {
   const BottomTotal({super.key});
 
@@ -53,7 +55,7 @@ class BottomTotal extends ConsumerWidget {
                   color: Colors.deepPurple,
                 ),
                 Text(
-                  "Бесплатная доставка",
+                  AppLocalizations.of(context).bepulDostavka,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: Colors.deepPurple,
@@ -93,7 +95,7 @@ class BottomTotal extends ConsumerWidget {
                   ),
                 ),
                 title: Text(
-                  "К оплате",
+                  AppLocalizations.of(context).kOplate,
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.background,

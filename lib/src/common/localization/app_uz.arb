@@ -38,5 +38,11 @@
   "numPhone": "Telefon raqami",
   "kod": "Ko'd",
   "otmen": "Bekor qilish",
-  "neNayd": "Hech narsa topilmadi"
+  "neNayd": "Hech narsa topilmadi",
+  "uzum1": " Зарегистрировавшись в сервисе Uzum Tezkor ",
+  "uzum2": " Зарегистрировавшись в сервисе Uzum Tezkor ",
+  "uzum3": " и ",
+  "uzum4": " Наша политика конфиденциальности ",
+  "uzum5": " вы принимаете ",
+  "davom": " Продолжать "
 }

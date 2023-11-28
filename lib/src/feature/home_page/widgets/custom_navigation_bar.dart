@@ -34,17 +34,17 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant_menu_outlined),
-              label: 'Рестораны',
+              label: AppLocalizations.of(context).restorani,
               activeIcon: Icon(Icons.restaurant_menu),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_basket_outlined),
-              label: 'Корзина',
+              label: AppLocalizations.of(context).korzinka,
               activeIcon: Icon(Icons.shopping_basket),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag_outlined),
-              label: 'Cart',
+              label: AppLocalizations.of(context).cart,
               activeIcon: Icon(Icons.shopping_bag),
             ),
             BottomNavigationBarItem(

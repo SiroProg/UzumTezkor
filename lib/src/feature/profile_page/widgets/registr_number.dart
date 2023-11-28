@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
+import '../../../common/localization/app_localizations.dart';
 import 'sms_code.dart';
 
 class RegisterNumber extends StatefulWidget {
@@ -31,7 +32,7 @@ class _RegisterNumberState extends State<RegisterNumber> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+           Column(
             children: [
               SizedBox(height: 25),
               Row(
@@ -41,7 +42,7 @@ class _RegisterNumberState extends State<RegisterNumber> {
                     color: Colors.black,
                   ),
                   Text(
-                    "Telefon raqami",
+                    AppLocalizations.of(context).numPhone,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(width: 15),
@@ -63,13 +64,13 @@ class _RegisterNumberState extends State<RegisterNumber> {
                         Radius.circular(15),
                       ),
                     ),
-                    child: const Column(
+                    child:  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 12, top: 8),
                           child: Text(
-                            "Ko'd",
+                            AppLocalizations.of(context).kod,
                             style: TextStyle(
                               fontSize: 13,
                               color: Colors.black26,
@@ -100,10 +101,10 @@ class _RegisterNumberState extends State<RegisterNumber> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.only(left: 12, top: 8),
                           child: Text(
-                            "Raqam",
+                            AppLocalizations.of(context).number,
                             style: TextStyle(
                               fontSize: 13,
                               color: Colors.black26,
@@ -142,25 +143,25 @@ class _RegisterNumberState extends State<RegisterNumber> {
                 padding: const EdgeInsets.all(15),
                 child: RichText(
                   textAlign: TextAlign.center,
-                  text: const TextSpan(
-                      text: "Uzum Tezkor xizmatida ro'yxatdan  o'tish orqali ",
+                  text:  TextSpan(
+                      text: AppLocalizations.of(context).uzum1,
                       style: TextStyle(color: Colors.grey),
                       children: [
                         TextSpan(
                           text:
-                              " Uzum Tezkor xizmatida ro'yxatdan  o'tish orqali ",
+                          AppLocalizations.of(context).uzum2,
                           style: TextStyle(color: Colors.deepPurple),
                         ),
                         TextSpan(
-                          text: " va ",
+                          text: AppLocalizations.of(context).uzum3,
                           style: TextStyle(color: Colors.grey),
                         ),
                         TextSpan(
-                          text: "Maxfiylik siyosatimizni ",
+                          text: AppLocalizations.of(context).uzum4,
                           style: TextStyle(color: Colors.deepPurple),
                         ),
                         TextSpan(
-                          text: " qabul qilasiz. ",
+                          text: AppLocalizations.of(context).uzum5,
                           style: TextStyle(color: Colors.grey),
                         ),
                       ]),
@@ -187,9 +188,9 @@ class _RegisterNumberState extends State<RegisterNumber> {
                       Radius.circular(35),
                     ),
                   ),
-                  child: const Center(
+                  child:  Center(
                     child: Text(
-                      "Davom etish",
+                      AppLocalizations.of(context).davom,
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

@@ -24,8 +24,8 @@ class AccountNotExist extends StatelessWidget {
                   style: TextStyle(fontSize: 35),
                 ),
                 const SizedBox(height: 35),
-                CustomListTile(icon: Icons.chat, name: "Yordam",function: (){}),
-                CustomListTile(icon: Icons.language, name: "Til",function: (){ Navigator.push(
+                CustomListTile(icon: Icons.chat, name: AppLocalizations.of(context).pomosh,function: (){}),
+                CustomListTile(icon: Icons.language, name: AppLocalizations.of(context).til,function: (){ Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => Language(),
@@ -49,9 +49,9 @@ class AccountNotExist extends StatelessWidget {
                     Radius.circular(35),
                   ),
                 ),
-                child: const Center(
+                child:  Center(
                   child: Text(
-                    "Kirish/Registratsiya",
+                    AppLocalizations.of(context).kirish,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

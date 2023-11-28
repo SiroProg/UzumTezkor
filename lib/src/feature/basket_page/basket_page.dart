@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/basket_items.dart';
@@ -20,7 +21,7 @@ class BasketPage extends ConsumerWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Корзина",
+         AppLocalizations.of(context).korzinka,
           style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).colorScheme.onPrimaryContainer,
               ),

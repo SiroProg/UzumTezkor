@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class DetailModal extends ConsumerWidget {
   const DetailModal({
     required this.basketModel,
@@ -15,13 +17,13 @@ class DetailModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ValueNotifier<int> amount = ValueNotifier(basketModel.amount);
-    ValueNotifier<String> buttonText = ValueNotifier("Удалить");
+    ValueNotifier<String> buttonText = ValueNotifier(AppLocalizations.of(context).udalit);
 
     void setButtonText() {
       if (amount.value == 0 || amount.value == basketModel.amount) {
-        buttonText.value = "Удалить";
+        buttonText.value = AppLocalizations.of(context).udalit;
       } else {
-        buttonText.value = "Обновить";
+        buttonText.value =AppLocalizations.of(context).obnovit;
       }
     }
 

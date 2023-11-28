@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class NameEdit extends StatefulWidget {
   const NameEdit({super.key});
 
@@ -24,14 +26,14 @@ class _RegisterNumberState extends State<NameEdit> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 25),
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   BackButton(
                     color: Colors.black,
                   ),
                   Text(
-                    "Shaxsiy ma'lumot",
+                    AppLocalizations.of(context).persInfo,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(width: 15),
@@ -50,10 +52,10 @@ class _RegisterNumberState extends State<NameEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.only(left: 12, top: 8),
                       child: Text(
-                        "Ism",
+                        AppLocalizations.of(context).name,
                         style: TextStyle(
                           fontSize: 11,
                           color: Colors.black26,
@@ -86,10 +88,10 @@ class _RegisterNumberState extends State<NameEdit> {
                   ],
                 ),
               ),
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(left: 15),
                 child: Text(
-                  "Sizga kuryer qanday murojaat qilsa bo'ladi",
+                  AppLocalizations.of(context).kakUmer,
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.black26,
@@ -109,10 +111,10 @@ class _RegisterNumberState extends State<NameEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.only(left: 12, top: 8),
                       child: Text(
-                        "Raqam",
+                        AppLocalizations.of(context).number,
                         style: TextStyle(
                           fontSize: 11,
                           color: Colors.black26,
@@ -138,10 +140,10 @@ class _RegisterNumberState extends State<NameEdit> {
                   ],
                 ),
               ),
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(left: 14),
                 child: Text(
-                  "Telefon raqamini almashtirish uchun",
+                  AppLocalizations.of(context).chtobi,
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.black26,
@@ -172,9 +174,9 @@ class _RegisterNumberState extends State<NameEdit> {
                   Radius.circular(35),
                 ),
               ),
-              child: const Center(
+              child:  Center(
                 child: Text(
-                  "Saqlash",
+                  AppLocalizations.of(context).soxranit,
                   style: TextStyle(color: Colors.white),
                 ),
               ),

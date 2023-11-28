@@ -5,6 +5,7 @@ import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/language.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit.dart';
 
+import '../../../common/localization/app_localizations.dart';
 import 'custom_list_tile.dart';
 
 class AccountExist extends StatelessWidget {
@@ -21,7 +22,7 @@ class AccountExist extends StatelessWidget {
         child: ListView(
           children: [
             ListTile(
-              title: Text("${$profileName}", style: TextStyle(fontSize: 30)),
+              title: Text("${$profileName} ", style: TextStyle(fontSize: 30)),
               subtitle: Text("${$profileNumber}",
                   style: TextStyle(fontSize: 15, color: Colors.grey)),
               trailing: IconButton(
@@ -38,29 +39,35 @@ class AccountExist extends StatelessWidget {
             SizedBox(height: 50),
             CustomListTile(
                 icon: Icons.fact_check,
-                name: "Buyurtmalar tarixi",
+                name: AppLocalizations.of(context).istoriyaZakaz,
                 function: () {}),
             CustomListTile(
                 icon: CupertinoIcons.ticket_fill,
-                name: "Promokodlar",
+                name: AppLocalizations.of(context).promo,
                 function: () {}),
-            CustomListTile(icon: Icons.chat, name: "Yordam", function: () {}),
-            CustomListTile(icon: Icons.language, name: "Til", function: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Language(),
-                  ));
-            }),
             CustomListTile(
-                icon: Icons.lock, name: "Maxfiylik siyosati", function: () {}),
+                icon: Icons.chat,
+                name: AppLocalizations.of(context).pomosh,
+                function: () {}),
+            CustomListTile(
+                icon: Icons.language,
+                name: AppLocalizations.of(context).til,
+                function: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Language(),
+                      ));
+                }),
+            CustomListTile(
+                icon: Icons.lock, name: AppLocalizations.of(context).politika, function: () {}),
             CustomListTile(
                 icon: Icons.info,
-                name: "Foydalanuvchi bilan kelishuv",
+                name: AppLocalizations.of(context).polzova,
                 function: () {}),
             CustomListTile(
                 icon: Icons.exit_to_app,
-                name: "Chiqish",
+                name: AppLocalizations.of(context).chiqish,
                 function: () {
                   $profileName = '';
                   $profileNumber = '';

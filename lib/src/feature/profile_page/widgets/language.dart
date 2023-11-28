@@ -42,7 +42,7 @@ class _LanguageState extends State<Language> {
           Column(
             children: [
               CheckboxListTile(
-                title: Text('O\'zbekcha'),
+                title: Text("O'zbekcha"),
                 value: isUzbekSelected,
                 onChanged: (value) {
                   setState(() {
