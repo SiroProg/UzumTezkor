@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   sliver_tools: ^0.2.12
+  shared_preferences: ^2.0.6
   flutter:
     sdk: flutter
 

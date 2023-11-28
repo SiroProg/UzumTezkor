@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 import '../feature/registration_page/widgets/choice_language.dart';
 
-
-class App extends StatelessWidget {
+class App extends ConsumerStatefulWidget {
   const App({super.key});
 
+  @override
+  ConsumerState<App> createState() => _AppState();
+}
+
+class _AppState extends ConsumerState<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +24,9 @@ class App extends StatelessWidget {
         ),
       ),
       title: "Uzum Tezkor",
-      home:  const ChoiceLanguage(),
+      home: $preferences.getBool("isRegistered") ?? true
+          ? const HomePage()
+          : const ChoiceLanguage(),
     );
   }
 }

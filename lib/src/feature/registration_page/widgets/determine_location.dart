@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
@@ -17,6 +19,8 @@ class DetermineLocation extends ConsumerStatefulWidget {
 }
 
 class _DetermineLocationState extends ConsumerState<DetermineLocation> {
+  ClientModel client = ClientModel(
+      ordersHistory: [], basket: [], promotionalCodes: [], locationList: []);
   Timer? _timer;
 
   final Completer<GoogleMapController> _controller = Completer();
@@ -135,7 +139,9 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
               height: 20,
             ),
             OutlinedButton(
-              onPressed: () {
+              onPressed: () async {
+                // SharedPreferences preferences =
+                //     await SharedPreferences.getInstance();
                 if (location.value != null) {
                   ref
                       .read(clientProvider.notifier)
@@ -150,6 +156,10 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                       (route) => false,
                     );
                   }
+                  client.locationList.add(location.value!);
+                  final String data = jsonEncode(client);
+                  print($preferences.setBool('isRegistered', true));
+                  $preferences.setString('person', data);
                 }
               },
               style: OutlinedButton.styleFrom(
@@ -168,7 +178,7 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
               ),
             ),
             const SizedBox(height: 5),
-           ],
+          ],
         ),
       ),
     );

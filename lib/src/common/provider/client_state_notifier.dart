@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:location/location.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uzum_tezkor/src/common/data/fake_data.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
@@ -27,6 +28,9 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   double? longitude;
 
   ValueNotifier<String> searchText = ValueNotifier("");
+
+
+
 
   void searchRestaurants(String text) {
     searchText.value = text;
@@ -57,8 +61,6 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     Category.pita: ValueNotifier(true),
     Category.asia: ValueNotifier(true),
   };
-
-
 
   void changeSelection(Category category) {
     refreshFilterList(category);
@@ -208,3 +210,5 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
 final clientProvider = StateNotifierProvider<ClientStateNotifier, ClientModel>(
   (ref) => ClientStateNotifier(),
 );
+
+late SharedPreferences $preferences;
