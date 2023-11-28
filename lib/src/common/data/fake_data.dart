@@ -1,5 +1,6 @@
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 
 import '../model/product_model.dart';
 import '../model/promotion_model.dart';
@@ -813,6 +814,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 4900,
+      deliveryPriceToFree: 8600,
     ),
     RestaurantModel(
       id: 2,
@@ -826,6 +829,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 5600,
+      deliveryPriceToFree: 8900,
     ),
     RestaurantModel(
       id: 3,
@@ -839,6 +844,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 7400,
+      deliveryPriceToFree: 12800,
     ),
     RestaurantModel(
       id: 4,
@@ -852,6 +859,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 6300,
+      deliveryPriceToFree: 7200,
     ),
     RestaurantModel(
       id: 5,
@@ -865,6 +874,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 8400,
+      deliveryPriceToFree: 13200,
     ),
     RestaurantModel(
       id: 6,
@@ -878,6 +889,8 @@ class FakeData {
       },
       open: DateTime.now(),
       close: DateTime.now(),
+      servicePrice: 7100,
+      deliveryPriceToFree: 10800,
     ),
   ];
   List<PromotionalCodeModel> promotionData = [];
@@ -885,22 +898,15 @@ class FakeData {
   List<ClientModel> clientData = [
     ClientModel(
       ordersHistory: [],
-      basket: [
-        BasketModel(
-          productModel: salad.first,
-          amount: 2,
-        ),
-        BasketModel(
-          productModel: tea.first,
-          amount: 2,
-        ),
-        BasketModel(
-          productModel: meal.last,
-          amount: 4,
-        ),
-      ],
+      basket: [],
       promotionalCodes: [],
-      locationList: [],
+      locationList: [
+        PlaceLocation(
+          longitude: 41,
+          latitude: 41,
+          address: "Beruniy 8 a",
+        )
+      ],
     ),
   ];
 }

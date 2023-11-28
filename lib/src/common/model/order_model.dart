@@ -1,28 +1,66 @@
-import 'product_model.dart';
+import 'package:uzum_tezkor/src/common/model/basket_model.dart';
+import 'package:uzum_tezkor/src/common/model/card_detail.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'promotion_model.dart';
 
+enum PaymentTypeEnum {
+  card("Картой", "UzCard, Humo, MasterCard, Visa"),
+  cash("Наличами", "Наличний денги");
+
+  final String type;
+  final String description;
+
+  const PaymentTypeEnum(this.type, this.description);
+}
+
 class OrderModel {
-  final int id;
-  final String restaurant;
-  final String deliveryPoint;
+  final String id;
+  final RestaurantModel restaurant;
+  final PlaceLocation placeLocation;
   final PromotionalCodeModel? promocode;
   final DateTime date;
+  final DateTime deliveredTime;
   final bool isDelivered;
-  final ProductModel product;
-  final int amount;
-
+  final CardDetail? cardDetail;
+  final List<BasketModel> products;
+  final PaymentTypeEnum paymentType;
 
   OrderModel({
-    required this.id,
     required this.restaurant,
-    required this.deliveryPoint,
-    required this.promocode,
+    required this.placeLocation,
     required this.date,
-    required this.isDelivered,
-    required this.product,
-    required this.amount,
-  });
+    required this.deliveredTime,
+    required this.products,
+    this.isDelivered = false,
+    this.promocode,
+    this.cardDetail,
+  })  : id = uuid.v4(),
+        paymentType = PaymentTypeEnum.card;
 
+  OrderModel copyWith({
+    String? id,
+    RestaurantModel? restaurant,
+    PlaceLocation? placeLocation,
+    PromotionalCodeModel? promocode,
+    DateTime? date,
+    DateTime? deliveredTime,
+    bool? isDelivered,
+    CardDetail? cardDetail,
+    List<BasketModel>? products,
+    PaymentTypeEnum? paymentType,
+  }) {
+    return OrderModel(
+      restaurant: restaurant ?? this.restaurant,
+      placeLocation: placeLocation ?? this.placeLocation,
+      date: date ?? this.date,
+      deliveredTime: deliveredTime ?? this.deliveredTime,
+      isDelivered: isDelivered ?? this.isDelivered,
+      products: products ?? this.products,
+      promocode: promocode ?? this.promocode,
+      cardDetail: cardDetail ?? this.cardDetail,
+    );
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -31,35 +69,41 @@ class OrderModel {
           runtimeType == other.runtimeType &&
           id == other.id &&
           restaurant == other.restaurant &&
-          deliveryPoint == other.deliveryPoint &&
+          placeLocation == other.placeLocation &&
           promocode == other.promocode &&
           date == other.date &&
+          deliveredTime == other.deliveredTime &&
           isDelivered == other.isDelivered &&
-          product == other.product &&
-          amount == other.amount;
+          cardDetail == other.cardDetail &&
+          products == other.products &&
+          paymentType == other.paymentType;
 
   @override
   int get hashCode =>
       id.hashCode ^
       restaurant.hashCode ^
-      deliveryPoint.hashCode ^
+      placeLocation.hashCode ^
       promocode.hashCode ^
       date.hashCode ^
+      deliveredTime.hashCode ^
       isDelivered.hashCode ^
-      product.hashCode ^
-      amount.hashCode;
+      cardDetail.hashCode ^
+      products.hashCode ^
+      paymentType.hashCode;
 
   @override
   String toString() {
-    return 'OrderModel{'
+    return 'OrderModel'
+        '{'
         'id: $id, '
-        'restaurant: $restaurant, '
-        'deliveryPoint: $deliveryPoint, '
+        'placeLocation: $placeLocation, '
         'promocode: $promocode, '
         'date: $date, '
+        'deliveredTime: $deliveredTime, '
         'isDelivered: $isDelivered, '
-        'product: $product, '
-        'amount: $amount'
+        'cardDetail: $cardDetail, '
+        'products: $products, '
+        'paymentType: $paymentType'
         '}';
   }
 }

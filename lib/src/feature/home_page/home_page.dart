@@ -10,6 +10,7 @@ import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
 import '../../common/localization/app_localizations.dart';
 import '../profile_page/profile_page.dart';
 import 'widgets/custom_filter.dart';
+import 'widgets/sliver_app_bar.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
