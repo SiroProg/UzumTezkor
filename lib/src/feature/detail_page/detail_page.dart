@@ -62,9 +62,9 @@ class _DetailPageState extends ConsumerState<DetailPage>
                   children: List.generate(
                     widget.restaurant.products.values.toList()[index].length,
                     (productIndex) => ProductItem(
+                      restaurant: widget.restaurant,
                       product: widget.restaurant.products.values.toList()[index]
                           [productIndex],
-                      restaurantModel: widget.restaurant,
                     ),
                   ),
                 ),
@@ -146,11 +146,11 @@ class _DetailPageState extends ConsumerState<DetailPage>
 
 class ProductItem extends ConsumerStatefulWidget {
   final ProductModel product;
-  final RestaurantModel restaurantModel;
+  final RestaurantModel restaurant;
 
   const ProductItem({
     super.key,
-    required this.restaurantModel,
+    required this.restaurant,
     required this.product,
   });
 
@@ -161,15 +161,48 @@ class ProductItem extends ConsumerStatefulWidget {
 class _ProductItemState extends ConsumerState<ProductItem> {
   ValueNotifier<int> amount = ValueNotifier(1);
 
+  @override
+  void initState() {
+    amount.value = isAddedToBasket(widget.product).$2;
+    super.initState();
+  }
+
   void onButtonPressed() {
-    ref.read(clientProvider).basket.add(
-          BasketModel(
-            productModel: widget.product,
-            amount: amount.value,
-            restaurantModel: widget.restaurantModel,
-          ),
-        );
+    bool cheked = true;
+    ref.read(clientProvider).basket.forEach((element) {
+      if (element.productModel == widget.product) {
+        ref.read(clientProvider.notifier).removeBasketElement(element);
+        ref.read(clientProvider).basket.add(
+              element.copyWith(
+                amount: amount.value + element.amount,
+              ),
+            );
+        cheked = false;
+      }
+    });
+    if (cheked) {
+      ref.read(clientProvider).basket.add(
+            BasketModel(
+              productModel: widget.product,
+              amount: amount.value,
+              restaurantModel: widget.restaurant,
+            ),
+          );
+    }
     Navigator.of(context).pop();
+    setState(() {});
+  }
+
+  (bool isAdd, int amout) isAddedToBasket(ProductModel productModel) {
+    bool isAdd = false;
+    int amout = 1;
+    ref.read(clientProvider).basket.forEach((element) {
+      if (element.productModel == productModel) {
+        isAdd = true;
+        amout = element.amount;
+      }
+    });
+    return (isAdd, amout);
   }
 
   @override

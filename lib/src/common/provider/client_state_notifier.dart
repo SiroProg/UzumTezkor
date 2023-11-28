@@ -58,6 +58,8 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     Category.asia: ValueNotifier(true),
   };
 
+
+
   void changeSelection(Category category) {
     refreshFilterList(category);
     filterByCategories();

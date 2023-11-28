@@ -143,10 +143,11 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                   if (widget.isAddAddress) {
                     Navigator.of(context).pop();
                   } else {
-                    Navigator.of(context).push(
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (ctx) => const HomePage(),
                       ),
+                      (route) => false,
                     );
                   }
                 }
@@ -167,16 +168,7 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
               ),
             ),
             const SizedBox(height: 5),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "Уточнить адрес",
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-            ),
-          ],
+           ],
         ),
       ),
     );

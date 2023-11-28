@@ -38,18 +38,8 @@ class _RestaurantsState extends ConsumerState<Restaurants> {
               return Column(
                 children: List.generate(
                   ref.read(clientProvider.notifier).restaurants.value.length,
-                  (index) => GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailPage(
-                          restaurant: value[index],
-                        ),
-                      ),
-                    ),
-                    child: RestaurantItem(
-                      restaurant: value[index],
-                    ),
+                  (index) => RestaurantItem(
+                    restaurant: value[index],
                   ),
                 ),
               );
@@ -68,120 +58,132 @@ class RestaurantItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 180,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage(restaurant.poster),
-                    ),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(40),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPage(
+            restaurant: restaurant,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(restaurant.poster),
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(40),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const Positioned(
-                top: 10,
-                left: 10,
-                child: SizedBox(
-                  width: 210,
-                  height: 35,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.white70,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50),
+                const Positioned(
+                  top: 10,
+                  left: 10,
+                  child: SizedBox(
+                    width: 210,
+                    height: 35,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.white70,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
                       ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 14,
-                            backgroundColor: Colors.deepPurple,
-                            child: Icon(
-                              Icons.delivery_dining,
-                              color: Colors.white,
-                              size: 20,
+                      child: Padding(
+                        padding: EdgeInsets.all(5),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundColor: Colors.deepPurple,
+                              child: Icon(
+                                Icons.delivery_dining,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Доставка бесплатная",
-                            style: TextStyle(color: Colors.black, fontSize: 12),
-                          )
-                        ],
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              "Доставка бесплатная",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const Positioned(
-                bottom: 0,
-                right: 0,
-                child: SizedBox(
-                  width: 150,
-                  height: 30,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(100),
-                        bottomRight: Radius.circular(100),
+                const Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: SizedBox(
+                    width: 150,
+                    height: 30,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(100),
+                          bottomRight: Radius.circular(100),
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "30 - 40 мин",
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      child: Center(
+                        child: Text(
+                          "30 - 40 мин",
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
                       ),
                     ),
                   ),
+                )
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              restaurant.name,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 20,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) => Text(
+                  restaurant.products.keys.toList()[index].title,
+                  style: const TextStyle(color: Colors.black, fontSize: 12),
                 ),
-              )
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            restaurant.name,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
-            height: 20,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) => Text(
-                restaurant.products.keys.toList()[index].title,
-                style: const TextStyle(color: Colors.black, fontSize: 12),
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Text(
+                  " · ",
+                  style: TextStyle(color: Colors.black, fontSize: 10),
+                ),
+                itemCount: 4,
               ),
-              separatorBuilder: (BuildContext context, int index) => const Text(
-                " · ",
-                style: TextStyle(color: Colors.black, fontSize: 10),
-              ),
-              itemCount: 4,
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
