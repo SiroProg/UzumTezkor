@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/model/promotion_model.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
@@ -62,10 +65,18 @@ class BottomTotal extends ConsumerWidget {
           GestureDetector(
             onTap: getTotalPrice() >= 30000
                 ? () {
+                    int randomDiscount = Random().nextInt(20);
+                    if (randomDiscount < 10) {
+                      randomDiscount += 10;
+                    }
                     ref.read(orderNotifier.notifier).setOrder(
                           OrderModel(
                             restaurant: restaurantModel,
                             placeLocation: location,
+                            promocode: PromotionalCodeModel(
+                              title: "g82023",
+                              discountAmount: randomDiscount,
+                            ),
                             date: DateTime.now(),
                             deliveredTime: DateTime.now(),
                             products: items,

@@ -35,8 +35,8 @@ class OrderModel {
     this.isDelivered = false,
     this.promocode,
     this.cardDetail,
-  })  : id = uuid.v4(),
-        paymentType = PaymentTypeEnum.card;
+    this.paymentType = PaymentTypeEnum.card,
+  }) : id = uuid.v4();
 
   OrderModel copyWith({
     String? id,
@@ -59,7 +59,54 @@ class OrderModel {
       products: products ?? this.products,
       promocode: promocode ?? this.promocode,
       cardDetail: cardDetail ?? this.cardDetail,
+      paymentType: paymentType ?? this.paymentType,
     );
+  }
+
+  String get deliveryPrice {
+    if (productsTotal < 99000) {
+      return "${restaurant.deliveryPriceToFree} сум";
+    }
+    return "Бесплатно";
+  }
+
+  double get productsTotal {
+    double total = 0.0;
+    for (BasketModel b in products) {
+      total += b.totalPrice;
+    }
+    return total;
+  }
+
+  double get totalPrice {
+    double total = 0.0;
+    for (BasketModel b in products) {
+      total += b.totalPrice;
+    }
+    if (total < 99000) {
+      total += restaurant.deliveryPriceToFree;
+    }
+    total += restaurant.servicePrice;
+    total -= getDiscount;
+
+    return total;
+  }
+
+  double get getDiscount {
+    if (promocode != null) {
+      if (promocode!.isActive) {
+        double total = 0.0;
+        for (BasketModel b in products) {
+          total += b.totalPrice;
+        }
+        if (total < 99000) {
+          total += restaurant.deliveryPriceToFree;
+        }
+        total += restaurant.servicePrice;
+        return (total * promocode!.discountAmount) / 100;
+      }
+    }
+    return 0;
   }
 
   @override
