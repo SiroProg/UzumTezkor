@@ -102,7 +102,7 @@ class BottomTotal extends ConsumerWidget {
                       ),
                 ),
                 trailing: Text(
-                  "${getTotalPrice()} сум",
+                  "${getTotalPrice()} ${AppLocalizations.of(context).sum}",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontWeight: FontWeight.w400,
                         color: Theme.of(context).colorScheme.background,

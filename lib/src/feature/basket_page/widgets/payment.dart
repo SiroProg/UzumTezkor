@@ -7,6 +7,8 @@ import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/payment_type.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/promo_code.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class Payment extends ConsumerWidget {
   const Payment({super.key});
 
@@ -17,7 +19,7 @@ class Payment extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Оплата"),
+        title: Text(AppLocalizations.of(context).oplata),
       ),
       body: ListView(
         children: [
@@ -25,7 +27,7 @@ class Payment extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.only(left: leftPadding),
             child: Text(
-              "Способ оплаты",
+              AppLocalizations.of(context).spoOplata,
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),
@@ -52,7 +54,7 @@ class Payment extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "К оплате",
+                        AppLocalizations.of(context).kOplate,
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
@@ -60,7 +62,7 @@ class Payment extends ConsumerWidget {
                             ),
                       ),
                       Text(
-                        "339 000 сум",
+                        "339 000 ${AppLocalizations.of(context).sum}",
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Colors.deepPurple,
                             ),
@@ -72,7 +74,7 @@ class Payment extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Заказ",
+                        AppLocalizations.of(context).zakaz,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               fontWeight: FontWeight.w200,
                               color: Theme.of(context)
@@ -81,7 +83,7 @@ class Payment extends ConsumerWidget {
                             ),
                       ),
                       Text(
-                        "339 000 сум",
+                        "339 000 ${AppLocalizations.of(context).sum}",
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Colors.deepPurple,
                               fontWeight: FontWeight.w200,
@@ -94,7 +96,7 @@ class Payment extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Доставка",
+                        AppLocalizations.of(context).dostavka,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               fontWeight: FontWeight.w200,
                               color: Theme.of(context)
@@ -103,7 +105,7 @@ class Payment extends ConsumerWidget {
                             ),
                       ),
                       Text(
-                        "Бесплатно",
+                        AppLocalizations.of(context).bepul,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Colors.deepPurple,
                               fontWeight: FontWeight.w200,
@@ -116,7 +118,7 @@ class Payment extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Работа сервиса",
+                        AppLocalizations.of(context).rabotaSer,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               fontWeight: FontWeight.w200,
                               color: Theme.of(context)
@@ -125,7 +127,7 @@ class Payment extends ConsumerWidget {
                             ),
                       ),
                       Text(
-                        "339 000 сум",
+                        "339 000 ${AppLocalizations.of(context).sum}",
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                               color: Colors.deepPurple,
                               fontWeight: FontWeight.w200,

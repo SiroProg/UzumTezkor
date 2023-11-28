@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 
 class InfoTileItem extends ConsumerWidget {
-  const InfoTileItem({
+ const InfoTileItem({
     required this.subTitle,
     this.icon = Icons.home,
     this.title = "Uy",

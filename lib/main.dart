@@ -4,7 +4,7 @@ import 'package:uzum_tezkor/src/common/app.dart';
 
 void main() {
   runApp(
-    const ProviderScope(
+     ProviderScope(
       child: App(),
     ),
   );

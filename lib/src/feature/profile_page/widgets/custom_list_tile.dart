@@ -30,7 +30,7 @@ class CustomListTile extends StatelessWidget {
             style: TextStyle(fontSize: 15),
           ),
           trailing:
-              IconButton(icon: Icon(Icons.navigate_next), onPressed: () {}),
+              IconButton(icon: Icon(Icons.navigate_next), onPressed: function),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 
 class BottomTotalItem extends StatelessWidget {
   const BottomTotalItem({
@@ -10,20 +11,20 @@ class BottomTotalItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = "Бесплатная доставка";
+    String text = AppLocalizations.of(context).bepulDostavka;
     IconData icon = Icons.run_circle_outlined;
     bool isBottomShown = false;
     double value = 1;
     double fontSize = 14;
     if (totalPrice < 30000) {
-      text = "${30000 - totalPrice} сум до минимальной суммы закаса";
+      text = "${30000 - totalPrice} ${AppLocalizations.of(context).sumDoMin}";
       icon = Icons.shopping_basket_outlined;
       value = totalPrice / 30000;
       fontSize = 12;
       isBottomShown = true;
     } else if (totalPrice < 99000) {
       icon = Icons.delivery_dining_outlined;
-      text = "${99000 - totalPrice} сум до бесплатное доставка";
+      text = "${99000 - totalPrice} ${AppLocalizations.of(context).sumDoBes}";
       isBottomShown = true;
       fontSize = 12;
       value = totalPrice / 99000;
@@ -44,7 +45,7 @@ class BottomTotalItem extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.w400,
                     color: Colors.deepPurple,
-                fontSize: fontSize,
+                    fontSize: fontSize,
                   ),
             ),
             const Icon(
@@ -54,7 +55,11 @@ class BottomTotalItem extends StatelessWidget {
           ],
         ),
         if (isBottomShown) const SizedBox(height: 8),
-        if (isBottomShown) LinearProgressIndicator(value: value, color: Colors.green,)
+        if (isBottomShown)
+          LinearProgressIndicator(
+            value: value,
+            color: Colors.green,
+          )
       ],
     );
   }

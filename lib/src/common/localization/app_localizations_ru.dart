@@ -128,20 +128,107 @@ class AppLocalizationsRu extends AppLocalizations {
   String get neNayd => 'Ничего не найдено';
 
   @override
-  String get uzum1 => 'Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali ';
+  String get uzum1 => ' Зарегистрировавшись в сервисе Uzum Tezkor ';
 
   @override
-  String get uzum2 => ' Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali ';
+  String get uzum2 => ' Зарегистрировавшись в сервисе Uzum Tezkor ';
 
   @override
-  String get uzum3 => ' va ';
+  String get uzum3 => ' и ';
 
   @override
-  String get uzum4 => 'Maxfiylik siyosatimizni ';
+  String get uzum4 => ' Наша политика конфиденциальности ';
 
   @override
-  String get uzum5 => ' qabul qilasiz. ';
+  String get uzum5 => ' вы принимаете ';
 
   @override
-  String get davom => 'Davom etish';
+  String get davom => ' Продолжать ';
+
+  @override
+  String get adress => ' Адрес доставки ';
+
+  @override
+  String get podez => ' Подьезд ';
+
+  @override
+  String get etaj => ' Этаж ';
+
+  @override
+  String get kvofis => ' Кв./Офис ';
+
+  @override
+  String get komentariy => ' Комментарий для курьера ';
+
+  @override
+  String get sumDoMin => 'сум до минимальной суммы закаса';
+
+  @override
+  String get sumDoBes => 'сум до бесплатное доставка';
+
+  @override
+  String get yangiManzil => 'Новый адрес';
+
+  @override
+  String get oplata => 'Оплата';
+
+  @override
+  String get spoOplata => 'Способ оплаты';
+
+  @override
+  String get zakaz => 'Заказ';
+
+  @override
+  String get dostavka => 'Доставка';
+
+  @override
+  String get rabotaSer => 'Работа сервиса';
+
+  @override
+  String get kKarta => 'Картой';
+
+  @override
+  String get viberi => 'Выберите или введите новый';
+
+  @override
+  String get promoExist => 'Эсть промокод?';
+
+  @override
+  String get min => 'мин';
+
+  @override
+  String get bistro => 'Быстро';
+
+  @override
+  String get filtr => 'Фильтры';
+
+  @override
+  String get pokazat => 'Показать';
+
+  @override
+  String get izLyubimiy => 'из любимых ресторанов';
+
+  @override
+  String get privesem => 'привезем вкусную еду';
+
+  @override
+  String get prinimayem => 'Принимаем карты';
+
+  @override
+  String get uliOrDom => 'Улица и дом';
+
+  @override
+  String get lokatsiya => 'Подтвердите локацию';
+
+  @override
+  String get kuda => 'Куда доставить?';
+
+  @override
+  String get opredelit => 'Определить автоматически';
+
+  @override
+  String get razreshitDost => 'Разрешите доступ к местоположению или укажите адрес вручнуюб чтобы мы подобрали лучшие рестораны поблизости';
+
+  @override
+  String get ukazat => 'Указать вручную';
 }

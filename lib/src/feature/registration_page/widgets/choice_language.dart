@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:uzum_tezkor/src/common/app.dart';
 
 import 'detail_screen.dart';
 
@@ -32,12 +33,15 @@ class ChoiceLanguage extends StatelessWidget {
             child: SizedBox(
               height: 50,
               child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DetailScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  App.setLocale(context, Locale("ru"));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   side: const BorderSide(
@@ -61,12 +65,15 @@ class ChoiceLanguage extends StatelessWidget {
             child: SizedBox(
               height: 50,
               child: ElevatedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DetailScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  App.setLocale(context, Locale("uz"));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   side: const BorderSide(

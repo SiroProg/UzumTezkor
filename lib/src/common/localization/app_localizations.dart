@@ -342,38 +342,212 @@ abstract class AppLocalizations {
   /// No description provided for @uzum1.
   ///
   /// In ru, this message translates to:
-  /// **'Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali '**
+  /// **' Зарегистрировавшись в сервисе Uzum Tezkor '**
   String get uzum1;
 
   /// No description provided for @uzum2.
   ///
   /// In ru, this message translates to:
-  /// **' Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali '**
+  /// **' Зарегистрировавшись в сервисе Uzum Tezkor '**
   String get uzum2;
 
   /// No description provided for @uzum3.
   ///
   /// In ru, this message translates to:
-  /// **' va '**
+  /// **' и '**
   String get uzum3;
 
   /// No description provided for @uzum4.
   ///
   /// In ru, this message translates to:
-  /// **'Maxfiylik siyosatimizni '**
+  /// **' Наша политика конфиденциальности '**
   String get uzum4;
 
   /// No description provided for @uzum5.
   ///
   /// In ru, this message translates to:
-  /// **' qabul qilasiz. '**
+  /// **' вы принимаете '**
   String get uzum5;
 
   /// No description provided for @davom.
   ///
   /// In ru, this message translates to:
-  /// **'Davom etish'**
+  /// **' Продолжать '**
   String get davom;
+
+  /// No description provided for @adress.
+  ///
+  /// In ru, this message translates to:
+  /// **' Адрес доставки '**
+  String get adress;
+
+  /// No description provided for @podez.
+  ///
+  /// In ru, this message translates to:
+  /// **' Подьезд '**
+  String get podez;
+
+  /// No description provided for @etaj.
+  ///
+  /// In ru, this message translates to:
+  /// **' Этаж '**
+  String get etaj;
+
+  /// No description provided for @kvofis.
+  ///
+  /// In ru, this message translates to:
+  /// **' Кв./Офис '**
+  String get kvofis;
+
+  /// No description provided for @komentariy.
+  ///
+  /// In ru, this message translates to:
+  /// **' Комментарий для курьера '**
+  String get komentariy;
+
+  /// No description provided for @sumDoMin.
+  ///
+  /// In ru, this message translates to:
+  /// **'сум до минимальной суммы закаса'**
+  String get sumDoMin;
+
+  /// No description provided for @sumDoBes.
+  ///
+  /// In ru, this message translates to:
+  /// **'сум до бесплатное доставка'**
+  String get sumDoBes;
+
+  /// No description provided for @yangiManzil.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новый адрес'**
+  String get yangiManzil;
+
+  /// No description provided for @oplata.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get oplata;
+
+  /// No description provided for @spoOplata.
+  ///
+  /// In ru, this message translates to:
+  /// **'Способ оплаты'**
+  String get spoOplata;
+
+  /// No description provided for @zakaz.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заказ'**
+  String get zakaz;
+
+  /// No description provided for @dostavka.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доставка'**
+  String get dostavka;
+
+  /// No description provided for @rabotaSer.
+  ///
+  /// In ru, this message translates to:
+  /// **'Работа сервиса'**
+  String get rabotaSer;
+
+  /// No description provided for @kKarta.
+  ///
+  /// In ru, this message translates to:
+  /// **'Картой'**
+  String get kKarta;
+
+  /// No description provided for @viberi.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите или введите новый'**
+  String get viberi;
+
+  /// No description provided for @promoExist.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эсть промокод?'**
+  String get promoExist;
+
+  /// No description provided for @min.
+  ///
+  /// In ru, this message translates to:
+  /// **'мин'**
+  String get min;
+
+  /// No description provided for @bistro.
+  ///
+  /// In ru, this message translates to:
+  /// **'Быстро'**
+  String get bistro;
+
+  /// No description provided for @filtr.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фильтры'**
+  String get filtr;
+
+  /// No description provided for @pokazat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показать'**
+  String get pokazat;
+
+  /// No description provided for @izLyubimiy.
+  ///
+  /// In ru, this message translates to:
+  /// **'из любимых ресторанов'**
+  String get izLyubimiy;
+
+  /// No description provided for @privesem.
+  ///
+  /// In ru, this message translates to:
+  /// **'привезем вкусную еду'**
+  String get privesem;
+
+  /// No description provided for @prinimayem.
+  ///
+  /// In ru, this message translates to:
+  /// **'Принимаем карты'**
+  String get prinimayem;
+
+  /// No description provided for @uliOrDom.
+  ///
+  /// In ru, this message translates to:
+  /// **'Улица и дом'**
+  String get uliOrDom;
+
+  /// No description provided for @lokatsiya.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердите локацию'**
+  String get lokatsiya;
+
+  /// No description provided for @kuda.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда доставить?'**
+  String get kuda;
+
+  /// No description provided for @opredelit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Определить автоматически'**
+  String get opredelit;
+
+  /// No description provided for @razreshitDost.
+  ///
+  /// In ru, this message translates to:
+  /// **'Разрешите доступ к местоположению или укажите адрес вручнуюб чтобы мы подобрали лучшие рестораны поблизости'**
+  String get razreshitDost;
+
+  /// No description provided for @ukazat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Указать вручную'**
+  String get ukazat;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

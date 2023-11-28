@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 
 import 'location_determination.dart';
 
@@ -67,8 +68,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           (states) => Colors.deepPurple,
                         ),
                       ),
-                      child: const Text(
-                        "Продолжить",
+                      child: Text(
+                        AppLocalizations.of(context).davom,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -90,7 +91,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   currentPage = page;
                 });
               },
-              children: const [
+              children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -112,7 +113,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 8.0, horizontal: 15),
                           child: Text(
-                            "Бесплатная доставка",
+                            AppLocalizations.of(context).bepulDostavka,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -123,7 +124,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                     Text(
-                      "из любимых ресторанов",
+                      AppLocalizations.of(context).izLyubimiy,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -153,7 +154,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 8.0, horizontal: 15),
                           child: Text(
-                            "Быстро",
+                            AppLocalizations.of(context).bistro,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -164,7 +165,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                     ),
                     Text(
-                      "привезем вкусную еду",
+                      AppLocalizations.of(context).privesem,
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -185,7 +186,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Text(
-                        "Принимаем карты Uzcard, Humo, Visa, Mastercard",
+                        "${AppLocalizations.of(context).prinimayem} Uzcard, Humo, Visa, Mastercard",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,

@@ -97,7 +97,7 @@ class DetailModal extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${basketModel.productModel.price} сум",
+                  "${basketModel.productModel.price} ${AppLocalizations.of(context).sum}",
                   style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: Colors.deepPurple,
                       ),

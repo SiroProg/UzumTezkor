@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/localization/app_localizations.dart';
 import '../../registration_page/widgets/determine_location.dart';
 
 class NewAddress extends ConsumerWidget {
@@ -33,7 +34,7 @@ class NewAddress extends ConsumerWidget {
               ),
             ),
             title: Text(
-              "Новый адрес",
+              AppLocalizations.of(context).yangiManzil,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 
 import 'determine_location.dart';
 
@@ -20,17 +21,17 @@ class LocationDetermination extends StatelessWidget {
               fit: BoxFit.cover,
               image: AssetImage("asset/icons/checking_the_location.png"),
             ),
-            const Text(
-              "Куда доставить?",
+            Text(
+              AppLocalizations.of(context).kuda,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
               ),
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               child: Text(
-                "Разрешите доступ к местоположению или укажите адрес вручнуюб чтобы мы подобрали лучшие рестораны поблизости",
+                AppLocalizations.of(context).razreshitDost,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 12,
@@ -52,10 +53,10 @@ class LocationDetermination extends StatelessWidget {
                   ),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple),
-                  child: const Padding(
+                  child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 15, horizontal: 18),
                     child: Text(
-                      "Определить автоматически",
+                      AppLocalizations.of(context).opredelit,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -68,8 +69,8 @@ class LocationDetermination extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    "Указать вручную",
+                  child: Text(
+                    AppLocalizations.of(context).ukazat,
                     style: TextStyle(
                       color: Colors.deepPurple,
                       fontSize: 14,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 
 class CustomAppBar extends ConsumerStatefulWidget {
@@ -68,8 +69,8 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                         child: TextField(
                           autofocus: true,
                           onChanged: onTab,
-                          decoration: const InputDecoration(
-                            hintText: "Поиск",
+                          decoration: InputDecoration(
+                            hintText: AppLocalizations.of(context).poisk,
                             hintStyle:
                                 TextStyle(fontSize: 14, color: Colors.black54),
                             border: InputBorder.none,
@@ -82,8 +83,8 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Отменить",
+                child: Text(
+                  AppLocalizations.of(context).otmen,
                   style: TextStyle(color: Colors.deepPurple, fontSize: 13),
                 ),
               ),

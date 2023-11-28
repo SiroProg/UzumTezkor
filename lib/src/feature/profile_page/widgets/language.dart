@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:uzum_tezkor/src/common/app.dart';
+import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import 'sms_code.dart';
@@ -46,22 +47,27 @@ class _LanguageState extends State<Language> {
                 title: Text("O'zbekcha"),
                 value: isUzbekSelected,
                 onChanged: (value) {
-                  setState(() {
-                    isUzbekSelected = value!;
-                    isRussianSelected = !value;
-                  });
+                  App.setLocale(context, Locale("uz"));
+                  isUzbekSelected = value!;
+                  isRussianSelected = !value;
+                  setState(() {});
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
                 },
               ),
               CheckboxListTile(
-                title: Text('Русский'),
-                value: isRussianSelected,
-                onChanged: (value) {
-                  setState(() {
+                  title: Text('Русский'),
+                  value: isRussianSelected,
+                  onChanged: (value) {
+                    App.setLocale(context, Locale("ru"));
                     isRussianSelected = value!;
                     isUzbekSelected = !value;
-                  });
-                },
-              ),
+                    setState(() {});
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                  }),
             ],
           ),
         ],
