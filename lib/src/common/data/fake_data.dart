@@ -1,6 +1,7 @@
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/model/person_model.dart';
 
 import '../model/product_model.dart';
 import '../model/promotion_model.dart';
@@ -897,6 +898,11 @@ class FakeData {
 
   List<ClientModel> clientData = [
     ClientModel(
+      personModel: PersonModel(
+        id:1,
+        phoneNumber: "+998946133644",
+        name: "Toxirjon"
+      ),
       ordersHistory: [],
       basket: [],
       promotionalCodes: [],

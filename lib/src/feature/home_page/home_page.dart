@@ -7,7 +7,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
-import '../../common/localization/app_localizations.dart';
+import 'package:uzum_tezkor/src/feature/order_page/order_page.dart';
 import '../profile_page/profile_page.dart';
 import 'widgets/custom_filter.dart';
 import 'widgets/sliver_app_bar.dart';
@@ -121,11 +121,10 @@ class _HomePagState extends ConsumerState<HomePage> {
                                           ),
                                         ],
                                         centerTitle: true,
-                                        title: Column(
+                                        title: const Column(
                                           children: [
                                             Text(
-                                              AppLocalizations.of(context)
-                                                  .restorani,
+                                              "Рестораны",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
@@ -198,15 +197,13 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                       color: Colors
                                                           .lightBlue.shade100,
                                                     ),
-                                                    child: Padding(
+                                                    child: const Padding(
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 10,
                                                               vertical: 5),
                                                       child: Text(
-                                                        AppLocalizations.of(
-                                                                context)
-                                                            .yeshyo,
+                                                        "Еще",
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 15,
@@ -252,8 +249,8 @@ class _HomePagState extends ConsumerState<HomePage> {
               ],
             ),
             const BasketPage(),
-            const ColoredBox(color: Colors.blue),
-            Profile(),
+            const OrderPage(),
+            const Profile(),
           ],
         ),
       ),

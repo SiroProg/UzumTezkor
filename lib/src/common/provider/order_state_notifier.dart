@@ -7,6 +7,8 @@ class OrderStateNotifier extends StateNotifier<OrderModel?> {
 
   void setOrder(OrderModel orderModel) => state = orderModel;
 
+  void clearOrder() => state = null;
+
   void updateOrder({
     PaymentTypeEnum? paymentType,
     bool? promoCodeActive,

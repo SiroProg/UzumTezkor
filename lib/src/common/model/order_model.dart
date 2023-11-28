@@ -1,6 +1,7 @@
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/card_detail.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/model/person_model.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'promotion_model.dart';
 
@@ -16,6 +17,7 @@ enum PaymentTypeEnum {
 
 class OrderModel {
   final String id;
+  final PersonModel? personModel;
   final RestaurantModel restaurant;
   final PlaceLocation placeLocation;
   final PromotionalCodeModel? promocode;
@@ -32,6 +34,7 @@ class OrderModel {
     required this.date,
     required this.deliveredTime,
     required this.products,
+    this.personModel,
     this.isDelivered = false,
     this.promocode,
     this.cardDetail,
@@ -43,6 +46,7 @@ class OrderModel {
     RestaurantModel? restaurant,
     PlaceLocation? placeLocation,
     PromotionalCodeModel? promocode,
+    PersonModel? personModel,
     DateTime? date,
     DateTime? deliveredTime,
     bool? isDelivered,
@@ -51,6 +55,7 @@ class OrderModel {
     PaymentTypeEnum? paymentType,
   }) {
     return OrderModel(
+      personModel: personModel ?? this.personModel,
       restaurant: restaurant ?? this.restaurant,
       placeLocation: placeLocation ?? this.placeLocation,
       date: date ?? this.date,
