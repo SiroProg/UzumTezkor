@@ -395,7 +395,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "${widget.product.price} сум",
+                          "${widget.product.price * isAddedToBasket(widget.product).$2} сум",
                           style:
                               TextStyle(color: Colors.deepPurple, fontSize: 12),
                         ),
@@ -410,10 +410,21 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                                 bottomRight: Radius.circular(30),
                               ),
                             ),
-                            child: Icon(
-                              Icons.add,
-                              size: 18,
-                            ),
+                            child: isAddedToBasket(widget.product).$1
+                                ? Center(
+                                  child: Text(
+                                      isAddedToBasket(widget.product)
+                                          .$2
+                                          .toString(),
+                                      style: TextStyle(
+                                        color: Colors.deepPurple,
+                                      ),
+                                    ),
+                                )
+                                : Icon(
+                                    Icons.add,
+                                    size: 18,
+                                  ),
                           ),
                         )
                       ],
