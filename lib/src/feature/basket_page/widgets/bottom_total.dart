@@ -1,11 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
+import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
+import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/model/promotion_model.dart';
+import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/bottom_total_item.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_modal.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
-
-import '../../../common/localization/app_localizations.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/payment.dart';
 
 class BottomTotal extends ConsumerWidget {
   const BottomTotal({super.key});
@@ -13,12 +20,19 @@ class BottomTotal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<BasketModel> items = ref.watch(clientProvider).basket;
-
+    ValueNotifier<bool> isActive = ValueNotifier(false);
+    PlaceLocation location = ref
+        .read(clientProvider)
+        .locationList
+        .where((element) => element.isSelected)
+        .first;
+    RestaurantModel restaurantModel = items.first.restaurantModel;
     double getTotalPrice() {
       double total = 0.0;
       for (BasketModel i in items) {
         total += i.totalPrice;
       }
+      if (total > 30000) isActive.value = true;
       return total;
     }
 
@@ -31,10 +45,8 @@ class BottomTotal extends ConsumerWidget {
       );
     }
 
-
-
     return Container(
-      height: 110,
+      height: 120,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
         border: Border(
@@ -47,68 +59,86 @@ class BottomTotal extends ConsumerWidget {
         children: [
           GestureDetector(
             onTap: deliveryModal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(
-                  Icons.run_circle_outlined,
-                  color: Colors.deepPurple,
-                ),
-                Text(
-                  AppLocalizations.of(context).bepulDostavka,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.deepPurple,
-                      ),
-                ),
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.deepPurple,
-                )
-              ],
-            ),
+            child: BottomTotalItem(totalPrice: getTotalPrice()),
           ),
           const SizedBox(height: 10),
           GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.deepPurple),
-              child: ListTile(
-                leading: Container(
-                  width: 30,
-                  height: 30,
+            onTap: getTotalPrice() >= 30000
+                ? () {
+                    int randomDiscount = Random().nextInt(20);
+                    if (randomDiscount < 10) {
+                      randomDiscount += 10;
+                    }
+                    ref.read(orderNotifier.notifier).setOrder(
+                          OrderModel(
+                            restaurant: restaurantModel,
+                            placeLocation: location,
+                            promocode: PromotionalCodeModel(
+                              title: "g82023",
+                              discountAmount: randomDiscount,
+                            ),
+                            date: DateTime.now(),
+                            deliveredTime: DateTime.now(),
+                            products: items,
+                          ),
+                        );
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const Payment(),
+                      ),
+                    );
+                  }
+                : null,
+            child: ValueListenableBuilder(
+              valueListenable: isActive,
+              builder: (ctx, value, child) {
+                return Container(
+                  height: 60,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(20),
+                    color: value
+                        ? Colors.deepPurple
+                        : Theme.of(context)
+                            .colorScheme
+                            .onSecondaryContainer
+                            .withOpacity(0.2),
                   ),
-                  child: Center(
-                    child: Text(
-                      "${items.length}",
+                  child: ListTile(
+                    leading: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Theme.of(context).colorScheme.background,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "${items.length}",
+                          style:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.deepPurple,
+                                  ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      "К оплате",
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                             fontWeight: FontWeight.w400,
-                            color: Colors.deepPurple,
+                            color: Theme.of(context).colorScheme.background,
+                          ),
+                    ),
+                    trailing: Text(
+                      "${getTotalPrice()} сум",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).colorScheme.background,
                           ),
                     ),
                   ),
-                ),
-                title: Text(
-                  AppLocalizations.of(context).kOplate,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                ),
-                trailing: Text(
-                  "${getTotalPrice()} ${AppLocalizations.of(context).sum}",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.background,
-                      ),
-                ),
-              ),
+                );
+              },
             ),
           )
         ],
