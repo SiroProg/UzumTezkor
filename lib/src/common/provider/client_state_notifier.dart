@@ -10,6 +10,7 @@ import 'package:uzum_tezkor/src/common/data/fake_data.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
+import 'package:uzum_tezkor/src/common/model/order_model.dart';
 
 import '../model/restourant_model.dart';
 
@@ -57,8 +58,6 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     Category.pita: ValueNotifier(true),
     Category.asia: ValueNotifier(true),
   };
-
-
 
   void changeSelection(Category category) {
     refreshFilterList(category);
@@ -151,6 +150,12 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
       locationList: [...state.locationList, location],
     );
     setAsMainAddress(location);
+  }
+
+  void addOrder(OrderModel order) {
+    state = state.copyWith(
+      ordersHistory: [order, ...state.ordersHistory],
+    );
   }
 
   void setAsMainAddress(PlaceLocation location) {

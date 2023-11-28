@@ -7,6 +7,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
+import 'package:uzum_tezkor/src/feature/order_page/order_page.dart';
 import '../profile_page/profile_page.dart';
 import 'widgets/custom_filter.dart';
 import 'widgets/sliver_app_bar.dart';
@@ -248,8 +249,8 @@ class _HomePagState extends ConsumerState<HomePage> {
               ],
             ),
             const BasketPage(),
-            const ColoredBox(color: Colors.blue),
-            Profile(),
+            const OrderPage(),
+            const Profile(),
           ],
         ),
       ),
