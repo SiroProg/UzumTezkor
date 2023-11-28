@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
 import '../feature/registration_page/widgets/choice_language.dart';
 
-class App extends ConsumerStatefulWidget {
-  const App({super.key});
+class App extends StatefulWidget {
+  App({super.key});
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _AppState? state = context.findAncestorStateOfType<_AppState>();
+    state?.setLocale(newLocale);
+  }
 
   @override
-  ConsumerState<App> createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
-class _AppState extends ConsumerState<App> {
+ValueNotifier<Locale> $locale = ValueNotifier(Locale('uz'));
+
+class _AppState extends State<App> {
+  Locale? _locale;
+
+  setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,9 +43,7 @@ class _AppState extends ConsumerState<App> {
         ),
       ),
       title: "Uzum Tezkor",
-      home: $preferences.getBool("isRegistered") ?? true
-          ? const HomePage()
-          : const ChoiceLanguage(),
+      home: const ChoiceLanguage(),
     );
   }
 }

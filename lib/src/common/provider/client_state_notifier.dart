@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:location/location.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uzum_tezkor/src/common/data/fake_data.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
@@ -211,4 +210,3 @@ final clientProvider = StateNotifierProvider<ClientStateNotifier, ClientModel>(
   (ref) => ClientStateNotifier(),
 );
 
-late SharedPreferences $preferences;

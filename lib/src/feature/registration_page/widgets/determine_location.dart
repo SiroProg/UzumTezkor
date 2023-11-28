@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
@@ -139,9 +138,7 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
               height: 20,
             ),
             OutlinedButton(
-              onPressed: () async {
-                // SharedPreferences preferences =
-                //     await SharedPreferences.getInstance();
+              onPressed: () {
                 if (location.value != null) {
                   ref
                       .read(clientProvider.notifier)
@@ -157,9 +154,6 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                     );
                   }
                   client.locationList.add(location.value!);
-                  final String data = jsonEncode(client);
-                  print($preferences.setBool('isRegistered', true));
-                  $preferences.setString('person', data);
                 }
               },
               style: OutlinedButton.styleFrom(
