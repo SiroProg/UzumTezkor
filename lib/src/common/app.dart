@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
+import '../feature/registration_page/widgets/choice_language.dart';
 
 
 class App extends StatelessWidget {
@@ -12,9 +12,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Locale('uz'),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(fontFamily: 'DaysOne').copyWith(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
@@ -22,7 +19,7 @@ class App extends StatelessWidget {
         ),
       ),
       title: "Uzum Tezkor",
-      home: const HomePage(),
+      home:  const ChoiceLanguage(),
     );
   }
 }

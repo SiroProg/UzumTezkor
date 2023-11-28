@@ -32,7 +32,7 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     searchText.value = text;
     searchResults.value = [];
     List<RestaurantModel> result = [];
-    if (text.isNotEmpty) {
+    if (text.isNotEmpty && text[0] != ' ') {
       for (var element in fakeData.restaurantData) {
         for (final category in element.products.keys) {
           if (category.title.toLowerCase().contains(text)) {
@@ -57,6 +57,8 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
     Category.pita: ValueNotifier(true),
     Category.asia: ValueNotifier(true),
   };
+
+
 
   void changeSelection(Category category) {
     refreshFilterList(category);

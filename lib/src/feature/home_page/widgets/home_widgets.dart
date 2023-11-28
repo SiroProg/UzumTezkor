@@ -8,7 +8,9 @@ import 'custom_search.dart';
 import 'restaurants.dart';
 
 class HomeWidgets extends StatefulWidget {
-  const HomeWidgets({super.key, required this.pageController, required this.location});
+  const HomeWidgets(
+      {super.key, required this.pageController, required this.location});
+
   final ScrollController pageController;
   final PlaceLocation? location;
 

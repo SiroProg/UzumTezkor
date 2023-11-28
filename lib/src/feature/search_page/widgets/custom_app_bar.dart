@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
@@ -10,10 +12,26 @@ class CustomAppBar extends ConsumerStatefulWidget {
 }
 
 class _CustomAppBarState extends ConsumerState<CustomAppBar> {
+  Timer? timer;
+
   @override
   void initState() {
     super.initState();
     ref.read(clientProvider.notifier).searchResults.value = [];
+  }
+
+  void onTab(String value) {
+    if (timer == null) {
+      timer ==
+          Timer(
+            Duration(seconds: 2),
+            () {
+              ref.read(clientProvider.notifier).searchRestaurants(value);
+              timer!.cancel();
+              timer = null;
+            },
+          );
+    }
   }
 
   @override
@@ -23,9 +41,10 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                width: 270,
+                // width: 270,
                 height: 40,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -48,11 +67,7 @@ class _CustomAppBarState extends ConsumerState<CustomAppBar> {
                         width: 200,
                         child: TextField(
                           autofocus: true,
-                          onChanged: (value) {
-                            ref
-                                .read(clientProvider.notifier)
-                                .searchRestaurants(value);
-                          },
+                          onChanged: onTab,
                           decoration: const InputDecoration(
                             hintText: "Поиск",
                             hintStyle:

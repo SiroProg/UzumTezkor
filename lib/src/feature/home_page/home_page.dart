@@ -43,7 +43,7 @@ class _HomePagState extends ConsumerState<HomePage> {
   @override
   Widget build(BuildContext context) {
     PlaceLocation? location =
-        ref.watch(clientProvider).locationList.firstOrNull;
+        ref.watch(clientProvider).locationList.lastOrNull;
     final PageController pageController = PageController();
 
     return SafeArea(
