@@ -110,7 +110,7 @@ class _SmsCodeState extends State<SmsCode> {
   }
 
   void _onNext(int index) {
-    // Bu fonksiyon bir textfield'dan diğerine geçer
+
     if (index < focusNodes.length - 1) {
       FocusScope.of(context).requestFocus(focusNodes[index + 1]);
     }

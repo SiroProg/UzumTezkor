@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 
 class CustomNavigationBar extends ConsumerStatefulWidget {
@@ -30,7 +31,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
           landscapeLayout: BottomNavigationBarLandscapeLayout.linear,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          items: const [
+          items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant_menu_outlined),
               label: 'Рестораны',
@@ -48,7 +49,7 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_2_outlined),
-              label: 'Профиль',
+              label: AppLocalizations.of(context).profil,
               activeIcon: Icon(Icons.person_2),
             ),
           ],

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/custom_list_tile.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/registr_number.dart';
+
+import 'language.dart';
 
 class AccountNotExist extends StatelessWidget {
   const AccountNotExist({super.key});
@@ -16,13 +19,17 @@ class AccountNotExist extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Profil",
+                 Text(
+                  AppLocalizations.of(context).profil,
                   style: TextStyle(fontSize: 35),
                 ),
                 const SizedBox(height: 35),
-                CustomListTile(icon: Icons.chat, name: "Yordam"),
-                CustomListTile(icon: Icons.language, name: "Til"),
+                CustomListTile(icon: Icons.chat, name: "Yordam",function: (){}),
+                CustomListTile(icon: Icons.language, name: "Til",function: (){ Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Language(),
+                    ));}),
               ],
             ),
             GestureDetector(
