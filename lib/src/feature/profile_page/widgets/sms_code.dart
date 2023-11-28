@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/account_exist.dart';
-import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit.dart';
+import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit2.dart';
 
 import '../profile_page.dart';
+import 'name_edit1.dart';
 
 List<String> code = [];
 
@@ -98,8 +100,9 @@ class _SmsCodeState extends State<SmsCode> {
             child: RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                text:
-                    "${$profileNumber} Raqamiga tekshiruv kodini yubordik. $seconds soniyadan keyin kodni qayta yuborishingiz mumkin",
+                text: (seconds != 0)
+                    ? "${$profileNumber} ${AppLocalizations.of(context).raqamiga} $seconds ${AppLocalizations.of(context).soniyadan}"
+                    : AppLocalizations.of(context).qayta,
                 style: const TextStyle(color: Colors.grey),
               ),
             ),
@@ -110,7 +113,6 @@ class _SmsCodeState extends State<SmsCode> {
   }
 
   void _onNext(int index) {
-
     if (index < focusNodes.length - 1) {
       FocusScope.of(context).requestFocus(focusNodes[index + 1]);
     }
@@ -168,10 +170,11 @@ class _CustomExpandState extends State<CustomExpand> {
 
                   if (listEquals(code, $profileNumberCode)) {
                     $profileIsExist = true;
+                    code.clear();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => NameEdit(),
+                        builder: (context) => NameEdit1(),
                       ),
                     );
                   }

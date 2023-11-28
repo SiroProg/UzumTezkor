@@ -4,6 +4,7 @@ import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import '../../../common/localization/app_localizations.dart';
+import '../../home_page/widgets/restaurants.dart';
 
 class NameEdit extends StatefulWidget {
   const NameEdit({super.key});
@@ -26,17 +27,17 @@ class _RegisterNumberState extends State<NameEdit> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 25),
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButton(
+                  const BackButton(
                     color: Colors.black,
                   ),
                   Text(
                     AppLocalizations.of(context).persInfo,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
-                  SizedBox(width: 15),
+                  const SizedBox(width: 15),
                 ],
               ),
               Container(
@@ -52,11 +53,11 @@ class _RegisterNumberState extends State<NameEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Padding(
-                      padding: EdgeInsets.only(left: 12, top: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 8),
                       child: Text(
                         AppLocalizations.of(context).name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 11,
                           color: Colors.black26,
                         ),
@@ -68,7 +69,8 @@ class _RegisterNumberState extends State<NameEdit> {
                         height: 28,
                         child: TextField(
                           onChanged: (value) {
-                            if (value != $profileName) {
+                            // Remove leading and trailing spaces and check if the modified string is not empty
+                            if (value.trim().isNotEmpty) {
                               isValid = true;
                               name = value;
                             } else {
@@ -88,11 +90,11 @@ class _RegisterNumberState extends State<NameEdit> {
                   ],
                 ),
               ),
-               Padding(
-                padding: EdgeInsets.only(left: 15),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
                 child: Text(
                   AppLocalizations.of(context).kakUmer,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     color: Colors.black26,
                   ),
@@ -111,11 +113,11 @@ class _RegisterNumberState extends State<NameEdit> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Padding(
-                      padding: EdgeInsets.only(left: 12, top: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12, top: 8),
                       child: Text(
                         AppLocalizations.of(context).number,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 11,
                           color: Colors.black26,
                         ),
@@ -140,11 +142,11 @@ class _RegisterNumberState extends State<NameEdit> {
                   ],
                 ),
               ),
-               Padding(
-                padding: EdgeInsets.only(left: 14),
+              Padding(
+                padding: const EdgeInsets.only(left: 14),
                 child: Text(
                   AppLocalizations.of(context).chtobi,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     color: Colors.black26,
                   ),
@@ -154,14 +156,11 @@ class _RegisterNumberState extends State<NameEdit> {
           ),
           GestureDetector(
             onTap: isValid
-                ? () {
-                    $profileName = name!;
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                ? () {setState(() {
+              $profileName = name!;
+                });
+
+                    Navigator.pop(context);
                   }
                 : null,
             child: Container(
@@ -174,10 +173,10 @@ class _RegisterNumberState extends State<NameEdit> {
                   Radius.circular(35),
                 ),
               ),
-              child:  Center(
+              child: Center(
                 child: Text(
                   AppLocalizations.of(context).soxranit,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
             ),

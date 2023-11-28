@@ -74,5 +74,8 @@
   "kuda": "Qayerga yetkazib berish kerak?",
   "opredelit": "Avtomatik aniqlash",
   "ukazat": "Qo'lda belgilang",
-  "razreshitDost": "Yaqin-atrofdagi eng yaxshi restoranlarni topishimiz uchun joylashuvingizga kirishga ruxsat bering yoki manzilingizni qo‘lda kiriting"
+  "razreshitDost": "Yaqin-atrofdagi eng yaxshi restoranlarni topishimiz uchun joylashuvingizga kirishga ruxsat bering yoki manzilingizni qo‘lda kiriting",
+  "raqamiga": "Raqamiga tekshiruv kodini yubordik.",
+  "soniyadan": "soniyadan keyin kodni qayta yuborishingiz mumkin",
+  "qayta": "Qayta yuboraylikmi?"
 }

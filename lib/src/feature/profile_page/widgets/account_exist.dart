@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/language.dart';
-import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit.dart';
+import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit2.dart';
 
 import '../../../common/localization/app_localizations.dart';
 import 'custom_list_tile.dart';
@@ -60,7 +60,9 @@ class AccountExist extends StatelessWidget {
                       ));
                 }),
             CustomListTile(
-                icon: Icons.lock, name: AppLocalizations.of(context).politika, function: () {}),
+                icon: Icons.lock,
+                name: AppLocalizations.of(context).politika,
+                function: () {}),
             CustomListTile(
                 icon: Icons.info,
                 name: AppLocalizations.of(context).polzova,
@@ -68,16 +70,42 @@ class AccountExist extends StatelessWidget {
             CustomListTile(
                 icon: Icons.exit_to_app,
                 name: AppLocalizations.of(context).chiqish,
-                function: () {
-                  $profileName = '';
-                  $profileNumber = '';
-                  $profileIsExist = false;
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ));
-                }),
+                function: () => showDialog(
+                      context: context,
+                      builder: (context) {
+                        // $profileName = '';
+                        // $profileNumber = '';
+                        // $profileIsExist = false;
+                        // if (context.mounted) {
+                        //   Navigator.pop(context);
+                        // }
+                        return AlertDialog(
+                            title: Text(
+                              "Chiqmoqchimisiz",
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {$profileName = '';
+                                $profileNumber = '';
+                                $profileIsExist = false;
+                                  Navigator.pop(context); // Close the dialog
+                                },
+                                child: Text("Ha"),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Add your logout logic here
+                                  // For example, you can clear user data and navigate to the login page
+
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                  // Navigator.pushReplacementNamed(context, '/login'); // Replace with your login route
+                                },
+                                child: Text("Yo'q"),
+                              )
+                            ]);
+                      },
+                    )),
           ],
         ),
       ),

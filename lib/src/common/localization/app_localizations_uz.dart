@@ -224,6 +224,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get kuda => 'Qayerga yetkazib berish kerak?';
 
   @override
+  String get raqamiga => 'Raqamiga tekshiruv kodini yubordik.';
+
+  @override
   String get opredelit => 'Avtomatik aniqlash';
 
   @override
@@ -231,4 +234,10 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get ukazat => 'Qo\'lda belgilang';
+
+  @override
+  String get soniyadan => 'soniyadan keyin kodni qayta yuborishingiz mumkin';
+
+  @override
+  String get qayta => 'Qayta yuboraylikmi?';
 }

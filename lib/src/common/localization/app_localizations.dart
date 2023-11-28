@@ -531,6 +531,12 @@ abstract class AppLocalizations {
   /// **'Куда доставить?'**
   String get kuda;
 
+  /// No description provided for @raqamiga.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мы отправили код на номер.'**
+  String get raqamiga;
+
   /// No description provided for @opredelit.
   ///
   /// In ru, this message translates to:
@@ -548,6 +554,18 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Указать вручную'**
   String get ukazat;
+
+  /// No description provided for @soniyadan.
+  ///
+  /// In ru, this message translates to:
+  /// **'вы можете отправить код повторно через секунду'**
+  String get soniyadan;
+
+  /// No description provided for @qayta.
+  ///
+  /// In ru, this message translates to:
+  /// **'мы отправим код повторно?'**
+  String get qayta;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
