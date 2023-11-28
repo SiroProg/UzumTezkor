@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/detail_modal.dart';
@@ -82,7 +83,7 @@ class BasketItem extends ConsumerWidget {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "${basketModel.totalPrice} сум",
+                        "${basketModel.totalPrice} ${AppLocalizations.of(context).sum}",
                         style:
                             Theme.of(context).textTheme.labelMedium!.copyWith(
                                   fontWeight: FontWeight.w400,

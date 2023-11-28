@@ -29,6 +29,9 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
 
   ValueNotifier<String> searchText = ValueNotifier("");
 
+
+
+
   void searchRestaurants(String text) {
     searchText.value = text;
     searchResults.value = [];
@@ -213,3 +216,4 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
 final clientProvider = StateNotifierProvider<ClientStateNotifier, ClientModel>(
   (ref) => ClientStateNotifier(),
 );
+

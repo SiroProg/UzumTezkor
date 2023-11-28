@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/app_localizations.dart';
 import '../../search_page/search_page.dart';
 
 class CustomSearch extends StatelessWidget {
@@ -26,7 +27,7 @@ class CustomSearch extends StatelessWidget {
               ),
             ),
           ),
-          child: const Row(
+          child:  Row(
             children: [
               Icon(
                 Icons.search,
@@ -36,7 +37,7 @@ class CustomSearch extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "Поиск",
+                AppLocalizations.of(context).poisk,
                 style: TextStyle(color: Colors.black54),
               ),
             ],

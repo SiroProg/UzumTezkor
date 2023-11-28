@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/product_model.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
@@ -46,7 +47,7 @@ class _DetailPageState extends ConsumerState<DetailPage>
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
                 child: Text(
                   widget.restaurant.products.keys.toList()[index].title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
                   ),
@@ -104,13 +105,13 @@ class _DetailPageState extends ConsumerState<DetailPage>
               children: [
                 Text(
                   widget.restaurant.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  "35-45 мин",
+                  "35-45 ${AppLocalizations.of(context).min}",
                   style: TextStyle(
                     color: Colors.black45,
                     fontSize: 10,
@@ -124,13 +125,13 @@ class _DetailPageState extends ConsumerState<DetailPage>
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                   size: 28,
                 ),
               ),
             ],
-            leading: BackButton(),
+            leading: const BackButton(),
             flexibleSpace: FlexibleSpaceBar(
               background: Image(
                 image: AssetImage(widget.restaurant.poster),
@@ -231,7 +232,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Text(
                   widget.product.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 24,
                   ),
@@ -242,7 +243,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: Text(
                   "${widget.product.price} сум",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.deepPurple,
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
@@ -253,7 +254,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Text(
                   widget.product.compound,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black54,
                     fontSize: 18,
                   ),
@@ -331,7 +332,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           backgroundColor: Colors.deepPurple,
                           foregroundColor:
                               Theme.of(context).colorScheme.primaryContainer),
-                      child: Text("Добавить"),
+                      child: const Text("Добавить"),
                     ),
                   ],
                 ),
@@ -346,7 +347,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.blue.shade100, width: 1),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -362,7 +363,7 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                   width: double.infinity,
                   height: 150,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                     child: Image(
@@ -375,13 +376,13 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                   padding: const EdgeInsets.only(top: 10, left: 3),
                   child: Text(
                     widget.product.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                     ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: SizedBox(
                     height: 10,
                   ),
@@ -396,8 +397,8 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                       children: [
                         Text(
                           "${widget.product.price * isAddedToBasket(widget.product).$2} сум",
-                          style:
-                              TextStyle(color: Colors.deepPurple, fontSize: 12),
+                          style: const TextStyle(
+                              color: Colors.deepPurple, fontSize: 12),
                         ),
                         SizedBox(
                           width: 30,
@@ -405,23 +406,23 @@ class _ProductItemState extends ConsumerState<ProductItem> {
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: Colors.deepPurple.shade100,
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 bottomRight: Radius.circular(30),
                               ),
                             ),
                             child: isAddedToBasket(widget.product).$1
                                 ? Center(
-                                  child: Text(
+                                    child: Text(
                                       isAddedToBasket(widget.product)
                                           .$2
                                           .toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.deepPurple,
                                       ),
                                     ),
-                                )
-                                : Icon(
+                                  )
+                                : const Icon(
                                     Icons.add,
                                     size: 18,
                                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 
 import '../../../common/provider/client_state_notifier.dart';
@@ -32,7 +33,7 @@ class _CustomFilterState extends ConsumerState<ConsumerStatefulWidget> {
               ),
               GestureDetector(
                 onTap: () {},
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     children: [
@@ -43,7 +44,7 @@ class _CustomFilterState extends ConsumerState<ConsumerStatefulWidget> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "Еще",
+                        AppLocalizations.of(context).yeshyo,
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       )
                     ],

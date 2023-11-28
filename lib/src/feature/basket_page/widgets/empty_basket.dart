@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class EmptyBasket extends StatelessWidget{
   const EmptyBasket({super.key});
 
@@ -18,14 +20,14 @@ class EmptyBasket extends StatelessWidget{
           ),
           const SizedBox(height: 15),
           Text(
-            "Тут пусто",
+            AppLocalizations.of(context).tutPusto,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Theme.of(context).colorScheme.onPrimaryContainer,
             ),
           ),
           const SizedBox(height: 5),
           Text(
-            "Вернитесь назад и вқберите что-нибудь вкусное",
+            AppLocalizations.of(context).vernites,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
               fontWeight: FontWeight.w400,

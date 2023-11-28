@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 
 import '../../../common/provider/client_state_notifier.dart';
 import '../../home_page/widgets/restaurants.dart';
@@ -33,8 +34,8 @@ class _ResultRestaurantsState extends ConsumerState<ResultRestaurants> {
                   ),
                 ),
               )
-            : const Text(
-                "Ничего не найдено",
+            : Text(
+                AppLocalizations.of(context).neNayd,
                 style: TextStyle(color: Colors.black54, fontSize: 16),
               );
       },

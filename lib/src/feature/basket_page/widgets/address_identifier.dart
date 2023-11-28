@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/address_tile.dart';
@@ -46,7 +47,7 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
         Padding(
           padding: EdgeInsets.only(left: widget.leftPadding),
           child: Text(
-            "Адрес доставки",
+            AppLocalizations.of(context).adress,
             style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                 ),
@@ -66,7 +67,7 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15)),
-                          labelText: "Подьезд",
+                          labelText: AppLocalizations.of(context).podez,
                         ),
                         onChanged: (value) {
                           ref
@@ -81,7 +82,7 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
-                        labelText: "Этаж",
+                        labelText: AppLocalizations.of(context).etaj,
                       ),
                       keyboardType: TextInputType.number,
                       onChanged: (value) {
@@ -98,7 +99,7 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
-                        labelText: "Кв./Офис",
+                        labelText: AppLocalizations.of(context).kvofis,
                       ),
                       onChanged: (value) {
                         ref
@@ -115,7 +116,7 @@ class _AddressIdentifierState extends ConsumerState<AddressIdentifier> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15)),
-                  labelText: "Комментарий для курьера",
+                  labelText: AppLocalizations.of(context).komentariy,
                 ),
                 onChanged: (value) {
                   ref

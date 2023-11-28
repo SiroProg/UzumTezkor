@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
+import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
-
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 
@@ -17,6 +18,8 @@ class DetermineLocation extends ConsumerStatefulWidget {
 }
 
 class _DetermineLocationState extends ConsumerState<DetermineLocation> {
+  ClientModel client = ClientModel(
+      ordersHistory: [], basket: [], promotionalCodes: [], locationList: []);
   Timer? _timer;
 
   final Completer<GoogleMapController> _controller = Completer();
@@ -50,8 +53,8 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
               iconSize: MaterialStateProperty.resolveWith((states) => 26),
             ),
           ),
-          title: const Text(
-            "Новый адрес",
+          title: Text(
+            AppLocalizations.of(context).yangiManzil,
             style: TextStyle(
               color: Colors.black,
               fontSize: 16,
@@ -62,11 +65,11 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
         ),
         body: Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: "Улица и дом",
+                  hintText: AppLocalizations.of(context).uliOrDom,
                   hintStyle: TextStyle(
                     color: Colors.black45,
                     fontWeight: FontWeight.w200,
@@ -150,6 +153,7 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                       (route) => false,
                     );
                   }
+                  client.locationList.add(location.value!);
                 }
               },
               style: OutlinedButton.styleFrom(
@@ -161,14 +165,14 @@ class _DetermineLocationState extends ConsumerState<DetermineLocation> {
                 ),
               ),
               child: Text(
-                "Подтвердите локацию",
+                AppLocalizations.of(context).lokatsiya,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.background,
                     ),
               ),
             ),
             const SizedBox(height: 5),
-           ],
+          ],
         ),
       ),
     );

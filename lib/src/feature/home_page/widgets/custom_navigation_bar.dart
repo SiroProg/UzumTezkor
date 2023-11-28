@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
-import 'package:badges/badges.dart' as badges;
-
-import '../../basket_page/basket_page.dart';
 
 class CustomNavigationBar extends ConsumerStatefulWidget {
   const CustomNavigationBar({
@@ -36,50 +34,22 @@ class _CustomNavigationBarState extends ConsumerState<CustomNavigationBar> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.restaurant_menu_outlined),
-              label: 'Рестораны',
+              label: AppLocalizations.of(context).restorani,
               activeIcon: Icon(Icons.restaurant_menu),
             ),
             BottomNavigationBarItem(
-              icon: GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BasketPage(),
-                  ),
-                ),
-                child: badges.Badge(
-                  badgeContent: Text(
-                    ref.read(clientProvider).basket.length == 0
-                        ? ""
-                        : ref.read(clientProvider).basket.length.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  badgeStyle: const badges.BadgeStyle(
-                    badgeColor: Colors.deepPurple,
-                  ),
-                  child: GestureDetector(
-                    child: Icon(Icons.shopping_basket_outlined),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BasketPage(),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              // Icon(Icons.shopping_basket_outlined),
-              label: 'Корзина',
+              icon: Icon(Icons.shopping_basket_outlined),
+              label: AppLocalizations.of(context).korzinka,
               activeIcon: Icon(Icons.shopping_basket),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag_outlined),
-              label: 'Cart',
+              label: AppLocalizations.of(context).cart,
               activeIcon: Icon(Icons.shopping_bag),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_2_outlined),
-              label: 'Профиль',
+              label: AppLocalizations.of(context).profil,
               activeIcon: Icon(Icons.person_2),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 
@@ -22,7 +23,7 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
           Padding(
             padding: const EdgeInsets.only(left: 20, top: 20),
             child: Text(
-              "Фильтры",
+              AppLocalizations.of(context).filtr,
               style: TextStyle(color: Colors.black, fontSize: 24),
             ),
           ),
@@ -132,7 +133,7 @@ class _AllFiltersState extends ConsumerState<AllFilters> {
                   ),
                 ),
                 child: Text(
-                  "Показать",
+                  AppLocalizations.of(context).pokazat,
                   style: TextStyle(
                     color: Colors.white,
                   ),
