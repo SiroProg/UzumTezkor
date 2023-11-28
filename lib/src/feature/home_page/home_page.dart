@@ -7,6 +7,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:uzum_tezkor/src/feature/basket_page/basket_page.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/custom_navigation_bar.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/home_widgets.dart';
+import '../../common/localization/app_localizations.dart';
 import '../profile_page/profile_page.dart';
 import 'widgets/custom_filter.dart';
 import 'widgets/sliver_app_bar.dart';
@@ -120,10 +121,11 @@ class _HomePagState extends ConsumerState<HomePage> {
                                           ),
                                         ],
                                         centerTitle: true,
-                                        title: const Column(
+                                        title: Column(
                                           children: [
                                             Text(
-                                              "Рестораны",
+                                              AppLocalizations.of(context)
+                                                  .restorani,
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
@@ -196,13 +198,15 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                       color: Colors
                                                           .lightBlue.shade100,
                                                     ),
-                                                    child: const Padding(
+                                                    child: Padding(
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 10,
                                                               vertical: 5),
                                                       child: Text(
-                                                        "Еще",
+                                                        AppLocalizations.of(
+                                                                context)
+                                                            .yeshyo,
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 15,

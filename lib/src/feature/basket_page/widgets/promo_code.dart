@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/info_tile_item.dart';
 
-class PromoCode extends StatelessWidget{
+class PromoCode extends StatelessWidget {
   const PromoCode({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: const InfoTileItem(
+      child: InfoTileItem(
         icon: Icons.discount,
-        subTitle: 'Выберите или введите новый',
-        title: 'Эсть промокод?',
+        subTitle: AppLocalizations.of(context).viberi,
+        title: AppLocalizations.of(context).promoExist,
         isExistLeftIcon: true,
       ),
     );
   }
-
 }

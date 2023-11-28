@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/localization/app_localizations.dart';
 import 'package:uzum_tezkor/src/common/model/restourant_model.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/restuarant_menus.dart';
@@ -28,8 +29,8 @@ class _RestaurantsState extends ConsumerState<Restaurants> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Рестораны",
+          Text(
+            AppLocalizations.of(context).restorani,
             style: TextStyle(color: Colors.black, fontSize: 28),
           ),
           ValueListenableBuilder(
@@ -92,7 +93,7 @@ class RestaurantItem extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   top: 10,
                   left: 10,
                   child: SizedBox(
@@ -122,7 +123,7 @@ class RestaurantItem extends ConsumerWidget {
                               width: 5,
                             ),
                             Text(
-                              "Доставка бесплатная",
+                              AppLocalizations.of(context).bepulDostavka,
                               style:
                                   TextStyle(color: Colors.black, fontSize: 12),
                             )
@@ -132,7 +133,7 @@ class RestaurantItem extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 0,
                   right: 0,
                   child: SizedBox(
@@ -148,7 +149,7 @@ class RestaurantItem extends ConsumerWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "30 - 40 мин",
+                          "30 - 40 ${AppLocalizations.of(context).min}",
                           style: TextStyle(color: Colors.white, fontSize: 14),
                         ),
                       ),

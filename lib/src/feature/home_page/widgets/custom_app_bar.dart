@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/common/provider/client_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/home_page/widgets/all_filters.dart';
 
+import '../../../common/localization/app_localizations.dart';
+
 class CustomAppBar extends ConsumerWidget {
   final String location;
 
@@ -41,10 +43,10 @@ class CustomAppBar extends ConsumerWidget {
                         color: Colors.deepPurple,
                       ),
                     ),
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2),
                       child: Text(
-                        "Дом",
+                        AppLocalizations.of(context).dom,
                         style: TextStyle(
                           color: Colors.deepPurple,
                           fontSize: 12,
