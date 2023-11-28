@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:uzum_tezkor/src/common/app.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import 'sms_code.dart';
@@ -19,7 +20,7 @@ class _LanguageState extends State<Language> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-       /// mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        /// mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Column(
             children: [

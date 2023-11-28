@@ -126,4 +126,22 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get neNayd => 'Ничего не найдено';
+
+  @override
+  String get uzum1 => 'Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali ';
+
+  @override
+  String get uzum2 => ' Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali ';
+
+  @override
+  String get uzum3 => ' va ';
+
+  @override
+  String get uzum4 => 'Maxfiylik siyosatimizni ';
+
+  @override
+  String get uzum5 => ' qabul qilasiz. ';
+
+  @override
+  String get davom => 'Davom etish';
 }

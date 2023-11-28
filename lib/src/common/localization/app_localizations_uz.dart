@@ -126,4 +126,22 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get neNayd => 'Hech narsa topilmadi';
+
+  @override
+  String get uzum1 => ' Зарегистрировавшись в сервисе Uzum Tezkor ';
+
+  @override
+  String get uzum2 => ' Зарегистрировавшись в сервисе Uzum Tezkor ';
+
+  @override
+  String get uzum3 => ' и ';
+
+  @override
+  String get uzum4 => ' Наша политика конфиденциальности ';
+
+  @override
+  String get uzum5 => ' вы принимаете ';
+
+  @override
+  String get davom => ' Продолжать ';
 }

@@ -338,6 +338,42 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Ничего не найдено'**
   String get neNayd;
+
+  /// No description provided for @uzum1.
+  ///
+  /// In ru, this message translates to:
+  /// **'Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali '**
+  String get uzum1;
+
+  /// No description provided for @uzum2.
+  ///
+  /// In ru, this message translates to:
+  /// **' Uzum Tezkor xizmatida ro\'yxatdan  o\'tish orqali '**
+  String get uzum2;
+
+  /// No description provided for @uzum3.
+  ///
+  /// In ru, this message translates to:
+  /// **' va '**
+  String get uzum3;
+
+  /// No description provided for @uzum4.
+  ///
+  /// In ru, this message translates to:
+  /// **'Maxfiylik siyosatimizni '**
+  String get uzum4;
+
+  /// No description provided for @uzum5.
+  ///
+  /// In ru, this message translates to:
+  /// **' qabul qilasiz. '**
+  String get uzum5;
+
+  /// No description provided for @davom.
+  ///
+  /// In ru, this message translates to:
+  /// **'Davom etish'**
+  String get davom;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
