@@ -21,7 +21,7 @@ class TotalOrder extends ConsumerWidget {
           horizontal: leftPadding / 2,
           vertical: 20,
         ),
-        height: 200,
+        height: 250,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.black12,
