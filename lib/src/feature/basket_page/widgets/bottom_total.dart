@@ -21,6 +21,7 @@ class BottomTotal extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     List<BasketModel> items = ref.watch(clientProvider).basket;
     ValueNotifier<bool> isActive = ValueNotifier(false);
+
     PlaceLocation location = ref
         .read(clientProvider)
         .locationList

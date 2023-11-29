@@ -60,8 +60,7 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
         personModel: null,
         ordersHistory: [],
         basket: [],
-        promotionalCodes: [],
-        locationList: []);
+        promotionalCodes: [],);
   }
 
   Map<Category, ValueNotifier<bool>> selectionCategoryes = {
