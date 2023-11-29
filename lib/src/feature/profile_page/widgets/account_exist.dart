@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/order_page/order_page.dart';
+import 'package:uzum_tezkor/src/feature/order_page/widgets/promocode_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/language.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit2.dart';
@@ -67,7 +68,11 @@ class _AccountExistState extends ConsumerState<AccountExist> {
             CustomListTile(
                 icon: CupertinoIcons.ticket_fill,
                 name: AppLocalizations.of(context).promo,
-                function: () {}),
+                function: () {
+                  MaterialPageRoute(
+                    builder: (ctx) => const PromoCode(),
+                  );
+                }),
             CustomListTile(
                 icon: Icons.chat,
                 name: AppLocalizations.of(context).pomosh,
