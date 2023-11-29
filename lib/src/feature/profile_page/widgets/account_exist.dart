@@ -69,9 +69,6 @@ class _AccountExistState extends ConsumerState<AccountExist> {
                 icon: CupertinoIcons.ticket_fill,
                 name: AppLocalizations.of(context).promo,
                 function: () {
-                  MaterialPageRoute(
-                    builder: (ctx) => const PromoCode(),
-                  );
                 }),
             CustomListTile(
                 icon: Icons.chat,
