@@ -3,7 +3,7 @@
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:label="uzum_tezkor">
+        android:label="Uzum Tezkor">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAMUS_eH_E0_qPzIuweJL_NWuRKoI8lj0w" />

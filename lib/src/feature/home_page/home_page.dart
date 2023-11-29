@@ -121,10 +121,10 @@ class _HomePagState extends ConsumerState<HomePage> {
                                           ),
                                         ],
                                         centerTitle: true,
-                                        title: const Column(
+                                        title: Column(
                                           children: [
                                             Text(
-                                              "Рестораны",
+                                              "",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18,
@@ -197,13 +197,13 @@ class _HomePagState extends ConsumerState<HomePage> {
                                                       color: Colors
                                                           .lightBlue.shade100,
                                                     ),
-                                                    child: const Padding(
+                                                    child: Padding(
                                                       padding:
                                                           EdgeInsets.symmetric(
                                                               horizontal: 10,
                                                               vertical: 5),
                                                       child: Text(
-                                                        "Еще",
+                                                        "Yeshyo",
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 15,
@@ -250,10 +250,11 @@ class _HomePagState extends ConsumerState<HomePage> {
             ),
             const BasketPage(),
             const OrderPage(),
-            const Profile(),
+            Profile(),
           ],
         ),
       ),
     );
   }
 }
+

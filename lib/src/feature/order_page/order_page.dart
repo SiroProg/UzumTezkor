@@ -27,6 +27,7 @@ class OrderPage extends ConsumerWidget {
     return Scaffold(
       appBar: orders.isNotEmpty
           ? AppBar(
+              centerTitle: true,
               title: const Text("Заказы"),
             )
           : null,

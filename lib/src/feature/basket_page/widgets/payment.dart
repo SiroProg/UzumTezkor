@@ -35,7 +35,7 @@ class _PaymentState extends ConsumerState<Payment> {
 
     void applyCode(BuildContext ctxCodeModal) {
       if (codeEditingController.text == "2023") {
-        int rnd = Random().nextInt(15);
+        int rnd = Random().nextInt(5);
         order = order.copyWith(
           personModel: person,
           date: DateTime.now(),
