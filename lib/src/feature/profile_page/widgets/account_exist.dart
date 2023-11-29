@@ -97,18 +97,25 @@ class _AccountExistState extends ConsumerState<AccountExist> {
                                   $profileNumber = '';
                                   $profileIsExist = false;
                                   Navigator.pop(context);
-                                  ref.read(clientProvider.notifier).pageNumber.value = 0;
+                                  ref
+                                      .read(clientProvider.notifier)
+                                      .pageNumber
+                                      .value = 0;
 
-                                  ref.read(clientProvider.notifier).pageController.jumpToPage(
-                                    0,
-                                  );
+                                  ref
+                                      .read(clientProvider.notifier)
+                                      .pageController
+                                      .jumpToPage(
+                                        0,
+                                      );
+                                  ref.read(clientProvider.notifier).clear();
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => HomePage(),
                                     ),
-                                        (route) => false,
-                                  );// Close the dialog
+                                    (route) => false,
+                                  ); // Close the dialog
                                 },
                                 child: Text("Ha"),
                               ),

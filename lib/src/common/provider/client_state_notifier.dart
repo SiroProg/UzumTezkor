@@ -11,12 +11,14 @@ import 'package:uzum_tezkor/src/common/model/basket_model.dart';
 import 'package:uzum_tezkor/src/common/model/location/place_location.dart';
 import 'package:uzum_tezkor/src/common/model/client_model.dart';
 import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/model/person_model.dart';
 
 import '../model/restourant_model.dart';
 
 class ClientStateNotifier extends StateNotifier<ClientModel> {
   FakeData fakeData = FakeData();
   RestaurantModel? orderRestorant;
+
   List<Category> categories = Category.values;
   ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
   ValueNotifier<int> pageNumber = ValueNotifier(0);
@@ -31,6 +33,10 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   double? longitude;
 
   ValueNotifier<String> searchText = ValueNotifier("");
+
+  void registerPerson(PersonModel personModel) {
+    state = state.copyWith(personModel: personModel);
+  }
 
   void searchRestaurants(String text) {
     searchText.value = text;
@@ -47,6 +53,15 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
       }
     }
     searchResults.value = result;
+  }
+
+  void clear() {
+    state = state.copyWith(
+        personModel: null,
+        ordersHistory: [],
+        basket: [],
+        promotionalCodes: [],
+        locationList: []);
   }
 
   Map<Category, ValueNotifier<bool>> selectionCategoryes = {

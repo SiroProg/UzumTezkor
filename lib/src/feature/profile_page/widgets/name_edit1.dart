@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/model/person_model.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
@@ -173,6 +174,13 @@ class _RegisterNumberState extends ConsumerState<NameEdit1> {
                       ),
                       (route) => false,
                     );
+                    ref.read(clientProvider.notifier).registerPerson(
+                          PersonModel(
+                            id: 3123,
+                            name: $profileName,
+                            phoneNumber: $profileNumber,
+                          ),
+                        );
                   }
                 : null,
             child: Container(

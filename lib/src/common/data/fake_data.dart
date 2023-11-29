@@ -898,20 +898,10 @@ class FakeData {
 
   List<ClientModel> clientData = [
     ClientModel(
-      personModel: PersonModel(
-        id:1,
-        phoneNumber: "+998946133644",
-        name: "Toxirjon"
-      ),
       ordersHistory: [],
       basket: [],
       promotionalCodes: [],
       locationList: [
-        PlaceLocation(
-          longitude: 41,
-          latitude: 41,
-          address: "Beruniy 8 a",
-        )
       ],
     ),
   ];

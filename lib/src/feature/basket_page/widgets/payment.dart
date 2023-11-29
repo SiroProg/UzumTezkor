@@ -13,6 +13,8 @@ import 'package:uzum_tezkor/src/feature/basket_page/widgets/promo_code.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/total_order.dart';
 import 'package:uzum_tezkor/src/feature/order_page/order_page.dart';
 
+import '../../profile_page/widgets/registr_number.dart';
+
 class Payment extends ConsumerStatefulWidget {
   const Payment({super.key});
 
@@ -239,6 +241,7 @@ class _PaymentState extends ConsumerState<Payment> {
 
     void addOrder() {
       if (person == null) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterNumber()));
       } else {
         if (order.paymentType == PaymentTypeEnum.cash) {
           int rnd = Random().nextInt(15);

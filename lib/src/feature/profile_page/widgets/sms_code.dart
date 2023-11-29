@@ -170,9 +170,7 @@ class _CustomExpandState extends State<CustomExpand> {
                   } else {
                     code.removeLast();
                   }
-
                   setState(() {});
-
                   if (listEquals(code, $profileNumberCode)) {
                     $profileIsExist = true;
                     code.clear();
