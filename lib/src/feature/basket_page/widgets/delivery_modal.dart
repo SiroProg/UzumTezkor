@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uzum_tezkor/src/common/model/order_model.dart';
+import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/delivery_item.dart';
 
 import '../../../common/localization/app_localizations.dart';
 
-class DeliveryModal extends StatelessWidget {
+class DeliveryModal extends ConsumerWidget {
   const DeliveryModal({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    OrderModel orderModel = ref.watch(orderNotifier)!;
     return SizedBox(
       height: 300,
       child: Stack(
@@ -42,16 +46,17 @@ class DeliveryModal extends StatelessWidget {
               ),
             ),
           ),
-           Positioned(
+          Positioned(
             left: 20,
             top: 90,
             right: 10,
             child: DeliveryItem(
               leadingText: AppLocalizations.of(context).do99000,
-              trailingText: AppLocalizations.of(context).s4900,
+              trailingText:
+                  "${orderModel.restaurant.deliveryPriceToFree} ${AppLocalizations.of(context).sum}",
             ),
           ),
-           Positioned(
+          Positioned(
             left: 20,
             top: 140,
             right: 10,
@@ -67,11 +72,11 @@ class DeliveryModal extends StatelessWidget {
             child: Text(
               AppLocalizations.of(context).detail,
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
             ),
           ),
-           Positioned(
+          Positioned(
             left: 20,
             top: 240,
             right: 10,

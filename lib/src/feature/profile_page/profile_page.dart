@@ -5,7 +5,7 @@ import 'widgets/account_exist.dart';
 import 'widgets/account_not_exist.dart';
 
 bool $profileIsExist = false;
-String $profileName = "";
+ValueNotifier<String> $profileName = ValueNotifier("");
 String $profileNumber = "";
 List<String> $profileNumberCode = ['0', '0', '0', '0'];
 

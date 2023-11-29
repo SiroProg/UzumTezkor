@@ -156,7 +156,7 @@ class _RegisterNumberState extends State<NameEdit> {
             onTap: isValid
                 ? () {
                     setState(() {
-                      $profileName = name!;
+                      $profileName.value = name!;
                     });
 
                     Navigator.pop(context);

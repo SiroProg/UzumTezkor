@@ -166,7 +166,7 @@ class _RegisterNumberState extends ConsumerState<NameEdit1> {
                     ref.read(clientProvider.notifier).pageController.jumpToPage(
                           0,
                         );
-                    $profileName = name!;
+                    $profileName.value = name!;
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
@@ -177,7 +177,7 @@ class _RegisterNumberState extends ConsumerState<NameEdit1> {
                     ref.read(clientProvider.notifier).registerPerson(
                           PersonModel(
                             id: 3123,
-                            name: $profileName,
+                            name: $profileName.value,
                             phoneNumber: $profileNumber,
                           ),
                         );

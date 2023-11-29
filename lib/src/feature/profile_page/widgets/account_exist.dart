@@ -19,6 +19,11 @@ class AccountExist extends ConsumerStatefulWidget {
 
 class _AccountExistState extends ConsumerState<AccountExist> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
@@ -28,20 +33,24 @@ class _AccountExistState extends ConsumerState<AccountExist> {
         ),
         child: ListView(
           children: [
-            ListTile(
-              title: Text("${$profileName} ", style: TextStyle(fontSize: 30)),
-              subtitle: Text("${$profileNumber}",
-                  style: TextStyle(fontSize: 15, color: Colors.grey)),
-              trailing: IconButton(
-                  icon: Icon(Icons.navigate_next),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NameEdit(),
-                      ),
-                    );
-                  }),
+            ValueListenableBuilder(
+              valueListenable: $profileName,
+              builder: (BuildContext context, String value, Widget? child) =>
+                  ListTile(
+                title: Text("${value} ", style: TextStyle(fontSize: 30)),
+                subtitle: Text("${$profileNumber}",
+                    style: TextStyle(fontSize: 15, color: Colors.grey)),
+                trailing: IconButton(
+                    icon: Icon(Icons.navigate_next),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NameEdit(),
+                        ),
+                      );
+                    }),
+              ),
             ),
             SizedBox(height: 50),
             CustomListTile(
@@ -93,7 +102,7 @@ class _AccountExistState extends ConsumerState<AccountExist> {
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
-                                  $profileName = '';
+                                  $profileName.value = '';
                                   $profileNumber = '';
                                   $profileIsExist = false;
                                   Navigator.pop(context);
