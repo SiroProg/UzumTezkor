@@ -45,6 +45,7 @@ class _SmsCodeState extends State<SmsCode> {
   void initState() {
     timer = null;
     startTimer();
+    code = [];
     focusNodes = List.generate(4, (index) => FocusNode());
     super.initState();
   }
@@ -164,7 +165,11 @@ class _CustomExpandState extends State<CustomExpand> {
                 ],
                 onChanged: (value) {
                   widget.onNext(widget.index);
-                  if (value.isNotEmpty) code.add(value);
+                  if (value.isNotEmpty) {
+                    code.add(value);
+                  } else {
+                    code.removeLast();
+                  }
 
                   setState(() {});
 

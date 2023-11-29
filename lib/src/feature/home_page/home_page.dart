@@ -44,7 +44,6 @@ class _HomePagState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     PlaceLocation? location =
         ref.watch(clientProvider).locationList.lastOrNull;
-    final PageController pageController = PageController();
 
     return SafeArea(
       child: Scaffold(
@@ -52,13 +51,13 @@ class _HomePagState extends ConsumerState<HomePage> {
           onPageChange: (value) {
             ref.read(clientProvider.notifier).pageNumber.value = value;
 
-            pageController.jumpToPage(
+            ref.read(clientProvider.notifier).pageController.jumpToPage(
               value,
             );
           },
         ),
         body: PageView(
-          controller: pageController,
+          controller: ref.read(clientProvider.notifier).pageController,
           physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (value) {
             ref.read(clientProvider.notifier).pageNumber.value = value;

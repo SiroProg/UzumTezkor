@@ -1,16 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/language.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit2.dart';
 
 import '../../../common/localization/app_localizations.dart';
+import '../../../common/provider/client_state_notifier.dart';
 import 'custom_list_tile.dart';
 
-class AccountExist extends StatelessWidget {
+class AccountExist extends ConsumerStatefulWidget {
   const AccountExist({super.key});
 
+  @override
+  ConsumerState<AccountExist> createState() => _AccountExistState();
+}
+
+class _AccountExistState extends ConsumerState<AccountExist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,10 +92,23 @@ class AccountExist extends StatelessWidget {
                             ),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () {$profileName = '';
-                                $profileNumber = '';
-                                $profileIsExist = false;
-                                  Navigator.pop(context); // Close the dialog
+                                onPressed: () {
+                                  $profileName = '';
+                                  $profileNumber = '';
+                                  $profileIsExist = false;
+                                  Navigator.pop(context);
+                                  ref.read(clientProvider.notifier).pageNumber.value = 0;
+
+                                  ref.read(clientProvider.notifier).pageController.jumpToPage(
+                                    0,
+                                  );
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(),
+                                    ),
+                                        (route) => false,
+                                  );// Close the dialog
                                 },
                                 child: Text("Ha"),
                               ),

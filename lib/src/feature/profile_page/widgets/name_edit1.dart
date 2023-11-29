@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import '../../../common/localization/app_localizations.dart';
+import '../../../common/provider/client_state_notifier.dart';
 import '../../home_page/widgets/restaurants.dart';
 
-class NameEdit1 extends StatefulWidget {
+class NameEdit1 extends ConsumerStatefulWidget {
   const NameEdit1({super.key});
 
   @override
-  State<NameEdit1> createState() => _RegisterNumberState();
+  ConsumerState<NameEdit1> createState() => _RegisterNumberState();
 }
 
-class _RegisterNumberState extends State<NameEdit1> {
+class _RegisterNumberState extends ConsumerState<NameEdit1> {
   bool isValid = false;
   String? name;
 
@@ -156,15 +158,21 @@ class _RegisterNumberState extends State<NameEdit1> {
           ),
           GestureDetector(
             onTap: isValid
-                ? () {setState(() {
+                ? () {
+                    setState(() {});
+                    ref.read(clientProvider.notifier).pageNumber.value = 0;
 
-                });
+                    ref.read(clientProvider.notifier).pageController.jumpToPage(
+                          0,
+                        );
                     $profileName = name!;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                      (route) => false,
+                    );
                   }
                 : null,
             child: Container(

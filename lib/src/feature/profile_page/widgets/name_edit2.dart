@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 
 import '../../../common/localization/app_localizations.dart';
-import '../../home_page/widgets/restaurants.dart';
 
 class NameEdit extends StatefulWidget {
   const NameEdit({super.key});
@@ -156,9 +154,10 @@ class _RegisterNumberState extends State<NameEdit> {
           ),
           GestureDetector(
             onTap: isValid
-                ? () {setState(() {
-              $profileName = name!;
-                });
+                ? () {
+                    setState(() {
+                      $profileName = name!;
+                    });
 
                     Navigator.pop(context);
                   }
