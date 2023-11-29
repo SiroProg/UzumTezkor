@@ -19,10 +19,10 @@ class OrderInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String deliveryInfo(OrderModel order) {
-      if (order.isDelivered) {
+      int seconds = DateTime.now().difference(order.deliveredTime).inSeconds;
+      if (order.isDelivered || seconds.isNegative) {
         return " .Доставлен";
       }
-      int seconds = DateTime.now().difference(order.deliveredTime).inSeconds;
       String minute = ((seconds ~/ 60)).toString().padLeft(2, "0");
       String second =
           (seconds - ((seconds ~/ 60) * 60)).toString().padLeft(2, "0");
