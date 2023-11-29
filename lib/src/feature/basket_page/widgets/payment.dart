@@ -290,12 +290,13 @@ class _PaymentState extends ConsumerState<Payment> {
                 ),
                 const PaymentType(),
                 const PromoCode(),
+                const SizedBox(height: 10),
                 TotalOrder(leftPadding: leftPadding),
               ],
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: leftPadding),
+            padding: EdgeInsets.symmetric(horizontal: leftPadding, vertical: 10),
             child: SizedBox(
               width: double.infinity,
               child: TextButton(
