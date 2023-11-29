@@ -224,6 +224,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get kuda => 'Куда доставить?';
 
   @override
+  String get raqamiga => 'Мы отправили код на номер.';
+
+  @override
   String get opredelit => 'Определить автоматически';
 
   @override
@@ -231,4 +234,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get ukazat => 'Указать вручную';
+
+  @override
+  String get soniyadan => 'вы можете отправить код повторно через секунду';
+
+  @override
+  String get qayta => 'мы отправим код повторно?';
 }
