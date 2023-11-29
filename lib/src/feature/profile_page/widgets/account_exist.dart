@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uzum_tezkor/src/feature/basket_page/widgets/promo_code.dart';
 import 'package:uzum_tezkor/src/feature/home_page/home_page.dart';
+import 'package:uzum_tezkor/src/feature/order_page/order_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/profile_page.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/language.dart';
 import 'package:uzum_tezkor/src/feature/profile_page/widgets/name_edit.dart';
@@ -40,7 +42,13 @@ class AccountExist extends StatelessWidget {
             CustomListTile(
                 icon: Icons.fact_check,
                 name: AppLocalizations.of(context).istoriyaZakaz,
-                function: () {}),
+                function: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => const OrderPage(),
+                    ),
+                  );
+                }),
             CustomListTile(
                 icon: CupertinoIcons.ticket_fill,
                 name: AppLocalizations.of(context).promo,
@@ -60,7 +68,9 @@ class AccountExist extends StatelessWidget {
                       ));
                 }),
             CustomListTile(
-                icon: Icons.lock, name: AppLocalizations.of(context).politika, function: () {}),
+                icon: Icons.lock,
+                name: AppLocalizations.of(context).politika,
+                function: () {}),
             CustomListTile(
                 icon: Icons.info,
                 name: AppLocalizations.of(context).polzova,
