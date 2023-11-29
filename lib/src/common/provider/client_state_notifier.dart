@@ -16,10 +16,12 @@ import '../model/restourant_model.dart';
 
 class ClientStateNotifier extends StateNotifier<ClientModel> {
   FakeData fakeData = FakeData();
+  RestaurantModel? orderRestorant;
   List<Category> categories = Category.values;
   ValueNotifier<List<RestaurantModel>> restaurants = ValueNotifier([]);
   ValueNotifier<int> pageNumber = ValueNotifier(0);
   ValueNotifier<List<RestaurantModel>> searchResults = ValueNotifier([]);
+  ValueNotifier<int> basketLendht = ValueNotifier(0);
 
   ClientStateNotifier() : super(FakeData().clientData.first);
   ValueNotifier<int> counterOfFilters = ValueNotifier(0);
@@ -28,9 +30,6 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   double? longitude;
 
   ValueNotifier<String> searchText = ValueNotifier("");
-
-
-
 
   void searchRestaurants(String text) {
     searchText.value = text;
@@ -81,6 +80,7 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   }
 
   void clearBasket() {
+    basketLendht.value = 0;
     state = state.copyWith(basket: []);
   }
 
@@ -115,6 +115,7 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
   }
 
   void removeBasketElement(BasketModel model) {
+    basketLendht.value = basketLendht.value - 1;
     state = state.copyWith(
         basket:
             state.basket.where((element) => element.id != model.id).toList());
@@ -216,4 +217,3 @@ class ClientStateNotifier extends StateNotifier<ClientModel> {
 final clientProvider = StateNotifierProvider<ClientStateNotifier, ClientModel>(
   (ref) => ClientStateNotifier(),
 );
-

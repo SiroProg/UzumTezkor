@@ -182,13 +182,32 @@ class _ProductItemState extends ConsumerState<ProductItem> {
       }
     });
     if (cheked) {
-      ref.read(clientProvider).basket.add(
-            BasketModel(
-              productModel: widget.product,
-              amount: amount.value,
-              restaurantModel: widget.restaurant,
-            ),
-          );
+      if (ref.read(clientProvider.notifier).orderRestorant == null) {
+        ref.read(clientProvider.notifier).orderRestorant = widget.restaurant;
+      } else if (ref.read(clientProvider.notifier).orderRestorant ==
+          widget.restaurant) {
+        ref.read(clientProvider.notifier).basketLendht.value =
+            ref.read(clientProvider.notifier).basketLendht.value + 1;
+        ref.read(clientProvider).basket.add(
+              BasketModel(
+                productModel: widget.product,
+                amount: amount.value,
+                restaurantModel: widget.restaurant,
+              ),
+            );
+      } else {
+        ref.read(clientProvider.notifier).orderRestorant = widget.restaurant;
+        ref.read(clientProvider.notifier).clearBasket();
+        ref.read(clientProvider.notifier).basketLendht.value =
+            ref.read(clientProvider.notifier).basketLendht.value + 1;
+        ref.read(clientProvider).basket.add(
+              BasketModel(
+                productModel: widget.product,
+                amount: amount.value,
+                restaurantModel: widget.restaurant,
+              ),
+            );
+      }
     }
     Navigator.of(context).pop();
     setState(() {});
