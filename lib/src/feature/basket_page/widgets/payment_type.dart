@@ -5,7 +5,12 @@ import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/info_tile_item.dart';
 
 class PaymentType extends ConsumerWidget {
-  const PaymentType({super.key});
+  const PaymentType({
+    this.isModifiable = true,
+    super.key,
+  });
+
+  final bool isModifiable;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -18,7 +23,7 @@ class PaymentType extends ConsumerWidget {
             return Column(
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onTap:() {
                     ref.read(orderNotifier.notifier).updateOrder(
                           paymentType: PaymentTypeEnum.card,
                         );
@@ -34,8 +39,8 @@ class PaymentType extends ConsumerWidget {
                 GestureDetector(
                   onTap: () {
                     ref.read(orderNotifier.notifier).updateOrder(
-                      paymentType: PaymentTypeEnum.cash,
-                    );
+                          paymentType: PaymentTypeEnum.cash,
+                        );
                     Navigator.of(context).pop();
                   },
                   child: InfoTileItem(
@@ -51,7 +56,7 @@ class PaymentType extends ConsumerWidget {
     }
 
     return GestureDetector(
-      onTap: showBottomPaymentModal,
+      onTap:  isModifiable ? showBottomPaymentModal:null,
       child: InfoTileItem(
         icon: Icons.credit_card,
         subTitle: order.paymentType.description,

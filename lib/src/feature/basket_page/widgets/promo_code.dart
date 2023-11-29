@@ -5,7 +5,12 @@ import 'package:uzum_tezkor/src/common/provider/order_state_notifier.dart';
 import 'package:uzum_tezkor/src/feature/basket_page/widgets/info_tile_item.dart';
 
 class PromoCode extends ConsumerStatefulWidget {
-  const PromoCode({super.key});
+  const PromoCode({
+    this.isModifiable = true,
+    super.key,
+  });
+
+  final bool isModifiable;
 
   @override
   ConsumerState<PromoCode> createState() => _PromoCodeState();
@@ -131,7 +136,7 @@ class _PromoCodeState extends ConsumerState<PromoCode> {
     }
 
     return GestureDetector(
-      onTap: showDialogPromoCode,
+      onTap: widget.isModifiable ? showDialogPromoCode : null,
       child: InfoTileItem(
         icon: Icons.discount,
         subTitle: order.promocode!.isActive
