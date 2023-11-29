@@ -85,10 +85,15 @@ class AccountExist extends StatelessWidget {
                             ),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () {$profileName = '';
-                                $profileNumber = '';
-                                $profileIsExist = false;
-                                  Navigator.pop(context); // Close the dialog
+                                onPressed: () {
+                                  $profileName = '';
+                                  $profileNumber = '';
+                                  $profileIsExist = false;
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePage(),
+                                      )); // Close the dialog
                                 },
                                 child: Text("Ha"),
                               ),

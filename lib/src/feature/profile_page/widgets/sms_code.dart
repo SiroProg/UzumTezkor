@@ -45,6 +45,7 @@ class _SmsCodeState extends State<SmsCode> {
   void initState() {
     timer = null;
     startTimer();
+    code.clear();
     focusNodes = List.generate(4, (index) => FocusNode());
     super.initState();
   }
